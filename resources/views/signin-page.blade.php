@@ -57,7 +57,7 @@
 
                     <div class="form-group mb-lg">
                         <div class="clearfix">
-                            <label class="pull-left">Password</label>
+                            <label class="pull-left">mot de passe</label>
                             <a href="pages-recover-password.html" class="pull-right">Lost Password?</a>
                         </div>
                         <div class="input-group input-group-icon">
