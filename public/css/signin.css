@@ -1,0 +1,29 @@
+label {
+    color: #777 ;
+}
+
+.pull-right {
+    color : #2d9b68;
+}
+
+.text-center {
+    color : #777;
+}
+a, .btn-link{
+    color: #114E9E  !important;
+}
+body .btn-primary {
+    background-color: #2d9b68 !important;
+    border-color: #2d9b68 !important;
+
+}
+body .btn-primary:hover {
+    border-color: #2d9b68 !important;
+}
+.body-sign .panel-sign .panel-title-sign .title {
+    background-color: #2d9b68  !important;
+}
+
+.body-sign .panel-sign .panel-body{
+    border-top-color: #2d9b68 !important;;
+}
