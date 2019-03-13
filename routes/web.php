@@ -19,10 +19,6 @@ Route::get('/index', function() {
     return view('dashboard-template');
 });
 
-Route::get('/user', function (){
-    return view('tab');
-});
-
 Route::get('/sign', function (){
     return view('signin-page');
 });
