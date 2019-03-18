@@ -26,3 +26,8 @@ Route::get('/user', function (){
 Route::get('/sign', function (){
     return view('signin-page');
 });
+Auth::routes();
+
+Route::get('/home/{name}/{email}/{password}', 'HomeController@addUser');
+
+Route::get('/home', 'HomeController@index')->name('home');
