@@ -243,7 +243,7 @@
                             <a role="menuitem" tabindex="-1" href="#" data-lock-screen="true"><i class="fa fa-lock"></i> Lock Screen</a>
                         </li>
                         <li>
-                            <a role="menuitem" tabindex="-1" href="pages-signin.html"><i class="fa fa-power-off"></i> Logout</a>
+                            <a role="menuitem" tabindex="-1" href="{{ route('logout') }}"><i class="fa fa-power-off"></i> Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -280,25 +280,25 @@
 
             </div>
 
-        </aside>
-    </div>      <!-- end: sidebar -->
-    <section role="main" class="content-body">
-        <header class="page-header">
-            <h2> @yield('content-title')</h2>
-            <div class="right-wrapper pull-right" style="margin-right: 10px;">
-                <ol class="breadcrumbs">
-                    <li>
-                        <a href="index.html">
-                            <i class="fa fa-home"></i>
-                        </a>
-                    </li>
-                    @yield('content-path')
-                </ol>
-
-            </div>
-        </header>
-        @yield('content')
-    </section>
+        </aside>      <!-- end: sidebar -->
+        <section role="main" class="content-body">
+                <header class="page-header">
+                <h2> @yield('content-title')</h2>
+                <div class="right-wrapper pull-right" style="margin-right: 10px;">
+                    <ol class="breadcrumbs">
+                        <li>
+                            <a href="index.html">
+                                <i class="fa fa-home"></i>
+                            </a>
+                        </li>
+                        @yield('content-path')
+                    </ol>
+                </div>
+            </header>
+            @yield('content')
+        </section>
+    </div>
+    
 </section>
 
 {!! HTML::script('js/jquery.js') !!}
@@ -308,11 +308,10 @@
 {!! HTML::script('js/bootstrap-datepicker.js') !!}
 {!! HTML::script('js/magnific-popup.js') !!}
 {!! HTML::script('js/jquery.placeholder.js') !!}
+<!-- specific page vendor -->
+@yield('page-scripts')
 {!! HTML::script('js/theme.js') !!}
 {!! HTML::script('js/theme.custom.js') !!}
 {!! HTML::script('js/theme.init.js') !!}
-{!! HTML::script('js/examples.dashboard.js') !!}
-<!-- specific page vendor -->
-@yield('page-scripts')
 </body>
 </html>

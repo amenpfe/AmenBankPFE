@@ -25,6 +25,25 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}">
+                            <label for="role" class="col-md-4 control-label">Role</label>
+
+                            <div class="col-md-6">
+                                
+                                <select id="role" class="form-control" name="role" required>
+                                    @foreach (\App\Enums\UserRole::getValues() as $key => $value)
+                                    <option value={{$value}}> {{\App\Enums\UserRole::getEnumDescriptionByKey($key)}} </option>
+                                    @endforeach
+                                    
+                                </select>
+                                @if ($errors->has('role'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('role') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
