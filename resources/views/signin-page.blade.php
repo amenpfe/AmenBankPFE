@@ -39,12 +39,12 @@
 
         <div class="panel panel-sign">
             <div class="panel-title-sign mt-xl text-right">
-                <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
+                <h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Connexion </h2>
             </div>
             <div class="panel-body">
                 <form action="index.html" method="post">
                     <div class="form-group mb-lg">
-                        <label>Username</label>
+                        <label>Identifiant</label>
                         <div class="input-group input-group-icon">
                             <input name="username" type="text" class="form-control input-lg" />
                             <span class="input-group-addon">
@@ -58,7 +58,6 @@
                     <div class="form-group mb-lg">
                         <div class="clearfix">
                             <label class="pull-left">mot de passe</label>
-                            <a href="pages-recover-password.html" class="pull-right">Lost Password?</a>
                         </div>
                         <div class="input-group input-group-icon">
                             <input name="pwd" type="password" class="form-control input-lg" />
@@ -72,18 +71,12 @@
 
                     <div class="row">
                         <div class="col-sm-8">
-                            <div class="checkbox-custom checkbox-default">
-                                <input id="RememberMe" name="rememberme" type="checkbox"/>
-                                <label for="RememberMe">Remember Me</label>
-                            </div>
                         </div>
                         <div class="col-sm-4 text-right">
-                            <button type="submit" class="btn btn-primary hidden-xs">Sign In</button>
-                            <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign In</button>
+                            <button type="submit" class="btn btn-primary hidden-xs">Connexion</button>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Connexion</button>
                         </div>
                     </div>
-                    <p class="text-center">Don't have an account yet? <a href="pages-signup.html">Sign Up!</a>
-
                 </form>
             </div>
         </div>
