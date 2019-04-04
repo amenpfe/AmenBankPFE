@@ -40,6 +40,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::post('users/update', 'Admin\ManageUsersController@update')->name('update_user');
     Route::get('add', 'Admin\ManageUsersController@add')->name('add_users');
     Route::post('add/register', array('uses'=>'Admin\ManageUsersController@addUser'))->name('add_user');
+    
 });
+
+Route::get('/edit', 'Admin\ManageUsersController@editProfil')->middleware('auth');
+Route::post('/edit', 'Admin\ManageUsersController@editProfilPost')->middleware('auth')->name('user_edit');
+ Route::get('/new', 'UserController@getOptimizationRequestForm');
+ Route::get('user/opt', 'UserController@submitOptimizationRequestForm');
+ Route::get('user/option', 'UserController@updateOptimizationRequest');
+ Route::get('user/new', 'UserController@submitNewProjectRequestForm');
+
 
 
