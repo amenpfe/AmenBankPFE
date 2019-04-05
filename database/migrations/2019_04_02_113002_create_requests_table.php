@@ -17,10 +17,11 @@ class CreateRequestsTable extends Migration
     	Schema::create('requests', function(Blueprint $table) {
 			$table->increments('id');
 			$table->tinyInteger('status');
-            $table->String('remarques');
-            $table->integer('requestable_id');
-            $table->String('requestable_type');
-            $table->string('livrable');
+            $table->String('remarques', 500);
+            $table->integer('requestable_id')->nullable();
+            $table->String('requestable_type')->nullable();
+            $table->string('livrable')->nullable();
+            $table->string('chd')->nullable();
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')
 				  ->references('id')

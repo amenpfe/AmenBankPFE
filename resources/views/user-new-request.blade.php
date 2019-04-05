@@ -48,68 +48,78 @@ Demande d'un nouveau projet
 @endsection
 
 @section('content')
-    
-<div class="row">
-    <div class="col-lg-12">
+    <form class="form-horizontal form-bordered" method="POST" action="{{route('add_new_request')}}" enctype="multipart/form-data">
+        {{ csrf_field() }}
         <section class="panel">
             <header class="panel-heading">
-
                 <h2 class="panel-title">Demande d'un nouveau projet</h2>
             </header>
             <div class="panel-body">
-                <form class="form-horizontal form-bordered" method="get">
-                    
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Titre du projet</label>
-                        <div class="col-md-6">
-                            <div class="input-group input-group-icon">
-                                
-                                <input type="text" class="form-control" placeholder="Titre">
-                            </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Titre du projet</label>
+                    <div class="col-md-6">
+                        <div class="input-group input-group-icon">
+                            <input type="text" class="form-control" placeholder="Titre" name="title">
                         </div>
+                        @if ($errors->has('title'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('title') }}</strong>
+                            </span>
+                        @endif
                     </div>
+                </div>
 
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="textareaDefault">Remarques</label>
-                        <div class="col-md-6">
-                            <textarea class="form-control" rows="3" data-plugin-maxlength maxlength="140"></textarea>
-                            
-                        </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="textareaDefault">Remarques</label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" rows="3" data-plugin-maxlength maxlength="140" name="remarques"></textarea>
+                        @if ($errors->has('remarque'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('remarque') }}</strong>
+                            </span>
+                        @endif
                     </div>
+                </div>
 
 
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Joindre un fichier</label>
-                        <div class="col-md-6">
-                            <div class="fileupload fileupload-new" data-provides="fileupload">
-                                <div class="input-append">
-                                    <div class="uneditable-input">
-                                        <i class="fa fa-file fileupload-exists"></i>
-                                        <span class="fileupload-preview"></span>
-                                    </div>
-                                    <span class="btn btn-default btn-file">
-                                        <span class="fileupload-exists">Changer</span>
-                                        <span class="fileupload-new">Sélectionner</span>
-                                        <input type="file" />
-                                    </span>
-                                    <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Retirer</a>
-                                    <br><br>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Joindre un fichier</label>
+                    <div class="col-md-6">
+                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                            <div class="input-append">
+                                <div class="uneditable-input">
+                                    <i class="fa fa-file fileupload-exists"></i>
+                                    <span class="fileupload-preview"></span>
                                 </div>
+                                <span class="btn btn-default btn-file">
+                                    <span class="fileupload-exists">Changer</span>
+                                    <span class="fileupload-new">Sélectionner</span>
+                                    <input type="file" name="chd" accept=".pdf"/>
+                                </span>
+                                <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Retirer</a>
+                                <br><br>
                             </div>
+                            
+                            @if ($errors->has('chd'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('chd') }}</strong>
+                            </span>
+                        @endif
                         </div>
                     </div>
-                    <footer class="panel-footer ">
-                        <div class="row ">
-                            <div class="col-sm-3 col-sm-offset-9">
-                                <button class="btn btn-primary">Envoyer</button>
-                                <button type="reset" class="btn btn-default">Annuler</button>
-                            </div>
-                        </div>
-                    </footer>
-                </form>
+                </div>
             </div>
+            
+            <footer class="panel-footer ">
+                <div class="row ">
+                    <div class="col-sm-3 col-sm-offset-9">
+                        <button class="btn btn-primary">Envoyer</button>
+                        <button type="reset" class="btn btn-default">Annuler</button>
+                    </div>
+                </div>
+            </footer>
         </section>
-        
+    </form>
 @endsection
 @section('page-scripts')
     
