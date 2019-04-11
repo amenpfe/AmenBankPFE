@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class UserAddRequest extends FormRequest
+class OptimizationRequestRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,14 +24,10 @@ class UserAddRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255',
-            'email' =>  [
-                'required',
-                'email',
-                'max:255',
-                Rule::unique('users'),
-            ],
-            'role' => 'required|integer',
+            'project_id' => 'required|integer',
+            'type' => 'required|integer',
+            'remarque' => 'string|max:500',
+            'chd' => 'required|file|mimes:pdf'
         ];
     }
 }

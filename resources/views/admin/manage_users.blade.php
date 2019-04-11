@@ -10,14 +10,6 @@
     {!! HTML::style('css/datatables.css') !!}
 @endsection
 
-@section('user-name')
-    {{Auth::user()->name}}
-@endsection
-
-@section('user-role')
-    {{\App\Enums\UserRole::getEnumDescriptionByValue(Auth::user()->role)}}
-@endsection
-
 @section('navigation')
     <li class="nav-parent nav-active nav-expanded">
         <a>
@@ -83,8 +75,8 @@
                                 <td class="actions">
                                     <a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a><input type="submit" class="form_submit" hidden/>
                                     <a href="#" class="hidden on-editing cancel-row"><i class="fa fa-times"></i></a>
-                                    <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
                                     @if (Auth::user()->id != $user->id)
+                                        <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
                                         <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
                                     @endif
                                 </td>
@@ -97,31 +89,31 @@
     </section>
 
     <div id="dialog" class="modal-block mfp-hide">
-            <section class="panel">
-                <header class="panel-heading">
-                    <h2 class="panel-title">Êtes-vous sûr?</h2>
-                </header>
-                <div class="panel-body">
-                    <div class="modal-wrapper">
-                        <div class="modal-text">
-                            <p>Êtes-vous sûr de vouloir supprimer cet employé?</p>
-                        </div>
+        <section class="panel">
+            <header class="panel-heading">
+                <h2 class="panel-title">Êtes-vous sûr?</h2>
+            </header>
+            <div class="panel-body">
+                <div class="modal-wrapper">
+                    <div class="modal-text">
+                        <p>Êtes-vous sûr de vouloir supprimer cet employé?</p>
                     </div>
                 </div>
-                <footer class="panel-footer">
-                    <div class="row">
-                        <div class="col-md-12 text-right">
-                            <form method="POST" action="{{ route('delete_user') }}">
-                                {{ csrf_field() }}
-                                <input hidden name="userId" id="userId" value="1"/>
-                                <input type="submit" class="btn btn-primary" value="Confirmer"/>
-                                <button id="dialogCancel" class="btn btn-default">Annuler</button>
-                            </form>
-                        </div>
+            </div>
+            <footer class="panel-footer">
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <form method="POST" action="{{ route('delete_user') }}">
+                            {{ csrf_field() }}
+                            <input hidden name="userId" id="userId" value="1"/>
+                            <input type="submit" class="btn btn-primary" value="Confirmer"/>
+                            <button id="dialogCancel" class="btn btn-default">Annuler</button>
+                        </form>
                     </div>
-                </footer>
-            </section>
-        </div>
+                </div>
+            </footer>
+        </section>
+    </div>
 
         {{$errors->first('row')}}
 @endsection

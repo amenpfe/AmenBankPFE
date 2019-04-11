@@ -10,14 +10,36 @@ use Zul3s\EnumPhp\Enum;
  */
 class UserRole extends Enum
 {
-   
-    const Admin  = 0;
+   /**
+    * @description('Administrateur')
+    */
+    const Admin = 0;
+     /**
+    * @description('Utilisateur')
+    */
+    const User = 1;
     /**
     * @description('Chef de division')
     */
-    const Chefdedivision  = 1;
-    const developpeur = 2;  
-
+    const Chef = 2;
+    /**
+    * @description('Développeur')
+    */
+    const Developpeur = 3; 
+    /**
+    * @description('Propriétaire métier')
+    */
+    const ProprietaireMetier = 4;
+    /**
+    * @description('Chef de division des cahiers des charges')
+    */
+    const ChefCD  = 5;
+    /**
+    * @description('Chef de division architecture et intégration')
+    */
+    const ChefArchitectureIntegration  = 6;
+    const CED  = 7;
+    
     public static function getEnumDescriptionByKey($key) {
         try {
             return UserRole::byKey($key)->getDescription();

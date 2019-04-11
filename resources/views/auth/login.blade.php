@@ -3,7 +3,8 @@
 	<head>
 
 		<!-- Basic -->
-		<meta charset="UTF-8">
+        <meta charset="UTF-8">
+        <title>Connexion</title>
 
 		<meta name="keywords" content="HTML5 Admin Template" />
 		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
@@ -45,14 +46,14 @@
 
 				<div class="panel panel-sign">
 					<div class="panel-title-sign mt-xl text-right">
-						<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
+						<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Se connecter</h2>
 					</div>
 					<div class="panel-body">
                         <form class="" method="POST" action="{{ route('login') }}">
                             {{ csrf_field() }}
 
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} mb-lg">
-                                <label for="email" class="control-label">E-Mail Address</label>
+                                <label for="email" class="control-label">Adresse E-Mail</label>
     
                                 <div class="">
                                     <div class="input-group input-group-icon">
@@ -73,7 +74,7 @@
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} mb-lg">
                                 <div class="clearfix">
-                                    <label for="password" class="control-label">Password</label>
+                                    <label for="password" class="control-label">Mot de passe</label>
                                     <a class="pull-right" href="{{ route('password.request') }}">
                                         Mot de passe oublié?
                                     </a>
@@ -98,14 +99,11 @@
 
 							<div class="row">
 								<div class="col-sm-8">
-									<div class="checkbox-custom checkbox-default">
-										<input id="RememberMe" name="remember" type="checkbox" {{ old('remember') ? 'checked' : '' }}/>
-										<label for="RememberMe">Remember Me</label>
-									</div>
+									
 								</div>
 								<div class="col-sm-4 text-right">
-									<button type="submit" class="btn btn-primary hidden-xs">Sign In</button>
-									<button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Sign In</button>
+									<button type="submit" class="btn btn-primary hidden-xs">Connexion</button>
+									<button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Connexion</button>
 								</div>
                             </div>
 						</form>
