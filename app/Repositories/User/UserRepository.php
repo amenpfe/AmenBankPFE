@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Repositories\User;
-
-use App\User;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class UserRepository implements UserRepositoryInterface {
-    
-    protected $user;
 
+    protected $user;
+    
     function __construct(User $user)
     {
         $this->user = $user;
@@ -60,6 +59,21 @@ class UserRepository implements UserRepositoryInterface {
     public static function getUserByEmail($email)
     {
         return $this->getByEmail($email);
+    }
+
+    public function getUsersByRole($role)
+    {
+        return $this->user->findUsersByRole($role);
+    }
+
+    public function getUsersByRoles($roles)
+    {   
+        $users = [];
+        foreach ($roles as $role) {
+            $users = array_merge($users, getUsersByRole($role));
+        }
+
+        return $users;
     }
 }
 

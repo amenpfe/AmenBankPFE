@@ -12,14 +12,6 @@ Admin - Modifier le profil
 </style>
 @endsection
 
-@section('user-name')
-{{Auth::user()->name}}
-@endsection
-
-@section('user-role')
-{{\App\Enums\UserRole::getEnumDescriptionByValue(Auth::user()->role)}}
-@endsection
-
 @section('navigation')
 <li class="nav-parent">
     <a>
@@ -75,7 +67,6 @@ Modifier le profil
 
     <section class="panel">
         <header class="panel-heading">
-
             <h2 class="panel-title">Modifier le profil</h2>
             <p class="panel-subtitle">
             </p>
@@ -104,14 +95,14 @@ Modifier le profil
                 <div class="form-group">
                     <label class="col-md-3 control-label" for="name">Nom</label>
                     <div class="col-md-8">
-                        <input type="text" id ="name" name="name" class="form-control" value="{{$user->name}}" required>
+                        <input type="text" id ="name" name="name" class="form-control" value="{{Auth::user()->name}}" required>
                     </div>
                 </div>
                 <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                     <label class="col-md-3 control-label" for="email">Adresse E-mail</label>
                     <div class="col-md-8">
                         
-                        <input type="email" id="email" name="email" class="form-control" value="{{$user->email}}" required>
+                        <input type="email" id="email" name="email" class="form-control" value="{{Auth::user()->email}}" required>
                         @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>

@@ -10,14 +10,6 @@
     {!! HTML::style('css/datatables.css') !!}
 @endsection
 
-@section('user-name')
-    {{Auth::user()->name}}
-@endsection
-
-@section('user-role')
-    {{\App\Enums\UserRole::getEnumDescriptionByValue(Auth::user()->role)}}
-@endsection
-
 @section('navigation')
     <li class="nav-parent nav-active nav-expanded">
         <a>

@@ -1,7 +1,7 @@
 @extends('dashboard-template')
 
 @section('title')
-    Admin - Consulter
+    Effectuer une demande
 @endsection
 
 @section('page-stylesheets')
@@ -12,6 +12,27 @@
 
 
 @section('navigation')
+
+<li class="nav-parent">
+    <a>
+        <i class="fa fa-table" aria-hidden="true"></i>
+        <span>Consulter</span>
+    </a>
+    <ul class="nav nav-children">
+            <li class="">
+                <a href="{{route('get_new')}}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Demandes des nouveaux projets
+                </a>
+            </li>
+        <li class="">
+            <a href="{{route('get_opt')}}">
+                <i class="fa fa-wrench" aria-hidden="true"></i>
+                    Demandes d'améliorations
+            </a>
+        </li>               
+    </ul>
+</li>
     <li class="nav-parent nav-active nav-expanded">
         <a>
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
@@ -25,13 +46,14 @@
                 </a>
             </li>
             <li class="">
-                <a href="">
+                <a href="{{route('add_opt_request')}}">
                     <i class="fa  fa-wrench" aria-hidden="true"></i>
                     Demande d'amélioration 
                 </a>
             </li>
         </ul>
     </li>
+   
 @endsection
 
 @section('content-title')
@@ -40,7 +62,7 @@ Demande d'un nouveau projet
 
 @section('content-path')
     <li>
-        <span>Les demandes</span>
+        <span>Effectuer une demande</span>
     </li>
     <li>
         <span>Demande d'un nouveau projet</span>
@@ -73,9 +95,9 @@ Demande d'un nouveau projet
                     <label class="col-md-3 control-label" for="textareaDefault">Remarques</label>
                     <div class="col-md-6">
                         <textarea class="form-control" rows="3" data-plugin-maxlength maxlength="140" name="remarques"></textarea>
-                        @if ($errors->has('remarque'))
+                        @if ($errors->has('remarques'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('remarque') }}</strong>
+                                <strong>{{ $errors->first('remarques') }}</strong>
                             </span>
                         @endif
                     </div>

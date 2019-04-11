@@ -57,7 +57,7 @@ class ManageUsersController extends Controller
     }
 
     public function editProfil(){
-        return view('edit_profil')->with('user', Auth::user());
+        return view('edit_profil');
     }
 
     public function editProfilPost(EditProfilRequest $request){

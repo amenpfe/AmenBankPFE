@@ -15,17 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/index', function() {
-    return view('dashboard-template');
-});
-
-Route::get('/user', function (){
-    return view('tab');
-});
-
-Route::get('/sign', function (){
-    return view('signin-page');
-});
 Auth::routes();
 
 //Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
@@ -44,17 +33,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
 Route::get('/edit', 'Admin\ManageUsersController@editProfil')->middleware('auth');
 Route::post('/edit', 'Admin\ManageUsersController@editProfilPost')->middleware('auth')->name('user_edit');
-Route::get('/optform', 'UserController@getOptimizationRequestForm');
-Route::get('/newform', 'UserController@getNewProjectRequestForm');
-Route::post('/newform', 'UserController@submitNewProjectRequestForm')->name('add_new_request');
 
 
-Route::group(['prefix' => 'user'], function () {
-    Route::get('opt', 'UserController@submitOptimizationRequestForm');
-    Route::get('upopt', 'UserController@updateOptimizationRequest');
-    Route::get('new', 'UserController@submitNewProjectRequestForm');
-    Route::get('upnew', 'UserController@updateNewProjectRequestForm');
+Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
+    Route::get('/optform', 'UserController@getOptimizationRequestForm')->name('opt_form');
+    Route::post('/optform', 'UserController@submitOptimizationRequestForm')->name('add_opt_request');
+    Route::get('/newform', 'UserController@getNewProjectRequestForm');
+    Route::post('/newform', 'UserController@submitNewProjectRequestForm')->name('add_new_request');
+    Route::get('/shownew', 'UserController@getNewProjectRequests')->name('get_new');
+    Route::get('/showopt', 'UserController@getOptRequests')->name('get_opt');
 });
 
+Route::get('users/{role}', 'UserController@usersByRole');
 
 

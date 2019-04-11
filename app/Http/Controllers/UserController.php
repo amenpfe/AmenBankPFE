@@ -8,21 +8,43 @@ use Illuminate\Support\Facades\Input;
 use App\Project;
 use App\OptimizationRequest;
 use App\NewProjectRequest;
+use App\Enums\UserRole;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\NewProjectRequestRequest;
+use App\Http\Requests\OptimizationRequestRequest;
 use Illuminate\Support\Facades\Redirect;
+use App\ProjectRequest;
+use Illuminate\Config\Repository;
+use App\Repositories\User\UserRepositoryInterface;
 
 class UserController extends Controller
 {
-    public function __construct(RequestRepositoryInterface $requestRepository)
+    protected $user;
+    public function __construct(RequestRepositoryInterface $requestRepository, UserRepositoryInterface $userRepository)
     {
         $this->requestRepository = $requestRepository;
+        $this->userRepository = $userRepository;
     }
+
+    public function getNewProjectRequests() {
+        return view('user-show-request')->with('newprojectrequests', NewProjectRequest::all());
+    }
+
+    public function getOptRequests() {
+        return view('user-show-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
+    }
+
     public function getOptimizationRequestForm(){
         return view('user-optimization-request')->with('projects', Project::all());
     }
 
     public function getNewProjectRequestForm(){
         return view('user-new-request');
+    }
+
+    public function getRequestsFrom(){
+        return view('user-show-request');
     }
 
     public function submitNewProjectRequestForm(NewProjectRequestRequest $newProjectRequestRequest){
@@ -40,50 +62,23 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-    /*public function submitOptimizationRequestForm(){
-        $inputs['type'] = 1;
-        $inputs['project_id'] = 1;
+    public function submitOptimizationRequestForm(OptimizationRequestRequest $optimizationRequestRequest){
+        $inputs = $optimizationRequestRequest->all();
+        $file = $optimizationRequestRequest->file('chd');
+        $newFileName = 'chd_'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
 
+        $inputs['chd'] = $newFileName;
         $inputs['status'] = 1;
-        $inputs['remarques'] = "Remarque";
-        $inputs['livrable'] = "Test Livrable";
+        $inputs['livrable'] = null;
         $inputs['user_id'] = 1;
+
         $this->requestRepository->saveOptimizationRequest(new OptimizationRequest(), $inputs);
+        return redirect()->back();
     }
 
-    public function submitNewProjectRequestForm(){
-        $inputs['title'] = "New Project";
-
-        $inputs['status'] = 1;
-        $inputs['remarques'] = "Remarque";
-        $inputs['livrable'] = "Test Livrable";
-        $inputs['user_id'] = 1;
-        $this->requestRepository->saveNewProjectRequest(new NewProjectRequest(), $inputs);
+    public function usersByRole($role){
+        return print_r($this->userRepository->getUsersByRole($role));
     }
-
-    public function updateOptimizationRequest(){
-        $optReq = OptimizationRequest::find(33);
-        $inputs['status'] = 2;
-        
-        $inputs['type'] = $optReq->type;
-        $inputs['project_id'] = $optReq->project_id;
-
-        $inputs['remarques'] = $optReq->request->remarques;
-        $inputs['livrable'] = $optReq->request->livrable;
-        $inputs['user_id'] = $optReq->request->user_id;
-        
-        $this->requestRepository->saveOptimizationRequest($optReq, $inputs);
-    }
-
-    public function updateNewProjectRequestForm(){
-        $newRequest = NewProjectRequest::find(4);
-        $inputs['title'] = "Updated New Project";
-
-        $inputs['status'] = 2;
-        $inputs['remarques'] = "Remarque updated";
-        $inputs['livrable'] = "Test up Livrable";
-        $inputs['user_id'] = $newRequest->request->user_id;
-        $this->requestRepository->saveNewProjectRequest($newRequest, $inputs);
-    }*/
 
 }

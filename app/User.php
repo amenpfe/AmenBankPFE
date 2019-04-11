@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\MailResetPasswordNotification;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -41,5 +42,9 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new MailResetPasswordNotification($token));
+    }
+
+    public function findUsersByRole($role){
+        return DB::table('users')->where('role', $role);
     }
 }
