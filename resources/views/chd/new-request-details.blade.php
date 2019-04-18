@@ -118,7 +118,7 @@ Détails de demande
                                                             @endif
                                                         </div>
                                                 <td class="text-dark col-sm-3"><h4><b>Joindre un fichier</b></h4></td>
-                                                <td class="text-dark"><h4><div class="form-group {{ $errors->has('chd_doc') ? ' has-error' : '' }}">
+                                                <td class="text-dark"><h4><div class="form-group {{ $errors->has('doc') ? ' has-error' : '' }}">
                                                     <div class="col-md-6">
                                                         <div class="fileupload fileupload-new" data-provides="fileupload">
                                                             <div class="input-append">
@@ -129,14 +129,14 @@ Détails de demande
                                                                 <span class="btn btn-default btn-file">
                                                                     <span class="fileupload-exists">Changer</span>
                                                                     <span class="fileupload-new">Sélectionner</span>
-                                                                    <input type="file" name="chd_doc" accept=".pdf"/>
+                                                                    <input type="file" name="doc" accept=".pdf"/>
                                                                 </span>
                                                                 <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Retirer</a>
                                                                 <br><br>
                                                             </div>
-                                                                @if ($errors->has('chd_doc'))
+                                                                @if ($errors->has('doc'))
                                                                 <span class="help-block">
-                                                                    <strong>{{ $errors->first('chd_doc') }}</strong>
+                                                                    <strong>{{ $errors->first('doc') }}</strong>
                                                                 </span>
                                                             @endif
                                                         </div>

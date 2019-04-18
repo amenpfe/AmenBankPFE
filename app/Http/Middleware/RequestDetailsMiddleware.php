@@ -29,6 +29,10 @@ class RequestDetailsMiddleware
         $user = Auth::user();
         if($user->role == UserRole::byKey('User')->getValue() && $projectRequest->user_id == $user->id){
             return $next($request);
+
+        } else if ($user->role == UserRole::byKey('CED')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_CED')->getValue()) {
+            return $next($request);
+
         } else if ($user->role == UserRole::byKey('ChefCD')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_chd')->getValue()) {
             return $next($request);
         }

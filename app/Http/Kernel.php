@@ -59,7 +59,8 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
         'user' => \App\Http\Middleware\UserMiddleware::class,
         'request_details' => \App\Http\Middleware\RequestDetailsMiddleware::class,
-        'chd' => \App\Http\Middleware\ChdMiddleware::class
+        'chd' => \App\Http\Middleware\ChdMiddleware::class,
+        'ced' => \App\Http\Middleware\CedMiddleware::class
 
     ];
 }

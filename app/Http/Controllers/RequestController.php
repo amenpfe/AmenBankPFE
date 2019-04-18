@@ -12,6 +12,8 @@ use App\Http\Requests\NewProjectRequestRequest;
 use App\Http\Requests\OptimizationRequestRequest;
 use App\Http\Requests\NewRequestDetailsRequest;
 use Illuminate\Support\Facades\Redirect;
+use App\Http\Requests\OptRequestDetailsRequest;
+use App\OptimizationRequest;
 
 class RequestController extends Controller
 {
@@ -53,7 +55,7 @@ class RequestController extends Controller
         $newFileName = 'user_doc_'  . str_random(8) . '.' . $file->getClientOriginalExtension();
         $file->move('files', $newFileName);
 
-        $inputs['status'] = StatusRequest::byKey("send")->getValue();
+        $inputs['status'] = StatusRequest::byKey("progressing_CED")->getValue();
         
         $inputs['user_id'] = $user->id;
 
@@ -118,6 +120,8 @@ class RequestController extends Controller
             ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_chd')->getValue()])->get());
     }
 
+    //new request
+
     public function getCDNewDetails($id){
         $request = ProjectRequest::find($id);
         return view('chd/new-request-details')->with('request', $request);
@@ -128,7 +132,7 @@ class RequestController extends Controller
         $requestId = $inputs['requestId'];
         $request = ProjectRequest::find($requestId);
 
-        $file = $newRequestDetailsRequest->file('chd_doc');
+        $file = $newRequestDetailsRequest->file('doc');
         $newFileName = 'chd_doc_'  . str_random(8) . '.' . $file->getClientOriginalExtension();
         $file->move('files', $newFileName);
 
@@ -149,9 +153,86 @@ class RequestController extends Controller
 
         $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
         return redirect()->route('get_chd_new');
+    }
 
+    //opt request
 
+    public function getCDOptDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('chd/opt-request-details')->with('request', $request);
+    }
+
+    public function submitCDOptRequestForm(OptRequestDetailsRequest $optRequestDetailsRequest){
+        $inputs = $optRequestDetailsRequest->all();
+        $request_id = $inputs['request_id'];
+        $request = ProjectRequest::find($request_id);
+
+        $file = $optRequestDetailsRequest->file('doc');
+        $newFileName = 'chd_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_div")->getValue();
+        $inputs['chd_doc'] = $newFileName;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_chd_opt');
     }
 
     //End CD
+
+    //CED
+
+    public function getCEDNewProjectRequest(){ 
+        return view('ced/new-request-table')->with('newprojectrequests', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest', 'status' => StatusRequest::byKey('progressing_CED')->getValue()])->get());
+    }
+    
+    public function getCEDNewDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('ced/new-request-details')->with('request', $request);
+    }
+
+    public function submitCEDNewRequestForm(NewRequestDetailsRequest $newRequestDetailsRequest){
+        $inputs = $newRequestDetailsRequest->all();
+        $requestId = $inputs['requestId'];
+        $request = ProjectRequest::find($requestId);
+
+        $file = $newRequestDetailsRequest->file('doc');
+        $newFileName = 'ced_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_chd")->getValue();
+        $inputs['ced_doc'] = $newFileName;
+        $inputs['title'] = $request->requestable->title;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        return redirect()->route('get_ced_new');
+    }
+    
+
+    //End CED
 }   

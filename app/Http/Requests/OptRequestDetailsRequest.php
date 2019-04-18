@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class NewRequestDetailsRequest extends FormRequest
+class OptRequestDetailsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class NewRequestDetailsRequest extends FormRequest
     public function rules()
     {
         return [
-            'requestId' => 'exists:requests,id',
-            'doc' => 'required|file|mimes:pdf'
+            'reques_id' => 'exists:requests,id',
+            'chd_doc' => 'required|file|mimes:pdf'
         ];
     }
 }

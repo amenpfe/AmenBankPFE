@@ -59,6 +59,16 @@ Route::group(['prefix' => 'chd', 'middleware' => 'chd'], function () {
 
     Route::get('/detail/{id}', 'RequestController@getCDNewDetails')->middleware('request_details')->name('new-request-details-chd');
     Route::post('/detailsubmit', 'RequestController@submitCDNewRequestForm')->name('new-request-detail-chd-submit');
+
+    Route::get('/detailopt/{id}', 'RequestController@getCDOptDetails')->middleware('request_details')->name('opt-request-details-chd');
+    Route::post('/detailoptsubmit', 'RequestController@submitCDOptRequestForm')->name('opt-request-detail-chd-submit');
+});
+
+Route::group(['prefix' => 'ced', 'middleware' => 'ced'], function () {
+    Route::get('/shownew', 'RequestController@getCEDNewProjectRequest')->name('get_ced_new');
+
+    Route::get('/detail/{id}', 'RequestController@getCEDNewDetails')->middleware('request_details')->name('new-request-details-ced');
+    Route::post('/detailsubmit', 'RequestController@submitCEDNewRequestForm')->name('new-request-detail-ced-submit');
 });
 
 
