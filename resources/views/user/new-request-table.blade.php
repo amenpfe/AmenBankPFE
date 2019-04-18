@@ -10,24 +10,28 @@
     {!! HTML::style('css/datatables.css') !!}
 @endsection
 
-@section('navigation')
+@section('edit')
+{{route('edit_user')}}
+@endsection
 
+
+@section('navigation')
 <li class="nav-parent nav-active nav-expanded">
     <a>
         <i class="fa fa-table" aria-hidden="true"></i>
-        <span>Consulter</span>
+        <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-            <li class="">
-                <a href="{{route('get_new')}}">
+        <li class="nav-active">
+                <a href="">
                     <i class="fa fa-plus" aria-hidden="true"></i>
-                    Demandes des nouveaux projets
+                    Des nouveaux projets
                 </a>
             </li>
-        <li class="nav-active">
-            <a href="">
+        <li class="">
+        <a href="{{route('get_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
-                    Demandes d'améliorations
+                    D'améliorations
             </a>
         </li>               
     </ul>
@@ -35,19 +39,19 @@
     <li class="nav-parent">
         <a>
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            <span>Effectuer une demande</span>
+            <span>Envoyer une demande</span>
         </a>
         <ul class="nav nav-children">
             <li class="">
                 <a href="{{route('add_new_request')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
-                    Demande d'un nouveau projet
+                    D'un nouveau projet
                 </a>
             </li>
             <li class="">
             <a href="{{route('add_opt_request')}}">
                     <i class="fa  fa-wrench" aria-hidden="true"></i>
-                    Demande d'amélioration 
+                    D'amélioration
                 </a>
             </li>
             
@@ -57,15 +61,15 @@
 @endsection
 
 @section('content-title')
-Demandes d'amélioration
+Demandes des nouveaux projets
 @endsection
 
 @section('content-path')
     <li>
-        <span>Consulter</span>
+        <span>Consulter les demandes</span>
     </li>
     <li>
-        <span>Demandes d'amélioration</span>
+        <span>Des nouveaux projets</span>
     </li>
 @endsection
 
@@ -78,24 +82,26 @@ Demandes d'amélioration
         <div class="panel-body">
             <form method="POST" action="">
             {{ csrf_field() }}
-                <table class="table table-bordered table-striped mb-none" id="datatable-editable">
+                <table class="table table-bordered table-striped mb-none" id="datatable-default">
                     <thead>
                         <tr>
                             <th>#Ref</th>
-                            <th>Type</th>
-                            <th>Remarques</th>
+                            <th>Titre</th>
                             <th>Etat</th>
                             <th>Créé à</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($optimizationRequests as $optimizationRequest)
-                        <tr class="gradeX" id="row-{{$optimizationRequest->id}}">
-                            <td class="userId">{{$optimizationRequest->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$optimizationRequest->id}}"/></td>
-                            <td class="input email email">{{\App\Enums\TypeRequest::getEnumDescriptionByValue($optimizationRequest->type)}}</td>
-                            <td class="input email email">{{$optimizationRequest->request->remarques}}</td>
-                            <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($optimizationRequest->request->status)}}</td>
-                            <td class="input email email">{{$optimizationRequest->created_at}}</td>
+                        @foreach ($newprojectrequests as $projectRequest)
+                        <tr class="gradeX" id="row-{{$projectRequest->requestable->id}}">
+                            <td class="userId">{{$projectRequest->requestable->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$projectRequest->requestable->id}}"/></td>
+                            <td class="input email email">{{$projectRequest->requestable->title}}</td>
+                            <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($projectRequest->status)}}</td>
+                            <td class="input email email">{{$projectRequest->requestable->created_at}}</td>
+                            <td class="actions">
+                                <a href="{{route('detail_request', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -114,7 +120,7 @@ Demandes d'amélioration
     {!! HTML::script('js/jquery.dataTables.js') !!}
     {!! HTML::script('js/dataTables.tableTools.min.js') !!}
     {!! HTML::script('js/datatables.js') !!}
-
+    
     <!-- Table script -->
-    {!! HTML::script('js/users.datatable.js') !!}
+    {!! HTML::script('js/examples.datatables.default.js') !!}
 @endsection

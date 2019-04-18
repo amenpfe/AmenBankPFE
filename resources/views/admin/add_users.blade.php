@@ -12,6 +12,11 @@ Admin - Ajouter
 </style>
 @endsection
 
+
+@section('edit')
+{{route('edit_admin')}}
+@endsection
+
 @section('navigation')
 <li class="nav-parent nav-active nav-expanded">
     <a>
@@ -59,12 +64,39 @@ Ajouter
             </p>
         </header>
         <div class="panel-body">
+            
             <div class="col-md-10 ">
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                     <label class="col-sm-3 control-label">Nom <span class="required">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" id="name" name="name" class="form-control" placeholder="eg.: John Doe"
-                            required />
+                        <input type="text" id="name" name="name" class="form-control" placeholder="eg.: John Doe" required />
+                        @if ($errors->has('name'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('name') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+                <div class="form-group {{ $errors->has('adresse') ? ' has-error' : '' }}">
+                    <label class="col-sm-3 control-label">Adresse <span class="required">*</span></label>
+                    <div class="col-sm-9">
+                        <input type="text" id="adresse" name="adresse" class="form-control" placeholder="eg.: John Doe" required />
+                        @if ($errors->has('adresse'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('adresse') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+                <div class="form-group {{ $errors->has('phone') ? ' has-error' : '' }}">
+                    <label class="col-sm-3 control-label">Numéro <span class="required">*</span></label>
+                    <div class="col-sm-9">
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="eg.: John Doe" required />
+                        @if ($errors->has('phone'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('phone') }}</strong>
+                            </span>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

@@ -47,6 +47,9 @@ class LoginController extends Controller
             case UserRole::byKey('User')->getValue():
                 return redirect()->route('get_new');
                 break;
+            case UserRole::byKey('ChefCD')->getValue():
+                return redirect()->route('get_chd_new');
+                break;
             
             default:
                 # code...

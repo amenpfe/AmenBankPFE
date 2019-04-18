@@ -25,6 +25,8 @@ class EditProfilRequest extends FormRequest
     {
         return [
             "name" => "string|max:255|required",
+            "adresse" => "string|max:255|required",
+            "phone" => "integer|required",
             "email" => "email|max:255|required",
             "password" => "confirmed",
             "current_password" => "required|min:6"

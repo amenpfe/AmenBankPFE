@@ -14,31 +14,54 @@ class UserRole extends Enum
     * @description('Administrateur')
     */
     const Admin = 0;
-     /**
+    /**
     * @description('Utilisateur')
     */
     const User = 1;
     /**
-    * @description('Chef de division')
+     * @description('Propriétaire du métier')
+     */
+    const proprietaire = 2;
+    /**
+     * @description('Comité d'organisation)
     */
-    const Chef = 2;
+    const comite = 3;
+    /**
+    * @description('Comité d'étude et de développement')
+    */
+    const CED = 4;
     /**
     * @description('Développeur')
     */
-    const Developpeur = 3; 
+    const Developpeur = 5; 
     /**
     * @description('Propriétaire métier')
     */
-    const ProprietaireMetier = 4;
+    const ProprietaireMetier = 6;
     /**
     * @description('Chef de division des cahiers des charges')
     */
-    const ChefCD  = 5;
+    const ChefCD  = 7;
     /**
     * @description('Chef de division architecture et intégration')
     */
-    const ChefArchitectureIntegration  = 6;
-    const CED  = 7;
+    const ChefArchitectureIntegration  = 8;
+    /**
+     * @description('Chef de division développement')
+     */
+    const dev_chef = 9;
+    /**
+     * @description('Chef de division de la qualité des applications')
+    */
+    const quality_chef = 10;
+    /**
+     * @description('Chef de division système')
+     */
+    const sys_chef = 11;
+    /**
+     * @description('Organisation informatique')
+     */
+    const info = 12;
     
     public static function getEnumDescriptionByKey($key) {
         try {

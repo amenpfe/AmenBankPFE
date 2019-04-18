@@ -19,8 +19,16 @@ class RequestRepository implements RequestRepositoryInterface {
         }
         $request->status = $inputs['status'];
         $request->remarques = $inputs['remarques'];
-        $request->chd = $inputs['chd'];
-        $request->livrable = $inputs['livrable'];
+        $request->user_doc = $inputs['user_doc'];
+        $request->logiciel_doc = $inputs['logiciel_doc'];
+        $request->ced_doc = $inputs['ced_doc'];
+        $request->organisation_doc = $inputs['organisation_doc'];
+        $request->chd_doc = $inputs['chd_doc'];
+        $request->analyse_doc = $inputs['analyse_doc'];
+        $request->conception_doc = $inputs['conception_doc'];
+        $request->test_doc = $inputs['test_doc'];
+        $request->recette_doc = $inputs['recette_doc'];
+        $request->circulaire_doc = $inputs['circulaire_doc'];
         $request->user_id = $inputs['user_id'];
         $request->save();
 
@@ -39,8 +47,16 @@ class RequestRepository implements RequestRepositoryInterface {
 
         $request->status = $inputs['status'];
         $request->remarques = $inputs['remarques'];
-        $request->chd = $inputs['chd'];
-        $request->livrable = $inputs['livrable'];
+        $request->user_doc = $inputs['user_doc'];
+        $request->logiciel_doc = $inputs['logiciel_doc'];
+        $request->ced_doc = $inputs['ced_doc'];
+        $request->organisation_doc = $inputs['organisation_doc'];
+        $request->chd_doc = $inputs['chd_doc'];
+        $request->analyse_doc = $inputs['analyse_doc'];
+        $request->conception_doc = $inputs['conception_doc'];
+        $request->test_doc = $inputs['test_doc'];
+        $request->recette_doc = $inputs['recette_doc'];
+        $request->circulaire_doc = $inputs['circulaire_doc'];
         $request->user_id = $inputs['user_id'];
         $request->save();
 

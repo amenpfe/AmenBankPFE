@@ -1,7 +1,7 @@
 @extends('dashboard-template')
 
 @section('title')
-Admin - Modifier le profil
+Modifier le profil
 @endsection
 
 @section('page-stylesheets')
@@ -88,14 +88,41 @@ Modifier le profil
                 </div>
             
         @endisset
-        <form class="form-horizontal" method="POST" action="{{route('user_edit')}}" id="form">
+        <form class="form-horizontal" method="POST" action="{{route('submit_adminedit')}}" id="form">
                 {{ csrf_field() }}
             <h4 class="mb-xlg"> Informations personnelles</h4>
             <fieldset>
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                     <label class="col-md-3 control-label" for="name">Nom</label>
                     <div class="col-md-8">
                         <input type="text" id ="name" name="name" class="form-control" value="{{Auth::user()->name}}" required>
+                        @if ($errors->has('name'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('name') }}</strong>
+                            </span>
+                            @endif    
+                    </div>
+                </div>
+                <div class="form-group {{ $errors->has('adresse') ? ' has-error' : '' }}">
+                    <label class="col-md-3 control-label" for="adresse">Adresse</label>
+                    <div class="col-md-8">
+                        <input type="text" id ="adresse" name="adresse" class="form-control" value="{{Auth::user()->adresse}}" required>
+                        @if ($errors->has('adresse'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('adresse') }}</strong>
+                            </span>
+                            @endif    
+                    </div>
+                </div>
+                <div class="form-group {{ $errors->has('phone') ? ' has-error' : '' }}">
+                    <label class="col-md-3 control-label" for="phone">Numéro</label>
+                    <div class="col-md-8">
+                        <input type="tel" id ="phone" name="phone" class="form-control" value="{{Auth::user()->phone}}" required>
+                        @if ($errors->has('phone'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('phone') }}</strong>
+                            </span>
+                            @endif    
                     </div>
                 </div>
                 <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">

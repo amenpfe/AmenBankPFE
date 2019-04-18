@@ -15,6 +15,8 @@ class UserRepository implements UserRepositoryInterface {
 
     function save(User $user, $inputs) {
         $user->name = $inputs['name'];
+        $user->adresse = $inputs['adresse'];
+        $user->phone = $inputs['phone'];
         $user->email = $inputs['email'];
         if($inputs['password'] && $inputs['password']!=''){
             $user->password = bcrypt($inputs['password']);

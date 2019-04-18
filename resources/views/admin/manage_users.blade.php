@@ -10,6 +10,11 @@
     {!! HTML::style('css/datatables.css') !!}
 @endsection
 
+@section('edit')
+{{route('edit_admin')}}
+@endsection
+
+
 @section('navigation')
     <li class="nav-parent nav-active nav-expanded">
         <a>
@@ -61,6 +66,8 @@
                             <th>#Ref</th>
                             <th>Nom</th>
                             <th>Email</th>
+                            <th>Adresse</th>
+                            <th>Num. Tel.</th>
                             <th>Role</th>
                             <th>Actions</th>
                         </tr>
@@ -71,6 +78,8 @@
                                 <td class="userId">{{$user->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$user->id}}"/></td>
                                 <td class="input name text">{{$user->name}}</td>
                                 <td class="input email email">{{$user->email}}</td>
+                                <td class="input adresse text">{{$user->adresse}}</td>
+                                <td class="input phone text">{{$user->phone}}</td>
                                 <td class="select role">{{\App\Enums\UserRole::getEnumDescriptionByValue($user->role)}}</td>
                                 <td class="actions">
                                     <a href="#" class="hidden on-editing save-row"><i class="fa fa-save"></i></a><input type="submit" class="form_submit" hidden/>

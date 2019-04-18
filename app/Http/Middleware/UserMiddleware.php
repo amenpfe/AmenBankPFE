@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Enums\UserRole;
 use Closure;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserMiddleware
 {
@@ -22,7 +23,7 @@ class UserMiddleware
             return redirect('login');
         }
         if(Auth::user()->role != UserRole::byKey('User')->getValue()) {
-            return new Response(view('errors\unauthorized')->with('role', 'Utilisateur'));
+            return new Response(view('errors\unauthorized')->with('role', UserRole::byKey('User')->getDescription()));
         }
         return $next($request);
     }

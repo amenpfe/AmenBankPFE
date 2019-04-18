@@ -44,6 +44,8 @@ var editableRow;
 					null,
 					null,
 					null,
+					null,
+					null,
 					{ "bSortable": false }
 				]
 			});

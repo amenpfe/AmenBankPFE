@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\RequestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,21 +30,42 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::post('users/update', 'Admin\ManageUsersController@update')->name('update_user');
     Route::get('add', 'Admin\ManageUsersController@add')->name('add_users');
     Route::post('add/register', array('uses'=>'Admin\ManageUsersController@addUser'))->name('add_user');
+    Route::get('/adminedit', 'Admin\ManageUsersController@editProfil')->name('edit_admin');
+    Route::post('/adminedit', 'Admin\ManageUsersController@editProfilPost')->name('submit_adminedit');
 });
-
-Route::get('/edit', 'Admin\ManageUsersController@editProfil')->middleware('auth');
-Route::post('/edit', 'Admin\ManageUsersController@editProfilPost')->middleware('auth')->name('user_edit');
-
 
 Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
-    Route::get('/optform', 'UserController@getOptimizationRequestForm')->name('opt_form');
-    Route::post('/optform', 'UserController@submitOptimizationRequestForm')->name('add_opt_request');
-    Route::get('/newform', 'UserController@getNewProjectRequestForm');
-    Route::post('/newform', 'UserController@submitNewProjectRequestForm')->name('add_new_request');
-    Route::get('/shownew', 'UserController@getNewProjectRequests')->name('get_new');
-    Route::get('/showopt', 'UserController@getOptRequests')->name('get_opt');
+    //Opt
+    Route::get('/optform', 'RequestController@getUserOptRequestForm')->name('opt_form');
+    Route::post('/optform', 'RequestController@submitOptimizationRequestForm')->name('add_opt_request');
+
+    //New
+    Route::get('/newform', 'RequestController@getUserNewProjectRequestForm');
+    Route::post('/newform', 'RequestController@submitNewProjectRequestForm')->name('add_new_request');
+
+    Route::get('/shownew', 'RequestController@getUserNewProjectRequests')->name('get_new');
+    Route::get('/showopt', 'RequestController@getUserOptRequests')->name('get_opt');
+    
+    //Edit
+    Route::get('/edituser', 'UserController@editProfilUser')->name('edit_user');
+    Route::post('/edit', 'UserController@editProfilPostUser')->name('submit_edit');
+
+    Route::get('/detail/{id}', 'RequestController@getUserNewDetails')->middleware('request_details')->name('detail_request');
 });
 
-Route::get('users/{role}', 'UserController@usersByRole');
+Route::group(['prefix' => 'chd', 'middleware' => 'chd'], function () {
+    Route::get('/shownew', 'RequestController@getCDNewProjectRequest')->name('get_chd_new');
+    Route::get('/showopt', 'RequestController@getCDOptRequest')->name('get_chd_opt');
+
+    Route::get('/detail/{id}', 'RequestController@getCDNewDetails')->middleware('request_details')->name('new-request-details-chd');
+    Route::post('/detailsubmit', 'RequestController@submitCDNewRequestForm')->name('new-request-detail-chd-submit');
+});
+
+
+
+/*Route::get('users/{role}', 'UserController@usersByRole');
+Route::get('/detailopt/{id}', 'RequestController@getOptDetails')->middleware('request_details')->name('opt_detail_request');
+*/
+
 
 

@@ -1,13 +1,20 @@
 @extends('dashboard-template')
 
 @section('title')
-    Effectuer une Demande
+    Envoyer une demande
 @endsection
 
 @section('page-stylesheets')
     <!-- Specific Page Vendor CSS -->
     {!! HTML::style('css/bootstrap-fileupload.min.css') !!}
+    {!! HTML::style('css/summernote.css') !!}
+    {!! HTML::style('css/summernote-bs3.css') !!}
  
+@endsection
+
+
+@section('edit')
+{{route('edit_user')}}
 @endsection
 
 
@@ -15,19 +22,19 @@
     <li class="nav-parent ">
         <a>
             <i class="fa fa-table" aria-hidden="true"></i>
-            <span>Consulter</span>
+            <span>Consulter les demandes</span>
         </a>
         <ul class="nav nav-children">
                 <li class="">
                     <a href="{{route('get_new')}}">
                         <i class="fa fa-plus" aria-hidden="true"></i>
-                        Demandes des nouveaux projets
+                        Des nouveaux projets
                     </a>
                 </li>
             <li class="">
                 <a href="{{route('get_opt')}}">
                     <i class="fa fa-wrench" aria-hidden="true"></i>
-                        Demandes d'améliorations
+                    D'améliorations
                 </a>
             </li>               
         </ul>
@@ -35,19 +42,19 @@
     <li class="nav-parent nav-active nav-expanded">
         <a>
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            <span>Les demandes</span>
+            <span>Envoyer une demandes</span>
         </a>
         <ul class="nav nav-children">
             <li class="">
                 <a href="{{route('add_new_request')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
-                    Demande d'un nouveau projet
+                    D'un nouveau projet
                 </a>
             </li>
             <li class="nav-active">
                 <a href="">
                     <i class="fa  fa-wrench" aria-hidden="true"></i>
-                    Demande d'amélioration 
+                    D'amélioration 
                 </a>
             </li>
             
@@ -62,10 +69,10 @@ Demande d'amélioration
 
 @section('content-path')
     <li>
-        <span>Effectuer une demande</span>
+        <span>Envoyer une demande</span>
     </li>
     <li>
-        <span>Demande d'amélioration</span>
+        <span>D'amélioration</span>
     </li>
 @endsection
 
@@ -99,18 +106,19 @@ Demande d'amélioration
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label" for="textareaDefault">Remarques</label>
-                        <div class="col-md-6">
-                            <textarea class="form-control" rows="3" data-plugin-maxlength maxlength="140" name="remarques"></textarea>
-                            @if ($errors->has('remarque'))
-                                <span class="help-block">
-                                    <strong>{{ $errors->first('remarque') }}</strong>
-                                </span>
-                            @endif
+                    <div class="form-group {{ $errors->has('remarques') ? ' has-error' : '' }}">
+                            <label class="col-md-3 control-label">Remarques</label>
+                            <div class="col-md-9">
+                                <textarea class="summernote" data-plugin-summernote data-plugin-options='{ "height": 180, "codemirror": { "theme": "ambiance" } }' name="remarques">Start typing...</textarea>
+                                @if ($errors->has('remarques'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('remarques') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
+                      
+                    <div class="form-group {{ $errors->has('chd') ? ' has-error' : '' }}">
                             <label class="col-md-3 control-label">Joindre un fichier</label>
                             <div class="col-md-6">
                                 <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -155,4 +163,5 @@ Demande d'amélioration
     <!-- Specific Page Vendor -->
     {!! HTML::script('js/jquery.autosize.js') !!}
     {!! HTML::script('js/bootstrap-fileupload.min.js') !!}
+    {!! HTML::script('js/summernote.js') !!}
 @endsection

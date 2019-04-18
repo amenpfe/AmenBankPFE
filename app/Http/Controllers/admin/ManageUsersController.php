@@ -57,7 +57,7 @@ class ManageUsersController extends Controller
     }
 
     public function editProfil(){
-        return view('edit_profil');
+        return view('admin\edit_profil');
     }
 
     public function editProfilPost(EditProfilRequest $request){
@@ -67,9 +67,9 @@ class ManageUsersController extends Controller
         if(Hash::check($currentPassword, $user->password)){
             $inputs['role'] = $user->role;
             $this->userRepository->updateUserInfos($user->id, $inputs);
-            return view('edit_profil')->with('user', $user)->with("success", "Profil mis à jour!");
+            return view('admin\edit_profil')->with('user', $user)->with("success", "Profil mis à jour!");
         }else {
-            return view('edit_profil')->with('user', $user)->with("error", "Mot de passe invalide!");
+            return view('admin\edit_profil')->with('user', $user)->with("error", "Mot de passe invalide!");
         }
     }
 }

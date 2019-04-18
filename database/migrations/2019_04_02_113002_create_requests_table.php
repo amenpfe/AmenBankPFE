@@ -17,11 +17,19 @@ class CreateRequestsTable extends Migration
     	Schema::create('requests', function(Blueprint $table) {
 			$table->increments('id');
 			$table->tinyInteger('status');
-            $table->String('remarques', 500);
+            $table->longText('remarques');
             $table->integer('requestable_id')->nullable();
-            $table->String('requestable_type')->nullable();
-            $table->string('livrable')->nullable();
-            $table->string('chd')->nullable();
+            $table->string('requestable_type')->nullable();
+            $table->string('user_doc')->nullable();
+            $table->string('ced_doc')->nullable();
+            $table->string('organisation_doc')->nullable();
+            $table->string('chd_doc')->nullable();
+            $table->string('analyse_doc')->nullable();
+            $table->string('conception_doc')->nullable();
+            $table->string('logiciel_doc')->nullable();
+            $table->string('test_doc')->nullable();
+            $table->string('recette_doc')->nullable();
+            $table->string('circulaire_doc')->nullable();
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')
 				  ->references('id')

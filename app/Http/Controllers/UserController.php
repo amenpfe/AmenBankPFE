@@ -1,84 +1,34 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use Illuminate\Http\Request;
-use App\Repositories\Request\RequestRepositoryInterface;
-use Illuminate\Support\Facades\Input;
-use App\Project;
-use App\OptimizationRequest;
-use App\NewProjectRequest;
-use App\Enums\UserRole;
-use App\User;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\NewProjectRequestRequest;
-use App\Http\Requests\OptimizationRequestRequest;
-use Illuminate\Support\Facades\Redirect;
-use App\ProjectRequest;
-use Illuminate\Config\Repository;
 use App\Repositories\User\UserRepositoryInterface;
+use App\Http\Requests\EditProfilRequest;
+use Illuminate\Support\Facades\Hash as IlluminateHash;
 
 class UserController extends Controller
 {
     protected $user;
-    public function __construct(RequestRepositoryInterface $requestRepository, UserRepositoryInterface $userRepository)
+    public function __construct(UserRepositoryInterface $userRepository)
     {
-        $this->requestRepository = $requestRepository;
         $this->userRepository = $userRepository;
     }
 
-    public function getNewProjectRequests() {
-        return view('user-show-request')->with('newprojectrequests', NewProjectRequest::all());
+    public function editProfilUser(){
+        return view('edit-user');
     }
 
-    public function getOptRequests() {
-        return view('user-show-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
-    }
-
-    public function getOptimizationRequestForm(){
-        return view('user-optimization-request')->with('projects', Project::all());
-    }
-
-    public function getNewProjectRequestForm(){
-        return view('user-new-request');
-    }
-
-    public function getRequestsFrom(){
-        return view('user-show-request');
-    }
-
-    public function submitNewProjectRequestForm(NewProjectRequestRequest $newProjectRequestRequest){
-        $inputs = $newProjectRequestRequest->all();
-        $file = $newProjectRequestRequest->file('chd');
-        $newFileName = 'chd_'  . str_random(8) . '.' . $file->getClientOriginalExtension();
-        $file->move('files', $newFileName);
-
-        $inputs['chd'] = $newFileName;
-        $inputs['status'] = 1;
-        $inputs['livrable'] = null;
-        $inputs['user_id'] = 1;
-
-        $this->requestRepository->saveNewProjectRequest(new NewProjectRequest(), $inputs);
-        return redirect()->back();
-    }
-
-    public function submitOptimizationRequestForm(OptimizationRequestRequest $optimizationRequestRequest){
-        $inputs = $optimizationRequestRequest->all();
-        $file = $optimizationRequestRequest->file('chd');
-        $newFileName = 'chd_'  . str_random(8) . '.' . $file->getClientOriginalExtension();
-        $file->move('files', $newFileName);
-
-        $inputs['chd'] = $newFileName;
-        $inputs['status'] = 1;
-        $inputs['livrable'] = null;
-        $inputs['user_id'] = 1;
-
-        $this->requestRepository->saveOptimizationRequest(new OptimizationRequest(), $inputs);
-        return redirect()->back();
-    }
-
-    public function usersByRole($role){
-        return print_r($this->userRepository->getUsersByRole($role));
+    public function editProfilPostUser(EditProfilRequest $request){
+        $user = Auth::user();
+        $inputs = $request->all();
+        $currentPassword = $inputs['current_password'];
+        if(IlluminateHash::check($currentPassword, $user->password)){
+            $inputs['role'] = $user->role;
+            $this->userRepository->updateUserInfos($user->id, $inputs);
+            return view('edit-user')->with('user', $user)->with("success", "Profil mis à jour!");
+        }else {
+            return view('edit-user')->with('user', $user)->with("error", "Mot de passe invalide!");
+        }
     }
 
 }
