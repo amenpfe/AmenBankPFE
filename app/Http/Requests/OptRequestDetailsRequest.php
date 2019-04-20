@@ -24,8 +24,8 @@ class OptRequestDetailsRequest extends FormRequest
     public function rules()
     {
         return [
-            'reques_id' => 'exists:requests,id',
-            'chd_doc' => 'required|file|mimes:pdf'
+            'request_id' => 'exists:requests,id',
+            'doc' => 'required|file|mimes:pdf'
         ];
     }
 }

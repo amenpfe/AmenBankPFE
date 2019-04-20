@@ -3,12 +3,12 @@ namespace App\Enums;
 use Zul3s\EnumPhp\Enum;
 
 /**
- * TypeRequest enum
+ * UserRole enum
  *
  * @method static Simpson::HOMER()
  * @method static Simpson::MARGE()
  */
-class TypeRequest extends Enum
+class RequestTypes extends Enum
 {
    /**
     * @description('Demande de modification')
@@ -17,11 +17,11 @@ class TypeRequest extends Enum
     /**
     * @description('Demande de corréction')
     */
-    const correction  = 2;
-    
+    const correction  = 1;
+
     public static function getEnumDescriptionByKey($key) {
         try {
-            return TypeRequest::byKey($key)->getDescription();
+            return RequestTypes::byKey($key)->getDescription();
         } catch (\InvalidArgumentException $th) {
             return $key;
         }
@@ -29,15 +29,15 @@ class TypeRequest extends Enum
 
     public static function getEnumDescriptionByValue($value) {
         try {
-            return TypeRequest::byValue($value)->getDescription();
+            return RequestTypes::byValue($value)->getDescription();
         } catch (\InvalidArgumentException $th) {
-            return TypeRequest::byValue($value)->getKey();
+            return RequestTypes::byValue($value)->getKey();
         }
     }
 
     public static function getEnumDescriptions(){
-        foreach(TypeRequest::getValues() as $key => $value){
-            $descs[$key] = TypeRequest::getEnumDescriptionByKey($key);
+        foreach(RequestTypes::getValues() as $key => $value){
+            $descs[$key] = RequestTypes::getEnumDescriptionByKey($key);
         }
         return $descs;
     }

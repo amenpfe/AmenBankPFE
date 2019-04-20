@@ -51,6 +51,7 @@ Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
     Route::post('/edit', 'UserController@editProfilPostUser')->name('submit_edit');
 
     Route::get('/detail/{id}', 'RequestController@getUserNewDetails')->middleware('request_details')->name('detail_request');
+    Route::get('/detailopt/{id}', 'RequestController@getUserOptDetails')->middleware('request_details')->name('opt_detail_request');
 });
 
 Route::group(['prefix' => 'chd', 'middleware' => 'chd'], function () {
@@ -66,9 +67,13 @@ Route::group(['prefix' => 'chd', 'middleware' => 'chd'], function () {
 
 Route::group(['prefix' => 'ced', 'middleware' => 'ced'], function () {
     Route::get('/shownew', 'RequestController@getCEDNewProjectRequest')->name('get_ced_new');
+    Route::get('/showopt', 'RequestController@getCEDOptRequest')->name('get_ced_opt');
 
     Route::get('/detail/{id}', 'RequestController@getCEDNewDetails')->middleware('request_details')->name('new-request-details-ced');
     Route::post('/detailsubmit', 'RequestController@submitCEDNewRequestForm')->name('new-request-detail-ced-submit');
+
+    Route::get('/detailopt/{id}', 'RequestController@getCEDOptDetails')->middleware('request_details')->name('opt-request-details-ced');
+    Route::post('/detailoptsubmit', 'RequestController@submitCEDOptRequestForm')->name('opt-request-detail-ced-submit');
 });
 
 

@@ -89,11 +89,10 @@ Demande d'amélioration
                     <label class="col-md-3 control-label">Type</label>
                     <div class="col-md-6">
                         <select id="type" name="type" class="form-control" required>
-                            @foreach (\App\Enums\TypeRequest::getValues() as $key => $value)
-                            <option value="{{$value}}"> {{\App\Enums\TypeRequest::getEnumDescriptionBykey($key)}}</option>
+                            @foreach (App\Enums\RequestTypes::getValues() as $key => $value)
+                                <option value="{{$value}}">{{App\Enums\RequestTypes::getEnumDescriptionBykey($key)}}</option>
                             @endforeach
                         </select>
-                        
                     </div>
                 </div>
                     <div class="form-group">

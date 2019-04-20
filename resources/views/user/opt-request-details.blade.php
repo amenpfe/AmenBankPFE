@@ -103,7 +103,7 @@ Modifier le profil
                         </tr>
                         <tr>
                             <td class="text-dark col-sm-3"><h4><b>Type d'amélioration</b></h4></td>
-                            <td class="text-dark"><h4>{{App\Enums\TypeRequest::getEnumDescriptionByValue($request->requestable->type)}}</h4></td>
+                            <td class="text-dark"><h4>{{App\Enums\RequestTypes::getEnumDescriptionByValue($request->requestable->type)}}</h4></td>
                         </tr>
                         <tr>
                             <td class="text-dark col-sm-3"><h4><b>Fichier</b></h4></td>

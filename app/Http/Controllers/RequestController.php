@@ -232,6 +232,48 @@ class RequestController extends Controller
         $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
         return redirect()->route('get_ced_new');
     }
+
+    //opt request
+
+    public function getCEDOptRequest(){ 
+        return view('ced/opt-request-table')->with('optimizationRequests', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_CED')->getValue()])->get());
+    }
+
+    public function getCEDOptDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('ced/opt-request-details')->with('request', $request);
+    }
+
+    public function submitCEDOptRequestForm(OptRequestDetailsRequest $optRequestDetailsRequest){
+        $inputs = $optRequestDetailsRequest->all();
+        $request_id = $inputs['request_id'];
+        $request = ProjectRequest::find($request_id);
+
+        $file = $optRequestDetailsRequest->file('doc');
+        $newFileName = 'ced_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_chd")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $newFileName;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_ced_opt');
+    }
+
     
 
     //End CED

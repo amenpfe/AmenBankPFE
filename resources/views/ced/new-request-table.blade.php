@@ -27,6 +27,13 @@
                 <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
             </a>
+        </li>
+        
+        <li class="">
+        <a href="{{route('get_ced_opt')}}">
+                <i class="fa fa-wrench" aria-hidden="true"></i>
+                    D'améliorations
+            </a>
         </li>            
     </ul>
 </li>

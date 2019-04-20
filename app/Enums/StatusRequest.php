@@ -11,7 +11,7 @@ use Zul3s\EnumPhp\Enum;
 class StatusRequest extends Enum
 {
    /**
-    * @description('En attente d'acceptation par le propriétaire du métier)
+    * @description('En attente d'acceptation par le propriétaire du métier')
     */
     const waiting  = 0;
     /**
@@ -19,7 +19,7 @@ class StatusRequest extends Enum
     */
     const progressing_CED  = 1;
     /**
-    * @description('En cours de traitement par la comité d'organisation d'étude)
+    * @description('En cours de traitement par la comité d'organisation d'étude')
     */
     const progressing_comite  = 2;
     /**
@@ -63,7 +63,7 @@ class StatusRequest extends Enum
     */
     const progressing_systeme  = 11;
     /**
-    * @description('En cours de rédaction de circulaire par l'organisation informatique)
+    * @description('En cours de rédaction de circulaire par l'organisation informatique')
     */
     const progressing_circulaire  = 12;
 
