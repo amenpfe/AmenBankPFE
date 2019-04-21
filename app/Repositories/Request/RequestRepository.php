@@ -33,6 +33,7 @@ class RequestRepository implements RequestRepositoryInterface {
         $request->save();
 
         $newProjectRequest->request()->save($request);
+        $newProjectRequest->request = $request;
     }
 
     public function saveOptimizationRequest(OptimizationRequest $optimizationRequest, $inputs) {
@@ -61,5 +62,6 @@ class RequestRepository implements RequestRepositoryInterface {
         $request->save();
 
         $optimizationRequest->request()->save($request);
+        $optimizationRequest->request = $request;
     }
 }
