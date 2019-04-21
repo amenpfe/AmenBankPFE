@@ -14,6 +14,8 @@ use App\Http\Requests\NewRequestDetailsRequest;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\OptRequestDetailsRequest;
 use App\OptimizationRequest;
+use App\User;
+use App\Notifications\DeploymentNotification;
 
 class RequestController extends Controller
 {
@@ -277,4 +279,401 @@ class RequestController extends Controller
     
 
     //End CED
+
+    //Propriétaire
+    
+    //opt request
+
+    public function getPropOptRequest(){ 
+        return view('prop/opt-request-table')->with('optimizationRequests', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('waiting')->getValue()])->get());
+    }
+
+    public function getPropOptDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('prop/opt-request-details')->with('request', $request);
+    }
+
+    public function AcceptOptRequest($id){
+        $request = ProjectRequest::find($id);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_CED")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_prop_opt');
+    }
+
+    public function RefuseOptRequest($id){
+        $request = ProjectRequest::find($id);
+
+        $inputs['status'] = StatusRequest::byKey("refus")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_prop_opt');
+        
+    }
+
+    //End Prop
+
+    //CDD
+
+    public function getCDDNewProjectRequest(){ 
+        return view('cdd/new-request-table')->with('newprojectrequests', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest', 'status' => StatusRequest::byKey('progressing_div')->getValue()])->get());
+    }
+    
+    public function getCDDNewDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('cdd/new-request-details')->with('request', $request);
+    }
+
+    public function submitCDDNewRequestForm(NewRequestDetailsRequest $newRequestDetailsRequest){
+        $inputs = $newRequestDetailsRequest->all();
+        $requestId = $inputs['requestId'];
+        $request = ProjectRequest::find($requestId);
+
+        $file = $newRequestDetailsRequest->file('doc');
+        $newFileName = 'test_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_recette")->getValue();
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['title'] = $request->requestable->title;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $newFileName;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        return redirect()->route('get_cdd_new');
+    }
+
+    //opt request
+
+    public function getCDDOptRequest(){ 
+        return view('cdd/opt-request-table')->with('optimizationRequests', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_div')->getValue()])->get());
+    }
+
+    public function getCDDOptDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('cdd/opt-request-details')->with('request', $request);
+    }
+
+    public function submitCDDOptRequestForm(OptRequestDetailsRequest $optRequestDetailsRequest){
+        $inputs = $optRequestDetailsRequest->all();
+        $request_id = $inputs['request_id'];
+        $request = ProjectRequest::find($request_id);
+
+        $file = $optRequestDetailsRequest->file('doc');
+        $newFileName = 'test_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_recette")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $newFileName;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_cdd_opt');
+    }
+
+    
+
+    //End CDD
+
+    //CDQ
+
+    public function getCDQNewProjectRequest(){ 
+        return view('cdq/new-request-table')->with('newprojectrequests', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest', 'status' => StatusRequest::byKey('progressing_recette')->getValue()])->get());
+    }
+    
+    public function getCDQNewDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('cdq/new-request-details')->with('request', $request);
+    }
+
+    public function submitCDQNewRequestForm(NewRequestDetailsRequest $newRequestDetailsRequest){
+        $inputs = $newRequestDetailsRequest->all();
+        $requestId = $inputs['requestId'];
+        $request = ProjectRequest::find($requestId);
+
+        $file = $newRequestDetailsRequest->file('doc');
+        $newFileName = 'recette_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_systeme")->getValue();
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['title'] = $request->requestable->title;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $newFileName;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        return redirect()->route('get_cdq_new');
+    }
+
+    //opt request
+
+    public function getCDQOptRequest(){ 
+        return view('cdq/opt-request-table')->with('optimizationRequests', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_recette')->getValue()])->get());
+    }
+
+    public function getCDQOptDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('cdq/opt-request-details')->with('request', $request);
+    }
+
+    public function submitCDQOptRequestForm(OptRequestDetailsRequest $optRequestDetailsRequest){
+        $inputs = $optRequestDetailsRequest->all();
+        $request_id = $inputs['request_id'];
+        $request = ProjectRequest::find($request_id);
+
+        $file = $optRequestDetailsRequest->file('doc');
+        $newFileName = 'recette_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_systeme")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $newFileName;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_cdq_opt');
+    }
+
+    //End CDQ
+
+    //ORG
+
+    public function getORGNewProjectRequest(){ 
+        return view('organisation/new-request-table')->with('newprojectrequests', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest', 'status' => StatusRequest::byKey('progressing_circulaire')->getValue()])->get());
+    }
+    
+    public function getORGNewDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('organisation/new-request-details')->with('request', $request);
+    }
+
+    public function submitORGNewRequestForm(NewRequestDetailsRequest $newRequestDetailsRequest){
+        $inputs = $newRequestDetailsRequest->all();
+        $requestId = $inputs['requestId'];
+        $request = ProjectRequest::find($requestId);
+
+        $file = $newRequestDetailsRequest->file('doc');
+        $newFileName = 'circulaire_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("done")->getValue();
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['title'] = $request->requestable->title;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $newFileName;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        return redirect()->route('get_org_new');
+    }
+
+    //opt request
+
+    public function getORGOptRequest(){ 
+        return view('organisation/opt-request-table')->with('optimizationRequests', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_circulaire')->getValue()])->get());
+    }
+
+    public function getORGOptDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('organisation/opt-request-details')->with('request', $request);
+    }
+
+    public function submitORGOptRequestForm(OptRequestDetailsRequest $optRequestDetailsRequest){
+        $inputs = $optRequestDetailsRequest->all();
+        $request_id = $inputs['request_id'];
+        $request = ProjectRequest::find($request_id);
+
+        $file = $optRequestDetailsRequest->file('doc');
+        $newFileName = 'circulaire_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("done")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->circulaire_doc;
+        $inputs['circulaire_doc'] = $newFileName;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_org_opt');
+    }
+    
+    //End CDQ
+
+    //DS
+
+    public function getDSNewProjectRequest(){ 
+        return view('ds/new-request-table')->with('newprojectrequests', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest', 'status' => StatusRequest::byKey('progressing_systeme')->getValue()])->get());
+    }
+    
+    public function getDSNewDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('ds/new-request-details')->with('request', $request);
+    }
+
+    public function submitDSNewRequestForm($id){
+        $request = ProjectRequest::find($id);
+        $user = User::find($request->user_id); 
+        $name = $user->name;
+        
+
+        $inputs['status'] = StatusRequest::byKey("progressing_circulaire")->getValue();
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['title'] = $request->requestable->title;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        return redirect()->route('get_ds_new');
+
+        $user->notify(new DeploymentNotification($name));
+        return redirect()->back();
+    
+    }
+
+    //opt request
+
+    public function getDSOptRequest(){ 
+        return view('ds/opt-request-table')->with('optimizationRequests', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_systeme')->getValue()])->get());
+    }
+
+    public function getDSOptDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('ds/opt-request-details')->with('request', $request);
+    }
+
+    public function submitDSOptRequestForm($id){
+        $request = ProjectRequest::find($id);
+        $user = User::find($request->user_id); 
+        $name = $user->name;
+
+        $inputs['status'] = StatusRequest::byKey("progressing_circulaire")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->recette;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $user->notify(new DeploymentNotification($name));
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_ds_opt');
+    }
+
+    //End CDQ
+
 }   

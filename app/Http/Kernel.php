@@ -60,7 +60,12 @@ class Kernel extends HttpKernel
         'user' => \App\Http\Middleware\UserMiddleware::class,
         'request_details' => \App\Http\Middleware\RequestDetailsMiddleware::class,
         'chd' => \App\Http\Middleware\ChdMiddleware::class,
-        'ced' => \App\Http\Middleware\CedMiddleware::class
+        'ced' => \App\Http\Middleware\CedMiddleware::class,
+        'prop' => \App\Http\Middleware\PropMiddleware::class,
+        'cdd' => \App\Http\Middleware\CddMidleware::class,
+        'cdq' => \App\Http\Middleware\CdqMiddleware::class,
+        'org' => \App\Http\Middleware\OrgMiddleware::class,
+        'ds' => \App\Http\Middleware\DsMiddleware::class
 
     ];
 }

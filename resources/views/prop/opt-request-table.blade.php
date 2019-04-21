@@ -22,12 +22,6 @@
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-            <li class="">
-                <a href="{{route('get_chd_new')}}">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    Des nouveaux projets
-                </a>
-            </li>
         <li class="nav-active">
             <a href="">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
@@ -79,7 +73,7 @@ Demandes d'améliorations
                             <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($projectRequest->status)}}</td>
                             <td class="input email email">{{$projectRequest->requestable->created_at}}</td>
                             <td class="actions">
-                                <a href="{{route('opt-request-details-chd', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
+                                <a href="{{route('opt-request-details-prop', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach

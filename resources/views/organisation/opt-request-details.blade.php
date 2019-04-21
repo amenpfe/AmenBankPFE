@@ -22,7 +22,7 @@
                 </a>
             </li>
         <li class="">
-        <a href="{{route('get_chd_opt')}}">
+        <a href="{{route('get_org_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations
             </a>
@@ -82,8 +82,8 @@ Détails de demande
                         </tr>
                         <tr>
                             <td class="text-dark col-sm-3"><h4><b>Fichier</b></h4></td> 
-                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$request->user_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
-                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$request->ced_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$request->chd_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$request->logiciel_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                         </tr>
                     </tbody>
                 </table>
@@ -98,7 +98,7 @@ Détails de demande
                 </div>
             </div>
             <div class="table-responsive col-sm-10 col-sm-offset-1"><br>
-                                <form class="form-horizontal form-bordered" method="POST" action="{{route('opt-request-detail-chd-submit')}}" enctype="multipart/form-data">
+                                <form class="form-horizontal form-bordered" method="POST" action="{{route('opt-request-detail-org-submit')}}" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     <table class="table invoice-items" border="0">
                                         <tbody>
@@ -106,7 +106,7 @@ Détails de demande
                                                 
                                                 <div class="form-group {{ $errors->has('request_id') ? ' has-error' : '' }}">
                                                             <div class="input-group input-group-icon">
-                                                                    <input type="text" value="{{$request->id}}" name="request_id" >
+                                                                    <input type="text" value="{{$request->id}}" name="request_id" hidden>
                                                             </div>
                                                             @if ($errors->has('request_id'))
                                                                 <span class="help-block">

@@ -76,6 +76,47 @@ Route::group(['prefix' => 'ced', 'middleware' => 'ced'], function () {
     Route::post('/detailoptsubmit', 'RequestController@submitCEDOptRequestForm')->name('opt-request-detail-ced-submit');
 });
 
+Route::group(['prefix' => 'prop', 'middleware' => 'prop'], function () {
+    Route::get('/showopt', 'RequestController@getPropOptRequest')->name('get_prop_opt');
+
+    Route::get('/detailopt/{id}', 'RequestController@getPropOptDetails')->middleware('request_details')->name('opt-request-details-prop');
+    Route::any('/detailaccept/{id}', 'RequestController@AcceptOptRequest')->name('accept_request');
+    Route::any('/detailrefu/{id}', 'RequestController@RefuseOptRequest')->name('refuse_request');
+});
+
+Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
+    Route::get('/shownew', 'RequestController@getCDDNewProjectRequest')->name('get_cdd_new');
+    Route::get('/showopt', 'RequestController@getCDDOptRequest')->name('get_cdd_opt');
+
+    Route::get('/detail/{id}', 'RequestController@getCDDNewDetails')->middleware('request_details')->name('new-request-details-cdd');
+    Route::post('/detailsubmit', 'RequestController@submitCDDNewRequestForm')->name('new-request-detail-cdd-submit');
+
+    Route::get('/detailopt/{id}', 'RequestController@getCDDOptDetails')->middleware('request_details')->name('opt-request-details-cdd');
+    Route::post('/detailoptsubmit', 'RequestController@submitCDDOptRequestForm')->name('opt-request-detail-cdd-submit');
+});
+
+Route::group(['prefix' => 'org', 'middleware' => 'org'], function () {
+    Route::get('/shownew', 'RequestController@getORGNewProjectRequest')->name('get_org_new');
+    Route::get('/showopt', 'RequestController@getORGOptRequest')->name('get_org_opt');
+
+    Route::get('/detail/{id}', 'RequestController@getORGNewDetails')->middleware('request_details')->name('new-request-details-org');
+    Route::post('/detailsubmit', 'RequestController@submitORGNewRequestForm')->name('new-request-detail-org-submit');
+
+    Route::get('/detailopt/{id}', 'RequestController@getORGOptDetails')->middleware('request_details')->name('opt-request-details-org');
+    Route::post('/detailoptsubmit', 'RequestController@submitORGOptRequestForm')->name('opt-request-detail-org-submit');
+});
+
+Route::group(['prefix' => 'ds', 'middleware' => 'ds'], function () {
+    Route::get('/shownew', 'RequestController@getDSNewProjectRequest')->name('get_ds_new');
+    Route::get('/showopt', 'RequestController@getDSOptRequest')->name('get_ds_opt');
+
+    Route::get('/detail/{id}', 'RequestController@getDSNewDetails')->middleware('request_details')->name('new-request-details-ds');
+    Route::any('/detailsubmit/{id}', 'RequestController@submitDSNewRequestForm')->name('mail_new_request');
+
+    Route::get('/detailopt/{id}', 'RequestController@getDSOptDetails')->middleware('request_details')->name('opt-request-details-ds');
+    Route::any('/detailoptsubmit/{id}', 'RequestController@submitDSOptRequestForm')->name('mail_opt_request');
+});
+
 
 
 /*Route::get('users/{role}', 'UserController@usersByRole');
