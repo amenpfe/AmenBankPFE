@@ -14,6 +14,9 @@ use App\Http\Requests\NewRequestDetailsRequest;
 use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\OptRequestDetailsRequest;
 use App\OptimizationRequest;
+use App\Enums\UserRole;
+use App\Notifications\WorkAdded;
+use App\User;
 
 class RequestController extends Controller
 {
@@ -71,7 +74,11 @@ class RequestController extends Controller
         $inputs['recette_doc'] = null;
         $inputs['circulaire_doc'] = null;
 
-        $this->requestRepository->saveNewProjectRequest(new NewProjectRequest(), $inputs);
+        $newPorjectRequest = new NewProjectRequest();
+        $this->requestRepository->saveNewProjectRequest($newPorjectRequest, $inputs);
+
+        $user = User::where(['role' => UserRole::byKey('ChefCD')])->first();
+        $user->notify(new WorkAdded($newPorjectRequest->request));
         return redirect()->back();
     }
     

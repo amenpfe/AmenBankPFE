@@ -14,6 +14,8 @@
 {{route('edit_user')}}
 @endsection
 
+@section('new-notification-route')detail_request @endsection
+@section('opt-notification-route')opt_detail_request @endsection
 
 @section('navigation')
 <li class="nav-parent nav-active nav-expanded">
