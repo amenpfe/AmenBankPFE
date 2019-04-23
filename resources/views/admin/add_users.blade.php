@@ -24,16 +24,16 @@ Admin - Ajouter
         <span>Gérer les utilisateurs</span>
     </a>
     <ul class="nav nav-children">
-        <li class="nav-active">
-            <a href="">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                Ajouter
-            </a>
-        </li>
         <li>
             <a href="{{ route('manage_users') }}">
                 <i class="fa fa-table" aria-hidden="true"></i>
                 Consulter
+            </a>
+        </li>
+        <li class="nav-active">
+            <a href="">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Ajouter
             </a>
         </li>
     </ul>

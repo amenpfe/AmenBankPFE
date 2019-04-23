@@ -22,7 +22,7 @@ class OrgMiddleware
         {
             return redirect('login');
         }
-        if(Auth::user()->role != UserRolee::byKey('info')->getValue()) {
+        if(Auth::user()->role != UserRole::byKey('info')->getValue()) {
             return new Response(view('errors\unauthorized')->with('role', UserRole::byKey('info')->getDescription()));
         }
         return $next($request);

@@ -8,6 +8,10 @@
     {!! HTML::style('css/bootstrap-fileupload.min.css') !!}
 @endsection
 
+@section('edit')
+{{route('edit_chd')}}
+@endsection
+
 @section('navigation')
 <li class="nav-parent nav-active nav-expanded">
     <a>
@@ -16,7 +20,7 @@
     </a>
     <ul class="nav nav-children">
         <li class="nav-active">
-                <a href="">
+                <a href="{{route('get_chd_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
@@ -27,6 +31,27 @@
                     D'améliorations
             </a>
         </li>               
+    </ul>
+</li>
+<li class="nav-parent">
+    <a>
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <span>Suivi des demande</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+            <a href="{{route('all_new_request_chd')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Des nouveaux projets
+            </a>
+        </li>
+        <li class="">
+        <a href="{{route('all_opt_request_chd')}}">
+                <i class="fa  fa-wrench" aria-hidden="true"></i>
+                D'améliorations
+            </a>
+        </li>
+        
     </ul>
 </li>
 @endsection
@@ -55,7 +80,15 @@ Détails de demande
                     <div class="col-md-6">
                         <div class="bill-to">
                             <p class="h5 mb-xs text-dark text-semibold"><b>Emetteur:</b></p>
-                        <address>{{$user->name}}</address>
+                            <address>
+                                {{$user->name}}
+                                <br>
+                                {{$user->adresse}}
+                                <br>
+                                Num.Tél : {{$user->phone}}
+                                <br>
+                                {{$user->email}}
+                            </address>
                         </div>
                     </div>
                     <div class="col-md-6">

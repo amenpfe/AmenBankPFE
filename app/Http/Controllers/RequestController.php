@@ -193,6 +193,16 @@ class RequestController extends Controller
         return redirect()->route('get_chd_opt');
     }
 
+    //All Requests
+
+    public function getCDAllNewProjectRequests() {
+        return view('chd/all-new-requests')->with('newprojectrequests', NewProjectRequest::all());
+    }
+
+    public function getCDAllOptRequests() {
+        return view('chd/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
+    }
+
     //End CD
 
     //CED
@@ -276,6 +286,15 @@ class RequestController extends Controller
         return redirect()->route('get_ced_opt');
     }
 
+    //All Requests
+
+    public function getCEDAllNewProjectRequests() {
+        return view('ced/all-new-requests')->with('newprojectrequests', NewProjectRequest::all());
+    }
+
+    public function getCEDAllOptRequests() {
+        return view('ced/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
+    }
     
 
     //End CED
@@ -339,6 +358,16 @@ class RequestController extends Controller
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
         return redirect()->route('get_prop_opt');
         
+    }
+
+    //All Requests
+
+    public function getPropAllNewProjectRequests() {
+        return view('prop/all-new-requests')->with('newprojectrequests', NewProjectRequest::all());
+    }
+
+    public function getPropAllOptRequests() {
+        return view('chd/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
     }
 
     //End Prop
@@ -422,6 +451,16 @@ class RequestController extends Controller
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
         return redirect()->route('get_cdd_opt');
+    }
+
+    //All Requests
+
+    public function getCDDAllNewProjectRequests() {
+        return view('cdd/all-new-requests')->with('newprojectrequests', NewProjectRequest::all());
+    }
+
+    public function getCDDAllOptRequests() {
+        return view('cdd/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
     }
 
     
@@ -509,6 +548,16 @@ class RequestController extends Controller
         return redirect()->route('get_cdq_opt');
     }
 
+    //All Requests
+
+    public function getCDQAllNewProjectRequests() {
+        return view('cdq/all-new-requests')->with('newprojectrequests', NewProjectRequest::all());
+    }
+
+    public function getCDQAllOptRequests() {
+        return view('cdq/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
+    }
+
     //End CDQ
 
     //ORG
@@ -591,8 +640,18 @@ class RequestController extends Controller
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
         return redirect()->route('get_org_opt');
     }
+
+    //All Requests
+
+    public function getORGAllNewProjectRequests() {
+        return view('organisation/all-new-requests')->with('newprojectrequests', NewProjectRequest::all());
+    }
+
+    public function getORGAllOptRequests() {
+        return view('organisation/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
+    }
     
-    //End CDQ
+    //End ORG
 
     //DS
 
@@ -611,7 +670,6 @@ class RequestController extends Controller
         $user = User::find($request->user_id); 
         $name = $user->name;
         
-
         $inputs['status'] = StatusRequest::byKey("progressing_circulaire")->getValue();
         $inputs['ced_doc'] = $request->ced_doc;
         $inputs['title'] = $request->requestable->title;
@@ -674,6 +732,16 @@ class RequestController extends Controller
         return redirect()->route('get_ds_opt');
     }
 
-    //End CDQ
+    //All Requests
+
+    public function getDSAllNewProjectRequests() {
+        return view('ds/all-new-requests')->with('newprojectrequests', NewProjectRequest::all());
+    }
+
+    public function getDSAllOptRequests() {
+        return view('ds/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
+    }
+
+    //End DS
 
 }   

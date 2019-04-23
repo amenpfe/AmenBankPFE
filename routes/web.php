@@ -30,8 +30,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::post('users/update', 'Admin\ManageUsersController@update')->name('update_user');
     Route::get('add', 'Admin\ManageUsersController@add')->name('add_users');
     Route::post('add/register', array('uses'=>'Admin\ManageUsersController@addUser'))->name('add_user');
-    Route::get('/adminedit', 'Admin\ManageUsersController@editProfil')->name('edit_admin');
-    Route::post('/adminedit', 'Admin\ManageUsersController@editProfilPost')->name('submit_adminedit');
+    Route::get('/edit', 'UserController@editProfilAdmin')->name('edit_admin');
+    Route::post('/adminedit', 'UserController@editProfilPostAdmin')->name('submit_adminedit');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
@@ -63,6 +63,13 @@ Route::group(['prefix' => 'chd', 'middleware' => 'chd'], function () {
 
     Route::get('/detailopt/{id}', 'RequestController@getCDOptDetails')->middleware('request_details')->name('opt-request-details-chd');
     Route::post('/detailoptsubmit', 'RequestController@submitCDOptRequestForm')->name('opt-request-detail-chd-submit');
+
+    Route::get('/allnew', 'RequestController@getCDAllNewProjectRequests')->name('all_new_request_chd');
+    Route::get('/allopt', 'RequestController@getCDAllOptRequests')->name('all_opt_request_chd');
+
+    Route::get('/edit', 'UserController@getEditProfilChd')->name('edit_chd');
+    Route::post('/editprofil', 'UserController@editProfilChdSubmit')->name('submit_chd_edit');
+
 });
 
 Route::group(['prefix' => 'ced', 'middleware' => 'ced'], function () {
@@ -74,6 +81,13 @@ Route::group(['prefix' => 'ced', 'middleware' => 'ced'], function () {
 
     Route::get('/detailopt/{id}', 'RequestController@getCEDOptDetails')->middleware('request_details')->name('opt-request-details-ced');
     Route::post('/detailoptsubmit', 'RequestController@submitCEDOptRequestForm')->name('opt-request-detail-ced-submit');
+
+    Route::get('/allnew', 'RequestController@getCEDAllNewProjectRequests')->name('all_new_request_ced');
+    Route::get('/allopt', 'RequestController@getCEDAllOptRequests')->name('all_opt_request_ced');
+
+    Route::get('/edit', 'UserController@getEditProfilCED')->name('edit_ced');
+    Route::post('/editprofil', 'UserController@editProfilCEDSubmit')->name('submit_ced_edit');
+
 });
 
 Route::group(['prefix' => 'prop', 'middleware' => 'prop'], function () {
@@ -82,6 +96,12 @@ Route::group(['prefix' => 'prop', 'middleware' => 'prop'], function () {
     Route::get('/detailopt/{id}', 'RequestController@getPropOptDetails')->middleware('request_details')->name('opt-request-details-prop');
     Route::any('/detailaccept/{id}', 'RequestController@AcceptOptRequest')->name('accept_request');
     Route::any('/detailrefu/{id}', 'RequestController@RefuseOptRequest')->name('refuse_request');
+
+    Route::get('/allnew', 'RequestController@getPropAllNewProjectRequests')->name('all_new_request_prop');
+    Route::get('/allopt', 'RequestController@getPropAllOptRequests')->name('all_opt_request_prop');
+
+    Route::get('/edit', 'UserController@getEditProfilProp')->name('edit_prop');
+    Route::post('/editprofil', 'UserController@editProfilPropSubmit')->name('submit_prop_edit');
 });
 
 Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
@@ -93,6 +113,13 @@ Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
 
     Route::get('/detailopt/{id}', 'RequestController@getCDDOptDetails')->middleware('request_details')->name('opt-request-details-cdd');
     Route::post('/detailoptsubmit', 'RequestController@submitCDDOptRequestForm')->name('opt-request-detail-cdd-submit');
+
+    Route::get('/allnew', 'RequestController@getCDDAllNewProjectRequests')->name('all_new_request_cdd');
+    Route::get('/allopt', 'RequestController@getCDDAllOptRequests')->name('all_opt_request_cdd');
+
+    Route::get('/edit', 'UserController@getEditProfilCDD')->name('edit_cdd');
+    Route::post('/editprofil', 'UserController@editProfilCDDSubmit')->name('submit_cdd_edit');
+
 });
 
 Route::group(['prefix' => 'org', 'middleware' => 'org'], function () {
@@ -104,6 +131,14 @@ Route::group(['prefix' => 'org', 'middleware' => 'org'], function () {
 
     Route::get('/detailopt/{id}', 'RequestController@getORGOptDetails')->middleware('request_details')->name('opt-request-details-org');
     Route::post('/detailoptsubmit', 'RequestController@submitORGOptRequestForm')->name('opt-request-detail-org-submit');
+
+    Route::get('/allnew', 'RequestController@getORGAllNewProjectRequests')->name('all_new_request_org');
+    Route::get('/allopt', 'RequestController@getORGAllOptRequests')->name('all_opt_request_org');
+
+    Route::get('/edit', 'UserController@getEditProfilORG')->name('edit_org');
+    Route::post('/editprofil', 'UserController@editProfilORGSubmit')->name('submit_org_edit');
+
+
 });
 
 Route::group(['prefix' => 'ds', 'middleware' => 'ds'], function () {
@@ -115,6 +150,32 @@ Route::group(['prefix' => 'ds', 'middleware' => 'ds'], function () {
 
     Route::get('/detailopt/{id}', 'RequestController@getDSOptDetails')->middleware('request_details')->name('opt-request-details-ds');
     Route::any('/detailoptsubmit/{id}', 'RequestController@submitDSOptRequestForm')->name('mail_opt_request');
+
+    Route::get('/allnew', 'RequestController@getDSAllNewProjectRequests')->name('all_new_request_ds');
+    Route::get('/allopt', 'RequestController@getDSAllOptRequests')->name('all_opt_request_ds');
+
+    Route::get('/edit', 'UserController@getEditProfilDS')->name('edit_ds');
+    Route::post('/editprofil', 'UserController@editProfilDSSubmit')->name('submit_ds_edit');
+
+});
+
+Route::group(['prefix' => 'cdq', 'middleware' => 'cdq'], function () {
+
+    Route::get('/shownew', 'RequestController@getCDQNewProjectRequest')->name('get_cdq_new');
+    Route::get('/showopt', 'RequestController@getCDQOptRequest')->name('get_cdq_opt');
+
+    Route::get('/detail/{id}', 'RequestController@getCDQNewDetails')->middleware('request_details')->name('new-request-details-cdq');
+    Route::post('/detailsubmit', 'RequestController@submitCDQNewRequestForm')->name('new-request-detail-cdq-submit');
+
+    Route::get('/detailopt/{id}', 'RequestController@getCDQOptDetails')->middleware('request_details')->name('opt-request-details-cdq');
+    Route::post('/detailoptsubmit', 'RequestController@submitCDQOptRequestForm')->name('opt-request-detail-cdq-submit');
+
+    Route::get('/allnew', 'RequestController@getCDQAllNewProjectRequests')->name('all_new_request_cdq');
+    Route::get('/allopt', 'RequestController@getCDQAllOptRequests')->name('all_opt_request_cdq');
+
+    Route::get('/edit', 'UserController@getEditProfilCDQ')->name('edit_cdq');
+    Route::post('/editprofil', 'UserController@editProfilCDQSubmit')->name('submit_cdq_edit');
+
 });
 
 

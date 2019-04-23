@@ -76,7 +76,15 @@ Modifier le profil
                     <div class="col-md-6">
                         <div class="bill-to">
                             <p class="h5 mb-xs text-dark text-semibold"><b>Emetteur:</b></p>
-                        <address>{{$user->name}}</address>
+                            <address>
+                                {{$user->name}}
+                                <br>
+                                {{$user->adresse}}
+                                <br>
+                                Num.Tél : {{$user->phone}}
+                                <br>
+                                {{$user->email}}
+                            </address>
                         </div>
                     </div>
                     <div class="col-md-6">
