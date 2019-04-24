@@ -35,10 +35,6 @@ class UserRole extends Enum
     */
     const Developpeur = 5; 
     /**
-    * @description('Propriétaire métier')
-    */
-    const ProprietaireMetier = 6;
-    /**
     * @description('Chef de division des cahiers des charges')
     */
     const ChefCD  = 7;

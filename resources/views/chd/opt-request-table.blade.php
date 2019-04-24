@@ -11,7 +11,7 @@
 @endsection
 
 @section('edit')
-{{route('edit_user')}}
+{{route('edit_chd')}}
 @endsection
 
 @section('navigation')
@@ -34,6 +34,27 @@
                     D'améliorations
             </a>
         </li>               
+    </ul>
+</li>
+<li class="nav-parent">
+    <a>
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <span>Suivi des demande</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+            <a href="{{route('all_new_request_chd')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Des nouveaux projets
+            </a>
+        </li>
+        <li class="">
+        <a href="{{route('all_opt_request_chd')}}">
+                <i class="fa  fa-wrench" aria-hidden="true"></i>
+                D'améliorations
+            </a>
+        </li>
+        
     </ul>
 </li>
     
@@ -78,7 +99,7 @@ Demandes d'améliorations
                         @foreach ($optimizationRequests as $projectRequest)
                         <tr class="gradeX" id="row-{{$projectRequest->requestable->id}}">
                             <td class="userId">{{$projectRequest->requestable->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$projectRequest->requestable->id}}"/></td>
-                            <td class="input email email">{{\App\Enums\TypeRequest::getEnumDescriptionByValue($projectRequest->requestable->type)}}</td>
+                            <td class="input email email">{{\App\Enums\RequestTypes::getEnumDescriptionByValue($projectRequest->requestable->type)}}</td>
                             <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($projectRequest->status)}}</td>
                             <td class="input email email">{{$projectRequest->requestable->created_at}}</td>
                             <td class="actions">

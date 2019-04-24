@@ -47,13 +47,27 @@ class LoginController extends Controller
             case UserRole::byKey('User')->getValue():
                 return redirect()->route('get_new');
                 break;
-                case UserRole::byKey('CED')->getValue():
-                    return redirect()->route('get_ced_new');
-                    break;
+            case UserRole::byKey('CED')->getValue():
+                return redirect()->route('get_ced_new');
+                break;
             case UserRole::byKey('ChefCD')->getValue():
                 return redirect()->route('get_chd_new');
                 break;
-            
+            case UserRole::byKey('proprietaire')->getValue():
+                return redirect()->route('get_prop_opt');
+                break;
+            case UserRole::byKey('dev_chef')->getValue():
+                return redirect()->route('get_cdd_new');
+                break;
+            case UserRole::byKey('quality_chef')->getValue():
+                return redirect()->route('get_cdq_new');
+                break;
+            case UserRole::byKey('sys_chef')->getValue():
+                return redirect()->route('get_ds_new');
+                break;
+            case UserRole::byKey('info')->getValue():
+                return redirect()->route('get_org_new');
+                break;
             default:
                 # code...
                 break;

@@ -11,7 +11,7 @@
 @endsection
 
 @section('edit')
-{{route('edit_user')}}
+{{route('edit_chd')}}
 @endsection
 
 @section('new-notification-route')new-request-details-chd @endsection
@@ -36,6 +36,27 @@
                     D'améliorations
             </a>
         </li>               
+    </ul>
+</li>
+<li class="nav-parent">
+    <a>
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <span>Suivi des demande</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+            <a href="{{route('all_new_request_chd')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Des nouveaux projets
+            </a>
+        </li>
+        <li class="">
+        <a href="{{route('all_opt_request_chd')}}">
+                <i class="fa  fa-wrench" aria-hidden="true"></i>
+                D'améliorations
+            </a>
+        </li>
+        
     </ul>
 </li>
     

@@ -35,7 +35,19 @@ class RequestDetailsMiddleware
 
         } else if ($user->role == UserRole::byKey('ChefCD')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_chd')->getValue()) {
             return $next($request);
-        }
+
+        } else if ($user->role == UserRole::byKey('proprietaire')->getValue() && $projectRequest->status == StatusRequest::byKey('waiting')->getValue()) {
+            return $next($request);
+
+        } else if ($user->role == UserRole::byKey('dev_chef')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_div')->getValue()) {
+            return $next($request);
+
+        } else if ($user->role == UserRole::byKey('quality_chef')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_recette')->getValue()) {
+            return $next($request);
+
+        }else if ($user->role == UserRole::byKey('sys_chef')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_systeme')->getValue()) {
+            return $next($request);}
+
         $trueUser = User::find($projectRequest->user_id);
         return new Response(view('errors\unauthorized')->with('role', UserRole::byValue($trueUser->role)->getDescription()));
 
