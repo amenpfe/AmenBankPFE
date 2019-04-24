@@ -211,9 +211,9 @@
 {!! HTML::script('js/theme.init.js') !!}
 
 <script>
-        window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};
-        window.Laravel.userId = {{Auth::user()->id}}
-    </script>
-    <script src="{{ asset('js/app.js') }}"></script>
+    window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};
+    window.Laravel.userId = {{Auth::user()->id}}
+</script>
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
