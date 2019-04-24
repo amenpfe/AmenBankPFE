@@ -73,6 +73,9 @@ Demandes d'améliorations
     </li>
 @endsection
 
+@section('new-notification-route')detail_request @endsection
+@section('opt-notification-route')opt_detail_request @endsection
+
 @section('content')
 
 <section class="panel">
