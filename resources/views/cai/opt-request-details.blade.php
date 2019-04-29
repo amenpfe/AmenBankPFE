@@ -9,7 +9,7 @@
 @endsection
 
 @section('edit')
-{{route('edit_cdd')}}
+{{route('edit_cai')}}
 @endsection
 
 @section('navigation')
@@ -19,46 +19,20 @@
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-    <li class="nav-parent">
-												<a>Activité</a>
-												<ul class="nav nav-children">
-													<li class="nav-parent">
-														<a>Test unitaire</a>
-														<ul class="nav nav-children">
-															<li>
-                                                            <a href="{{route('get_cdd_new')}}">
+        <li class="nav-active">
+                <a href="{{route('get_cai_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
-															</li>
-															<li>
-															<a href="{{route('get_cdd_opt')}}">
+            </li>
+        <li class="">
+        <a href="{{route('get_cai_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations
             </a>
-           										</li>
-
-                                                            <li class="nav-parent">
-														<a>Analyse des besoins</a>
-														<ul class="nav nav-children">
-															<li>
-                                                            <a href="{{route('get_cddp_new')}}">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    Des nouveaux projets
-                </a>
-															</li>
-															<li>
-															<a href="{{route('get_cddp_opt')}}">
-                <i class="fa fa-wrench" aria-hidden="true"></i>
-                    D'améliorations
-            </a>
-															</li>
-														</ul>
-													</li>
-													
-												</ul>
-											</li>
-        
+        </li>               
+    </ul>
+</li>
 <li class="nav-parent">
     <a>
         <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -66,13 +40,13 @@
     </a>
     <ul class="nav nav-children">
         <li class="">
-            <a href="{{route('all_new_request_cdd')}}">
+            <a href="{{route('all_new_request_cai')}}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Des nouveaux projets
             </a>
         </li>
         <li class="">
-        <a href="{{route('all_opt_request_cdd')}}">
+        <a href="{{route('all_opt_request_cai')}}">
                 <i class="fa  fa-wrench" aria-hidden="true"></i>
                 D'améliorations
             </a>
@@ -141,7 +115,7 @@ Détails de demande
                         </tr>
                         <tr>
                             <td class="text-dark col-sm-3"><h4><b>Fichier</b></h4></td> 
-                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$request->chd_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$request->conception_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                         </tr>
                     </tbody>
                 </table>
@@ -156,7 +130,7 @@ Détails de demande
                 </div>
             </div>
             <div class="table-responsive col-sm-10 col-sm-offset-1"><br>
-                                <form class="form-horizontal form-bordered" method="POST" action="{{route('opt-request-detail-cdd-submit')}}" enctype="multipart/form-data">
+                                <form class="form-horizontal form-bordered" method="POST" action="{{route('opt-request-detail-cai-submit')}}" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     <table class="table invoice-items" border="0">
                                         <tbody>

@@ -60,9 +60,6 @@
 Détails de demande
 @endsection
 
-@section('new-notification-route')new-request-details-chd @endsection
-@section('opt-notification-route')opt-request-details-chd @endsection
-
 @section('content')
     @php 
         $user = App\User::find($request->user_id); 

@@ -11,9 +11,8 @@
 @endsection
 
 @section('edit')
-{{route('edit_chd')}}
+{{route('edit_cdd')}}
 @endsection
-
 
 @section('navigation')
 <li class="nav-parent nav-active nav-expanded">
@@ -22,20 +21,46 @@
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-        <li class="nav-active">
-                <a href="">
+    <li class="nav-parent">
+												<a>Activité</a>
+												<ul class="nav nav-children">
+													<li class="nav-parent">
+														<a>Test unitaire</a>
+														<ul class="nav nav-children">
+															<li>
+                                                            <a href="{{route('get_cdd_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
-            </li>
-        <li class="">
-        <a href="{{route('get_chd_opt')}}">
+															</li>
+															<li>
+															<a href="{{route('get_cdd_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations
             </a>
-        </li>               
-    </ul>
-</li>
+           										</li>
+
+                                                            <li class="nav-parent">
+														<a>Analyse des besoins</a>
+														<ul class="nav nav-children">
+															<li>
+                                                            <a href="{{route('get_cddp_new')}}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Des nouveaux projets
+                </a>
+															</li>
+															<li>
+															<a href="{{route('get_cddp_opt')}}">
+                <i class="fa fa-wrench" aria-hidden="true"></i>
+                    D'améliorations
+            </a>
+															</li>
+														</ul>
+													</li>
+													
+												</ul>
+											</li>
+        
 <li class="nav-parent">
     <a>
         <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -43,13 +68,13 @@
     </a>
     <ul class="nav nav-children">
         <li class="">
-            <a href="{{route('all_new_request_chd')}}">
+            <a href="{{route('all_new_request_cdd')}}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Des nouveaux projets
             </a>
         </li>
         <li class="">
-        <a href="{{route('all_opt_request_chd')}}">
+        <a href="{{route('all_opt_request_cdd')}}">
                 <i class="fa  fa-wrench" aria-hidden="true"></i>
                 D'améliorations
             </a>
@@ -57,11 +82,10 @@
         
     </ul>
 </li>
-    
 @endsection
 
 @section('content-title')
-Demandes des nouveaux projets
+Demandes d'améliorations
 @endsection
 
 @section('content-path')
@@ -69,7 +93,7 @@ Demandes des nouveaux projets
         <span>Consulter les demandes</span>
     </li>
     <li>
-        <span>Des nouveaux projets</span>
+        <span>D'améliorations</span>
     </li>
 @endsection
 
@@ -77,7 +101,7 @@ Demandes des nouveaux projets
 
 <section class="panel">
         <header class="panel-heading">
-            <h2 class="panel-title">Liste des demandes</h2>
+            <h2 class="panel-title">Liste des demandes d'améliorations</h2>
         </header>
         <div class="panel-body">
             <form method="POST" action="">
@@ -86,21 +110,21 @@ Demandes des nouveaux projets
                     <thead>
                         <tr>
                             <th>#Ref</th>
-                            <th>Titre</th>
+                            <th>Type</th>
                             <th>Etat</th>
                             <th>Créé à</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($newprojectrequests as $projectRequest)
+                        @foreach ($optimizationRequests as $projectRequest)
                         <tr class="gradeX" id="row-{{$projectRequest->requestable->id}}">
                             <td class="userId">{{$projectRequest->requestable->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$projectRequest->requestable->id}}"/></td>
-                            <td class="input email email">{{$projectRequest->requestable->title}}</td>
+                            <td class="input email email">{{\App\Enums\RequestTypes::getEnumDescriptionByValue($projectRequest->requestable->type)}}</td>
                             <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($projectRequest->status)}}</td>
                             <td class="input email email">{{$projectRequest->requestable->created_at}}</td>
                             <td class="actions">
-                                <a href="{{route('new-request-details-chd', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
+                                <a href="{{route('opt-p-details-cdd', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach

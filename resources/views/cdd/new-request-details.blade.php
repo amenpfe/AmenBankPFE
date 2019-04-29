@@ -19,20 +19,46 @@
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-        <li class="nav-active">
-                <a href="">
+    <li class="nav-parent">
+												<a>Activité</a>
+												<ul class="nav nav-children">
+													<li class="nav-parent">
+														<a>Test unitaire</a>
+														<ul class="nav nav-children">
+															<li>
+                                                            <a href="{{route('get_cdd_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
-            </li>
-        <li class="">
-        <a href="{{route('get_cdd_opt')}}">
+															</li>
+															<li>
+															<a href="{{route('get_cdd_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations
             </a>
-        </li>               
-    </ul>
-</li>
+           										</li>
+
+                                                            <li class="nav-parent">
+														<a>Analyse des besoins</a>
+														<ul class="nav nav-children">
+															<li>
+                                                            <a href="{{route('get_cddp_new')}}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Des nouveaux projets
+                </a>
+															</li>
+															<li>
+															<a href="{{route('get_cddp_opt')}}">
+                <i class="fa fa-wrench" aria-hidden="true"></i>
+                    D'améliorations
+            </a>
+															</li>
+														</ul>
+													</li>
+													
+												</ul>
+											</li>
+        
 <li class="nav-parent">
     <a>
         <i class="fa fa-calendar" aria-hidden="true"></i>

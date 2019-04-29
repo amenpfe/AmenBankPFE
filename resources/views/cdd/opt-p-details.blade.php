@@ -156,7 +156,7 @@ Détails de demande
                 </div>
             </div>
             <div class="table-responsive col-sm-10 col-sm-offset-1"><br>
-                                <form class="form-horizontal form-bordered" method="POST" action="{{route('opt-request-detail-cdd-submit')}}" enctype="multipart/form-data">
+                                <form class="form-horizontal form-bordered" method="POST" action="{{route('opt-p-detail-cdd-submit')}}" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     <table class="table invoice-items" border="0">
                                         <tbody>

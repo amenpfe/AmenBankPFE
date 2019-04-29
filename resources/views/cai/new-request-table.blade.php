@@ -11,7 +11,7 @@
 @endsection
 
 @section('edit')
-{{route('edit_chd')}}
+{{route('edit_cai')}}
 @endsection
 
 
@@ -29,7 +29,7 @@
                 </a>
             </li>
         <li class="">
-        <a href="{{route('get_chd_opt')}}">
+        <a href="{{route('get_cai_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations
             </a>
@@ -43,13 +43,13 @@
     </a>
     <ul class="nav nav-children">
         <li class="">
-            <a href="{{route('all_new_request_chd')}}">
+            <a href="{{route('all_new_request_cai')}}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Des nouveaux projets
             </a>
         </li>
         <li class="">
-        <a href="{{route('all_opt_request_chd')}}">
+        <a href="{{route('all_opt_request_cai')}}">
                 <i class="fa  fa-wrench" aria-hidden="true"></i>
                 D'améliorations
             </a>
@@ -100,7 +100,7 @@ Demandes des nouveaux projets
                             <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($projectRequest->status)}}</td>
                             <td class="input email email">{{$projectRequest->requestable->created_at}}</td>
                             <td class="actions">
-                                <a href="{{route('new-request-details-chd', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
+                                <a href="{{route('new-request-details-cai', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach
