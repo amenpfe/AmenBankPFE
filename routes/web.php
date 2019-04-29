@@ -116,6 +116,18 @@ Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
 
     Route::get('/allnew', 'RequestController@getCDDAllNewProjectRequests')->name('all_new_request_cdd');
     Route::get('/allopt', 'RequestController@getCDDAllOptRequests')->name('all_opt_request_cdd');
+//next
+Route::get('/shownewp', 'RequestController@getCDDPNewProjectRequest')->name('get_cddp_new');
+    Route::get('/showoppt', 'RequestController@getCDDOptRequest')->name('get_cddp_opt');
+
+    Route::get('/detailp/{id}', 'RequestController@getCDDPNewDetails')->middleware('request_details')->name('new-p-details-cdd');
+    Route::post('/detailsubmitp', 'RequestController@submitCDDPNewRequestForm')->name('new-p-detail-cdd-submit');
+
+    Route::get('/detailoptp/{id}', 'RequestController@getCDDPOptDetails')->middleware('request_details')->name('opt-p-details-cdd');
+    Route::post('/detailoptsubmitp', 'RequestController@submitCDDPOptRequestForm')->name('opt-p-detail-cdd-submit');
+
+    
+//
 
     Route::get('/edit', 'UserController@getEditProfilCDD')->name('edit_cdd');
     Route::post('/editprofil', 'UserController@editProfilCDDSubmit')->name('submit_cdd_edit');
@@ -178,6 +190,54 @@ Route::group(['prefix' => 'cdq', 'middleware' => 'cdq'], function () {
 
 });
 
+//dv
+Route::group(['prefix' => 'dv', 'middleware' => 'dv'], function () {
+    Route::get('/shownew', 'RequestController@getdvNewProjectRequest')->name('get_dv_new');
+    Route::get('/showopt', 'RequestController@getdvOptRequest')->name('get_dv_opt');
+
+    Route::get('/detail/{id}', 'RequestController@getdvNewDetails')->middleware('request_details')->name('new-request-details-dv');
+    Route::post('/detailsubmit', 'RequestController@submitdvNewRequestForm')->name('new-request-detail-dv-submit');
+
+    Route::get('/detailopt/{id}', 'RequestController@getdvOptDetails')->middleware('request_details')->name('opt-request-details-dv');
+    Route::post('/detailoptsubmit', 'RequestController@submitdvOptRequestForm')->name('opt-request-detail-dv-submit');
+
+    Route::get('/allnew', 'RequestController@getdvAllNewProjectRequests')->name('all_new_request_dv');
+    Route::get('/allopt', 'RequestController@getdvAllOptRequests')->name('all_opt_request_dv');
+//next
+Route::get('/shownewd', 'RequestController@getdvsecNewProjectRequest')->name('get_sec_new');
+    Route::get('/showoptd', 'RequestController@getdvsecOptRequest')->name('get_sec_opt');
+
+    Route::get('/detaild/{id}', 'RequestController@getdvsecNewDetails')->middleware('request_details')->name('new-sec-details-dv');
+    Route::post('/detailsubmitd', 'RequestController@submitdvsecNewRequestForm')->name('new-sec-detail-dv-submit');
+
+    Route::get('/detailoptd/{id}', 'RequestController@getdvsecOptDetails')->middleware('request_details')->name('opt-sec-details-dv');
+    Route::post('/detailoptsubmitd', 'RequestController@submitdvsecOptRequestForm')->name('opt-sec-detail-dv-submit');
+
+    
+//
+
+    Route::get('/edit', 'UserController@getEditProfildv')->name('edit_dv');
+    Route::post('/editprofil', 'UserController@editProfildvSubmit')->name('submit_dv_edit');
+
+});
+
+Route::group(['prefix' => 'cai', 'middleware' => 'cai'], function () {
+
+    Route::get('/shownew', 'RequestController@getcaiNewProjectRequest')->name('get_cai_new');
+    Route::get('/showopt', 'RequestController@getcaiOptRequest')->name('get_cai_opt');
+
+    Route::get('/detail/{id}', 'RequestController@getcaiNewDetails')->middleware('request_details')->name('new-request-details-cai');
+    Route::any('/detailaccept/{id}', 'RequestController@caiAcceptOptRequest')->name('caiaccept_request');
+    Route::any('/detailrefu/{id}', 'RequestController@caiRefuseOptRequest')->name('cairefuse_request');
+
+    Route::get('/detailopt/{id}', 'RequestController@getcaiOptDetails')->middleware('request_details')->name('opt-request-details-cai');
+
+    Route::get('/allnew', 'RequestController@getcaiAllNewProjectRequests')->name('all_new_request_cai');
+    Route::get('/allopt', 'RequestController@getcaiAllOptRequests')->name('all_opt_request_cai');
+
+    Route::get('/edit', 'UserController@getEditProfilcai')->name('edit_cai');
+    Route::post('/editprofil', 'UserController@editProfilcaiSubmit')->name('submit_cai_edit'); 
+});
 
 
 /*Route::get('users/{role}', 'UserController@usersByRole');

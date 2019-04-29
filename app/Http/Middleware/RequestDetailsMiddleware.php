@@ -46,6 +46,12 @@ class RequestDetailsMiddleware
             return $next($request);
 
         }else if ($user->role == UserRole::byKey('sys_chef')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_systeme')->getValue()) {
+            return $next($request);
+        
+        }else if ($user->role == UserRole::byKey('ChefArchitectureIntegration')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_archi')->getValue()) {
+            return $next($request);
+
+        } else if ($user->role == UserRole::byKey('Developpeur')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_devlop')->getValue()) {
             return $next($request);}
 
         $trueUser = User::find($projectRequest->user_id);

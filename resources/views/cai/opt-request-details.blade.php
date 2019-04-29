@@ -126,66 +126,18 @@ Détails de demande
                         border-right: 5px solid #114E9E; border-top-right-radius: 5px; border-bottom-right-radius: 5px;
                         margin-top: 5px; padding-left: 1%;">
                             {!!$request->remarques!!}
-                    </div><br><br><br></h4>
+                            </div><br><br><br></h4>
                 </div>
             </div>
-            <div class="table-responsive col-sm-10 col-sm-offset-1"><br>
-                                <form class="form-horizontal form-bordered" method="POST" action="{{route('opt-request-detail-cai-submit')}}" enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    <table class="table invoice-items" border="0">
-                                        <tbody>
-                                            <tr>
-                                                
-                                                <div class="form-group {{ $errors->has('request_id') ? ' has-error' : '' }}">
-                                                            <div class="input-group input-group-icon">
-                                                                    <input type="text" value="{{$request->id}}" name="request_id" hidden>
-                                                            </div>
-                                                            @if ($errors->has('request_id'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('request_id') }}</strong>
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                <td class="text-dark col-sm-3"><h4><b>Joindre un fichier</b></h4></td>
-                                                <td class="text-dark"><h4><div class="form-group {{ $errors->has('doc') ? ' has-error' : '' }}">
-                                                    <div class="col-md-6">
-                                                        <div class="fileupload fileupload-new" data-provides="fileupload">
-                                                            <div class="input-append">
-                                                                <div class="uneditable-input">
-                                                                    <i class="fa fa-file fileupload-exists"></i>
-                                                                    <span class="fileupload-preview"></span>
-                                                                </div>
-                                                                <span class="btn btn-default btn-file">
-                                                                    <span class="fileupload-exists">Changer</span>
-                                                                    <span class="fileupload-new">Sélectionner</span>
-                                                                    <input type="file" name="doc" accept=".pdf"/>
-                                                                </span>
-                                                                <a href="#" class="btn btn-default fileupload-exists" data-dismiss="fileupload">Retirer</a>
-                                                                <br><br>
-                                                            </div>
-                                                                @if ($errors->has('doc'))
-                                                                <span class="help-block">
-                                                                    <strong>{{ $errors->first('doc') }}</strong>
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                </div></h4></td>
-                                            </tr>
-                                        </tbody>
-                                    </table><br><br>
-                                    <footer>
-                                        <div class="row ">
-                                            <div class="col-sm-3 col-sm-offset-9">
-                                                <button class="btn btn-primary">Envoyer</button>
-                                                <button type="reset" class="btn btn-default">Annuler</button>
-                                            </div>
-                                        </div>
-                                    </footer>
-                                </form>
-                </div>  
-            </div>
-        </div>
+            <footer>
+                <div class="row ">
+                    <div class="col-sm-3 col-sm-offset-9">
+                    <button class="btn btn-success"><a href="{{route('caiaccept_request', $request->id)}}">Valider</a></button>
+                    <button class="btn btn-danger"><a href="{{route('cairefuse_request', $request->id)}}">Refuser</a></button>
+                    </div>
+                </div>
+            </footer>
+        </div>  
     </div>
 </section>
 @endsection

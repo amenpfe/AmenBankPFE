@@ -109,7 +109,7 @@ Modifier le profil
             </div>
             
         @endisset
-        <form class="form-horizontal" method="POST" action="{{route('submit_cdq_edit')}}" id="form">
+        <form class="form-horizontal" method="POST" action="{{route('submit_cai_edit')}}" id="form">
                 {{ csrf_field() }}
                 <h4 class="mb-xlg"> Informations personnelles</h4>
                 <fieldset>

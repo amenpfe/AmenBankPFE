@@ -3,10 +3,11 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\Enums\UserRole;
 use Illuminate\Support\Facades\Auth;
+use App\Enums\UserRole;
+use Symfony\Component\HttpFoundation\Response;
 
-class ChdMiddleware
+class dvMiddleware
 {
     /**
      * Handle an incoming request.
@@ -21,8 +22,8 @@ class ChdMiddleware
         {
             return redirect('login');
         }
-        if(Auth::user()->role != UserRole::byKey('ChefCD')->getValue()) {
-            return new Response(view('errors\unauthorized')->with('role', UserRole::byKey('ChefCD')->getDescription()));
+        if(Auth::user()->role != UserRole::byKey('Developpeur')->getValue()) {
+            return new Response(view('errors\unauthorized')->with('role', UserRole::byKey('Developpeur')->getDescription()));
         }
         return $next($request);
     }

@@ -166,6 +166,40 @@ class UserController extends Controller
             return view('prop/edit-profil')->with('user', $user)->with("error", "Mot de passe invalide!");
         }
     }
+    
+    public function getEditProfilcai(){
+        return view('cai/edit-profil');
+    }
+
+    public function editProfilcaiSubmit(EditProfilRequest $request){
+        $user = Auth::user();
+        $inputs = $request->all();
+        $currentPassword = $inputs['current_password'];
+        if(IlluminateHash::check($currentPassword, $user->password)){
+            $inputs['role'] = $user->role;
+            $this->userRepository->updateUserInfos($user->id, $inputs);
+            return view('cai/edit-profil')->with('user', $user)->with("success", "Profil mis à jour!");
+        }else {
+            return view('cai/edit-profil')->with('user', $user)->with("error", "Mot de passe invalide!");
+        }
+    }
+
+    public function getEditProfildv(){
+        return view('dv/edit-profil');
+    }
+
+    public function editProfildvSubmit(EditProfilRequest $request){
+        $user = Auth::user();
+        $inputs = $request->all();
+        $currentPassword = $inputs['current_password'];
+        if(IlluminateHash::check($currentPassword, $user->password)){
+            $inputs['role'] = $user->role;
+            $this->userRepository->updateUserInfos($user->id, $inputs);
+            return view('dv/edit-profil')->with('user', $user)->with("success", "Profil mis à jour!");
+        }else {
+            return view('dv/edit-profil')->with('user', $user)->with("error", "Mot de passe invalide!");
+        }
+    }
 
 
 }

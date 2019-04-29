@@ -76,9 +76,6 @@ Demande d'amélioration
     </li>
 @endsection
 
-@section('new-notification-route')detail_request @endsection
-@section('opt-notification-route')opt_detail_request @endsection
-
 @section('content')
 
     <form class="form-horizontal form-bordered" method="POST" action="{{route('add_opt_request')}}" enctype="multipart/form-data">
