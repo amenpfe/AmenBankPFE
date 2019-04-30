@@ -39,7 +39,6 @@ Modifier le profil
 Modifier le profil
 @endsection
 
-
 @section('content')
     <div id="dialog" class="modal-block mfp-hide">
         <section class="panel">

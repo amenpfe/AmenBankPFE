@@ -178,6 +178,12 @@ Route::group(['prefix' => 'cdq', 'middleware' => 'cdq'], function () {
 
 });
 
+Route::group(['prefix' => 'dev'], function () {
+
+    Route::get('/stat', 'RequestController@getStat')->name('get_dev_stat');
+
+});
+
 
 
 /*Route::get('users/{role}', 'UserController@usersByRole');

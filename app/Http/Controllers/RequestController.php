@@ -17,6 +17,7 @@ use App\OptimizationRequest;
 use App\Enums\UserRole;
 use App\Notifications\WorkAdded;
 use App\Notifications\DeploymentNotification;
+use Illuminate\Support\Facades\DB;
 
 class RequestController extends Controller
 {
@@ -77,7 +78,7 @@ class RequestController extends Controller
         $newPorjectRequest = new NewProjectRequest();
         $this->requestRepository->saveNewProjectRequest($newPorjectRequest, $inputs);
 
-        $user = User::where(['role' => UserRole::byKey('ChefCD')])->first();
+        $user = User::where(['role' => UserRole::byKey('CED')])->first();
         $user->notify(new WorkAdded($newPorjectRequest->request));
         return redirect()->back();
     }
@@ -748,5 +749,18 @@ class RequestController extends Controller
     }
 
     //End DS
+
+    //De
+
+    public function getStat(){
+        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
+        $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        $notDevProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
+        $devProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_devlop')->getValue()])->count();
+        $devProjPercentage = ($devProjCount / $notDevProjCount) * 100;
+        return view('dev/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('devProjPercentage', $devProjPercentage);
+    }
+
+    //End Dev
 
 }   
