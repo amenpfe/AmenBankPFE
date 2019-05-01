@@ -172,7 +172,7 @@ Détails de demande
                                                             </div>
                                                                 @if ($errors->has('doc'))
                                                                 <span class="help-block">
-                                                                    <strong>{{ $errors->first('doc') }}</strong>
+                                                                    <strong>{{$errors->first('doc')}}</strong>
                                                                 </span>
                                                             @endif
                                                         </div>

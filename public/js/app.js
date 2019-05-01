@@ -783,6 +783,8 @@ $(document).ready(function () {
         chan = 'App.User.' + window.Laravel.userId;
         console.log(chan);
         window.Echo.private(chan).notification(function (notification) {
+
+            badgeContainer = $('#badge-container');
             console.log("Hello");
             console.log(notification);
             console.log((notification.projectRequest.requestable_type == "App\\NewProjectRequest" ? newRouteLink : optRouteLink) + notification.projectRequest.id);
@@ -790,6 +792,7 @@ $(document).ready(function () {
 
             outerBadge = $('#notifications-outer-badge');
             outerBadge.html(+outerBadge.html() + 1);
+            outerBadge.show();
 
             innerBadge = $('#notifications-inner-badge');
             innerBadge.html(+innerBadge.html() + 1);

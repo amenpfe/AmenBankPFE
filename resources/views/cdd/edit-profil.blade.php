@@ -60,6 +60,9 @@
 Modifier le profil
 @endsection
 
+@section('new-notification-route')new-request-details-cdd @endsection
+@section('opt-notification-route')opt-request-details-cdd @endsection
+
 
 @section('content')
     <div id="dialog" class="modal-block mfp-hide">

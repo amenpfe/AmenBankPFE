@@ -64,6 +64,8 @@
 Demandes d'améliorations
 @endsection
 
+@section('new-notification-route')new-request-details-ced @endsection
+@section('opt-notification-route')opt-request-details-ced @endsection
 @section('content-path')
     <li>
         <span>Consulter les demandes</span>

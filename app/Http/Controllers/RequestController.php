@@ -18,6 +18,7 @@ use App\Enums\UserRole;
 use App\Notifications\WorkAdded;
 use App\Notifications\DeploymentNotification;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class RequestController extends Controller
 {
@@ -110,7 +111,11 @@ class RequestController extends Controller
         $inputs['recette_doc'] = null;
         $inputs['circulaire_doc'] = null;
 
-        $this->requestRepository->saveOptimizationRequest(new OptimizationRequest(), $inputs);
+        $optRequest = new OptimizationRequest();
+        $this->requestRepository->saveOptimizationRequest($optRequest, $inputs);
+
+        $user = User::where(['role' => UserRole::byKey('proprietaire')])->first();
+        $user->notify(new WorkAdded($optRequest->request));
         return redirect()->back();
     }
 
@@ -159,7 +164,10 @@ class RequestController extends Controller
         $inputs['circulaire_doc'] = $request->circulaire_doc;
         $inputs['user_id'] = $request->user_id;
 
-        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        $this->requestRepository->saveNewProjectRequest( $request->requestable, $inputs);
+
+        $user = User::where(['role' => UserRole::byKey('dev_chef')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_chd_new');
     }
 
@@ -248,6 +256,7 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
         return redirect()->route('get_ced_new');
     }
 
@@ -763,4 +772,14 @@ class RequestController extends Controller
 
     //End Dev
 
-}   
+    private function markNotificationAsReaded(ProjectRequest $projectRequest){
+        $userNotifications = Auth::user()->unreadNotifications;
+        for($i = 0; $i < sizeof($userNotifications); $i++) {
+            if($userNotifications[$i]->data['projectRequest']['id'] == $projectRequest->id){
+                $userNotifications[$i]->markAsRead();
+                break;
+            }
+        }
+    }
+
+}  

@@ -13,6 +13,8 @@
 @section('edit')
 {{route('edit_ds')}}
 @endsection
+@section('new-notification-route')new-request-details-ds @endsection
+@section('opt-notification-route')opt-request-details-ds @endsection
 
 
 @section('navigation')

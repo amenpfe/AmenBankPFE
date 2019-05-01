@@ -14,6 +14,9 @@
 {{route('edit_cdd')}}
 @endsection
 
+@section('new-notification-route')new-request-details-cdd @endsection
+@section('opt-notification-route')opt-request-details-cdd @endsection
+
 @section('navigation')
 
 <li class="nav-parent nav-active nav-expanded">

@@ -48,21 +48,24 @@
         <div class="header-right">
 
             
-
+            
+            @if (Auth::user()->role != App\Enums\UserRole::byKey('Admin')->getValue())
             <span class="separator"></span>
 
             <ul class="notifications">
                 
-                @if (Auth::user()->role != App\Enums\UserRole::byKey('Admin')->getValue()) {
                     <li>
+                        @php
+                            $notificationCount = Count(Auth::user()->unreadNotifications);
+                        @endphp
                         <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
                             <i class="fa fa-bell"></i>
-                            <span class="badge" id="notifications-outer-badge">{{Count(Auth::user()->unreadNotifications)}}</span>
+                            <span @if($notificationCount == 0) style="display: none;" @endif class="badge" id="notifications-outer-badge">{{$notificationCount}}</span>
                         </a>
     
                         <div class="dropdown-menu notification-menu">
                             <div class="notification-title">
-                                <span class="pull-right label label-default" id="notifications-inner-badge">{{Count(Auth::user()->unreadNotifications)}}</span>
+                                <span class="pull-right label label-default" id="notifications-inner-badge">{{$notificationCount}}</span>
                                 Alerts
                             </div>
     
@@ -103,11 +106,9 @@
                             </div>
                         </div>
                     </li>
-                    
-                }
-                @endif
                 </ul>
-
+                
+                @endif
             <span class="separator"></span>
 
             <div id="userbox" class="userbox">

@@ -54,6 +54,9 @@
 Modifier le profil
 @endsection
 
+@section('new-notification-route')opt-request-details-prop @endsection
+@section('opt-notification-route')opt-request-details-prop @endsection
+
 
 @section('content')
     <div id="dialog" class="modal-block mfp-hide">

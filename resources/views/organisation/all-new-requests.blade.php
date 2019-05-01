@@ -14,6 +14,8 @@
 {{route('edit_org')}}
 @endsection
 
+@section('new-notification-route')new-request-details-org @endsection
+@section('opt-notification-route')opt-request-details-org @endsection
 
 @section('navigation')
 <li class="nav-parent">

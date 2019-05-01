@@ -59,6 +59,9 @@
 Suivi des demandes d'améliorations
 @endsection
 
+@section('new-notification-route')opt-request-details-prop @endsection
+@section('opt-notification-route')opt-request-details-prop @endsection
+
 @section('content-path')
     <li>
         <span>Suivi des demandes</span>

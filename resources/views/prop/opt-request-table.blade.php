@@ -59,6 +59,9 @@
 Demandes d'améliorations
 @endsection
 
+@section('new-notification-route')opt-request-details-prop @endsection
+@section('opt-notification-route')opt-request-details-prop @endsection
+
 @section('content-path')
     <li>
         <span>Consulter les demandes</span>
