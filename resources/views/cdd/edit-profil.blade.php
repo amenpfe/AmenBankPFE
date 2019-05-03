@@ -13,69 +13,65 @@
 @endsection
 
 @section('navigation')
-<li class="nav-parent nav-active nav-expanded">
+<li class="nav-parent">
     <a>
-        <i class="fa fa-table" aria-hidden="true"></i>
+        <i class="fa fa-align-left" aria-hidden="true"></i>
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-    <li class="nav-parent">
-												<a>Activité</a>
-												<ul class="nav nav-children">
-													<li class="nav-parent">
-														<a>Test unitaire</a>
-														<ul class="nav nav-children">
-															<li>
-                                                            <a href="{{route('get_cdd_new')}}">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    Des nouveaux projets
-                </a>
-															</li>
-															<li>
-															<a href="{{route('get_cdd_opt')}}">
-                <i class="fa fa-wrench" aria-hidden="true"></i>
-                    D'améliorations
-            </a>
-           										</li>
-
-                                                            <li class="nav-parent">
-														<a>Analyse des besoins</a>
-														<ul class="nav nav-children">
-															<li>
-                                                            <a href="{{route('get_cddp_new')}}">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    Des nouveaux projets
-                </a>
-															</li>
-															<li>
-															<a href="{{route('get_cddp_opt')}}">
-                <i class="fa fa-wrench" aria-hidden="true"></i>
-                    D'améliorations
-            </a>
-															</li>
-														</ul>
-													</li>
-													
-												</ul>
-											</li>
         
-<li class="nav-parent">
-    <a>
-        <i class="fa fa-calendar" aria-hidden="true"></i>
-        <span>Suivi des demande</span>
-    </a>
-    <ul class="nav nav-children">
-        <li class="">
-            <a href="{{route('all_new_request_cdd')}}">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                Des nouveaux projets
-            </a>
+        <li class="nav-parent">
+            <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
+            <ul class="nav nav-children">
+                <li class="nav-parent">
+                    <a>Test unitaire</a>
+                    <ul class="nav nav-children">
+                        <li>
+                            <a href="{{route('get_cdd_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
+                                Des nouveaux projets</a>
+                        </li>
+                        <li>
+                            <a href="{{route('get_cdd_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
+                                D'améliorations</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-parent">
+                    <a>Analyse des besoins</a>
+                    <ul class="nav nav-children">
+                        <li>
+                            <a href="{{route('get_cddp_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
+                                Des nouveaux projets</a>
+                        </li>
+                        <li>
+                            <a href="{{route('get_cddp_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
+                                D'améliorations</a>
+                        </li>
+                    </ul>
+                </li>
+                
+            </ul>
         </li>
-        <li class="">
-        <a href="{{route('all_opt_request_cdd')}}">
-                <i class="fa  fa-wrench" aria-hidden="true"></i>
-                D'améliorations
+        <li class="nav-parent">
+            <a>
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <span>Suivi des demande</span>
             </a>
+            <ul class="nav nav-children">
+                <li class="">
+                    <a href="{{route('all_new_request_cdd')}}">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Des nouveaux projets
+                    </a>
+                </li>
+                <li class="">
+                <a href="{{route('all_opt_request_cdd')}}">
+                        <i class="fa  fa-wrench" aria-hidden="true"></i>
+                        D'améliorations
+                    </a>
+                </li>
+                
+            </ul>
         </li>
         
     </ul>
