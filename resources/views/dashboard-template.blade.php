@@ -86,7 +86,12 @@
                                                         $routeLink = route($optRequestRouteName, $notification->data['projectRequest']['id']);
                                                 @endphp
                                                 <a href="{{$routeLink}}" class="clearfix">
-                                                    {{$notification->data['projectRequest']['id']}}
+                                                    @if($notification->data['projectRequest']['requestable_type'] == "App\\NewProjectRequest")
+                                                        Demande d'un nouveau projet
+                                                    @else 
+                                                        Demande d'amélioration
+                                                    @endif
+                                                    <span class="message">{{$notification->data['projectRequest']['updated_at']}}</span>
                                                     <!--<div class="image">
                                                         <i class="fa fa-thumbs-down bg-danger"></i>
                                                     </div>

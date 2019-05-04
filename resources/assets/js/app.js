@@ -37,7 +37,8 @@ $(document).ready(function() {
                 $('#notifications-container').prepend('' + 
                 '<li>' +
                     '<a href="' + (notification.projectRequest.requestable_type == "App\\NewProjectRequest" ? newRouteLink : optRouteLink) + notification.projectRequest.id +'">' +
-                        notification.projectRequest.id +
+                    (notification.projectRequest.requestable_type == "App\\NewProjectRequest" ? "Demande de nouveau projet" : "Demande d'amélioration") +
+                    '<span class="message">' + notification.projectRequest.created_at + '</span>' +
                     '</a>' +
                 '</li>' + 
                 '');
