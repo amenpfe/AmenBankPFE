@@ -49,7 +49,7 @@
 
             
             
-            @if (Auth::user()->role != App\Enums\UserRole::byKey('Admin')->getValue())
+            @if (Auth::user()->role != App\Enums\UserRole::byKey('Admin')->getValue()&& Auth::user()->role != App\Enums\UserRole::byKey('User')->getValue())
             <span class="separator"></span>
 
             <ul class="notifications">
@@ -59,14 +59,14 @@
                             $notificationCount = Count(Auth::user()->unreadNotifications);
                         @endphp
                         <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                            <i class="fa fa-bell"></i>
+                            <i class="fa fa-tasks"></i>
                             <span @if($notificationCount == 0) style="display: none;" @endif class="badge" id="notifications-outer-badge">{{$notificationCount}}</span>
                         </a>
     
                         <div class="dropdown-menu notification-menu">
                             <div class="notification-title">
                                 <span class="pull-right label label-default" id="notifications-inner-badge">{{$notificationCount}}</span>
-                                Alerts
+                                Tâches
                             </div>
     
                             <div class="content">
@@ -210,7 +210,7 @@
 {!! HTML::script('js/theme.init.js') !!}
 
                 
-@if (Auth::user()->role != App\Enums\UserRole::byKey('Admin')->getValue()) {
+@if (Auth::user()->role != App\Enums\UserRole::byKey('Admin')->getValue()&& Auth::user()->role != App\Enums\UserRole::byKey('User')->getValue()) {
 <script>
     newRouteLink = '{{route($newRequestRouteName, 0)}}';
     newRouteLink = newRouteLink.substring(0, newRouteLink.lastIndexOf("/")+1);

@@ -1,7 +1,7 @@
 @extends('dashboard-template')
 
 @section('title')
-    Suivi des demandes
+    Archive des projets
 @endsection
 
 @section('page-stylesheets')
@@ -26,7 +26,7 @@
     </a>
     <ul class="nav nav-children">
         <li class="">
-        <a href="{{route('get_cdd_new')}}">
+                <a href="{{route('get_cdd_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
@@ -39,14 +39,14 @@
         </li>               
     </ul>
 </li>
-<li class="nav-parent nav-active nav-expanded">
+<li class="nav-parent">
     <a>
         <i class="fa fa-calendar" aria-hidden="true"></i>
         <span>Suivi des demande</span>
     </a>
     <ul class="nav nav-children">
-        <li class="nav-active">
-            <a href="">
+        <li class="">
+            <a href="{{route('all_new_request_cdd')}}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Des nouveaux projets
             </a>
@@ -60,14 +60,14 @@
         
     </ul>
 </li>
-<li class="nav-parent">
+<li class="nav-parent nav-active nav-expanded">
     <a>
         <i class="fa fa-archive" aria-hidden="true"></i>
         <span>Archive des projets</span>
     </a>
     <ul class="nav nav-children">
-        <li class="">
-            <a href="{{route('get_cdd_new_archive')}}">
+        <li class="nav-active">
+            <a href="">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Des nouveaux projets
             </a>
@@ -85,12 +85,12 @@
 @endsection
 
 @section('content-title')
-Suivi des demandes des nouveaux projets
+Archive des projets
 @endsection
 
 @section('content-path')
     <li>
-        <span>Suivi des demandes</span>
+        <span>Archive des projets</span>
     </li>
     <li>
         <span>Des nouveaux projets</span>
@@ -101,7 +101,7 @@ Suivi des demandes des nouveaux projets
 
 <section class="panel">
         <header class="panel-heading">
-            <h2 class="panel-title">Suivi des demandes</h2>
+            <h2 class="panel-title">Archive des projets traités</h2>
         </header>
         <div class="panel-body">
             <form method="POST" action="">
@@ -111,17 +111,21 @@ Suivi des demandes des nouveaux projets
                         <tr>
                             <th>#Ref</th>
                             <th>Titre</th>
-                            <th>Etat</th>
+                            <th>Type</th>
                             <th>Créé à</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($newprojectrequests as $NewprojectRequest)
-                        <tr class="gradeX" id="row-{{$NewprojectRequest->id}}">
-                            <td class="userId">{{$NewprojectRequest->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$NewprojectRequest->id}}"/></td>
-                            <td class="input email email">{{$NewprojectRequest->title}}</td>
-                            <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($NewprojectRequest->request->status)}}</td>
-                            <td class="input email email">{{$NewprojectRequest->created_at}}</td>
+                        @foreach ($newprojectrequest as $newProjectRequest)
+                        <tr class="gradeX" id="row-{{$newProjectRequest->requestable->id}}">
+                            <td class="userId">{{$newProjectRequest->requestable->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$newProjectRequest->requestable->id}}"/></td>
+                            <td class="input email email">{{$newProjectRequest->requestable->title}}</td>
+                            <td class="input email email">{{$newProjectRequest->requestable_type}}</td>
+                            <td class="input email email">{{$newProjectRequest->requestable->created_at}}</td>
+                            <td class="actions">
+                                <a href="{{route('get_cdd_new_archive_details', $newProjectRequest->id)}}"><i class="fa fa-eye"></i></a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

@@ -108,6 +108,12 @@ Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
     Route::get('/shownew', 'RequestController@getCDDNewProjectRequest')->name('get_cdd_new');
     Route::get('/showopt', 'RequestController@getCDDOptRequest')->name('get_cdd_opt');
 
+    Route::get('/archiveOpt', 'RequestController@getCDDOptArchive')->name('get_cdd_opt_archive');
+    Route::get('/archiveOptDetails{id}', 'RequestController@getCDDOptArchiveDetails')->name('get_cdd_opt_archive_details');
+
+    Route::get('/archiveNew', 'RequestController@getCDDNewArchive')->name('get_cdd_new_archive');
+    Route::get('/archiveNewDetails{id}', 'RequestController@getCDDNewArchiveDetails')->name('get_cdd_new_archive_details');
+
     Route::get('/detail/{id}', 'RequestController@getCDDNewDetails')->middleware('request_details')->name('new-request-details-cdd');
     Route::post('/detailsubmit', 'RequestController@submitCDDNewRequestForm')->name('new-request-detail-cdd-submit');
 

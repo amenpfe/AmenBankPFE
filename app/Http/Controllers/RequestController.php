@@ -165,7 +165,7 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveNewProjectRequest( $request->requestable, $inputs);
-
+        $this->markNotificationAsReaded($request);
         $user = User::where(['role' => UserRole::byKey('dev_chef')])->first();
         $user->notify(new WorkAdded($request));
         return redirect()->route('get_chd_new');
@@ -204,6 +204,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('dev_chef')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_chd_opt');
     }
 
@@ -257,6 +260,8 @@ class RequestController extends Controller
 
         $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
         $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('ChefCD')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_ced_new');
     }
 
@@ -298,6 +303,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('ChefCD')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_ced_opt');
     }
 
@@ -348,6 +356,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('CED')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_prop_opt');
     }
 
@@ -371,6 +382,7 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
         return redirect()->route('get_prop_opt');
         
     }
@@ -424,6 +436,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('quality_chef')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_cdd_new');
     }
 
@@ -465,6 +480,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('quality_chef')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_cdd_opt');
     }
 
@@ -478,8 +496,24 @@ class RequestController extends Controller
         return view('cdd/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
     }
 
-    
+    //archive
 
+    public function getCDDOptArchive() {
+        return view('cdd/archive_opt_project')->with('projectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getCDDOptArchiveDetails($id){
+        $projectrequest = ProjectRequest::find($id);
+        return view('cdd/archive_opt_project_details')->with('projectrequest', $projectrequest);
+    }
+    public function getCDDNewArchive() {
+        return view('cdd/archive_new_project')->with('newprojectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getCDDNewArchiveDetails($id){
+        $newprojectrequest = ProjectRequest::find($id);
+        return view('cdd/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
+    }
     //End CDD
 
     //CDQ
@@ -519,6 +553,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('sys_chef')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_cdq_new');
     }
 
@@ -560,6 +597,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('sys_chef')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_cdq_opt');
     }
 
@@ -612,6 +652,7 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
         return redirect()->route('get_org_new');
     }
 
@@ -653,6 +694,7 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
         return redirect()->route('get_org_opt');
     }
 
@@ -701,6 +743,7 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
         return redirect()->route('get_ds_new');
 
         $user->notify(new DeploymentNotification($name));
@@ -744,6 +787,7 @@ class RequestController extends Controller
         $user->notify(new DeploymentNotification($name));
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
         return redirect()->route('get_ds_opt');
     }
 
