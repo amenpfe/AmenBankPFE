@@ -16,7 +16,7 @@
 
 @section('navigation')
 
-<li class="nav-parent nav-active nav-expanded">
+<li class="nav-parent">
     <a>
         <i class="fa fa-table" aria-hidden="true"></i>
         <span>Consulter les demandes</span>
@@ -28,7 +28,7 @@
                     Des nouveaux projets
                 </a>
             </li>
-        <li class="nav-active">
+        <li class="">
             <a href="">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations

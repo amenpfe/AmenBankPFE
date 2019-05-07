@@ -19,13 +19,13 @@
 
 
 @section('navigation')
-<li class="nav-parent nav-active nav-expanded">
+<li class="nav-parent">
     <a>
         <i class="fa fa-table" aria-hidden="true"></i>
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-        <li class="nav-active">
+        <li class="">
                 <a href="">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets

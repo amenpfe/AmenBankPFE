@@ -151,18 +151,44 @@ Détails de demande
                             <td class="text-dark"><h4>{{$newprojectrequest->requestable->title}}</h4></td>
                         </tr>
                         <tr>
-                            <td class="text-dark col-sm-3"><h4><b>Fichier</b></h4></td> 
+                            <td class="text-dark col-sm-3"><h4><b>Titre du projet</b></h4></td>
+                            <td class="text-dark"><h4>{{$newprojectrequest->requestable->title}}</h4></td>
+                        </tr>
+                        <tr>
+                            <td class="text-dark col-sm-3"><h4><b>Document d'expression des besoins</b></h4></td> 
                             <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->user_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                        </tr>
+                        <tr>
+                            <td class="text-dark col-sm-3"><h4><b>L'ensemble des actions à entreprendre</b></h4></td> 
                             <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->ced_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
-                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->organisation_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
-                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->chd_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
-                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->analyse_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
-                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->conception_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
-                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->logiciel_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
-                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->test_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
-                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->recette_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
-                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->circulaire_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
-
+                        </tr>
+                        <tr>
+                                <td class="text-dark col-sm-3"><h4><b>Cahier des charges</b></h4></td> 
+                                <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->chd_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                        </tr>
+                        <tr>
+                                <td class="text-dark col-sm-3"><h4><b>Document d'analyse de besoins</b></h4></td> 
+                                <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->analyse_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                        </tr>
+                        <tr>
+                                <td class="text-dark col-sm-3"><h4><b>Document de conception globale</b></h4></td> 
+                                <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->conception_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                        </tr>
+                        <tr>
+                                <td class="text-dark col-sm-3"><h4><b>Le logiciel</b></h4></td> 
+                                <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->logiciel_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                        </tr>
+                        <tr>
+                                <td class="text-dark col-sm-3"><h4><b>Document du test</b></h4></td> 
+                                <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->test_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                        </tr>
+                        <tr>
+                                <td class="text-dark col-sm-3"><h4><b>Cahier de recette</b></h4></td> 
+                                <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->recette_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                        </tr>
+                        <tr>
+                                <td class="text-dark col-sm-3"><h4><b>circulaire</b></h4></td> 
+                                <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->circulaire_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                         </tr>
                     </tbody>
                 </table>

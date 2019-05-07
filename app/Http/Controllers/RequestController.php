@@ -220,6 +220,25 @@ class RequestController extends Controller
         return view('chd/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
     }
 
+    //archive
+
+    public function getCDOptArchive() {
+        return view('chd/archive_opt_project')->with('projectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getCDOptArchiveDetails($id){
+        $projectrequest = ProjectRequest::find($id);
+        return view('chd/archive_opt_project_details')->with('projectrequest', $projectrequest);
+    }
+    public function getCDNewArchive() {
+        return view('chd/archive_new_project')->with('newprojectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getCDNewArchiveDetails($id){
+        $newprojectrequest = ProjectRequest::find($id);
+        return view('chd/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
+    }
+
     //End CD
 
     //CED
@@ -318,6 +337,25 @@ class RequestController extends Controller
     public function getCEDAllOptRequests() {
         return view('ced/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
     }
+
+    //archive
+
+    public function getCEDOptArchive() {
+        return view('ced/archive_opt_project')->with('projectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getCEDOptArchiveDetails($id){
+        $projectrequest = ProjectRequest::find($id);
+        return view('ced/archive_opt_project_details')->with('projectrequest', $projectrequest);
+    }
+    public function getCEDNewArchive() {
+        return view('ced/archive_new_project')->with('newprojectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getCEDNewArchiveDetails($id){
+        $newprojectrequest = ProjectRequest::find($id);
+        return view('ced/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
+    }
     
 
     //End CED
@@ -394,7 +432,26 @@ class RequestController extends Controller
     }
 
     public function getPropAllOptRequests() {
-        return view('chd/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
+        return view('prop/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
+    }
+
+    //archive
+
+    public function getPropOptArchive() {
+        return view('prop/archive_opt_project')->with('projectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getPropOptArchiveDetails($id){
+        $projectrequest = ProjectRequest::find($id);
+        return view('prop/archive_opt_project_details')->with('projectrequest', $projectrequest);
+    }
+    public function getPropNewArchive() {
+        return view('prop/archive_new_project')->with('newprojectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getPropNewArchiveDetails($id){
+        $newprojectrequest = ProjectRequest::find($id);
+        return view('prop/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
     }
 
     //End Prop
@@ -613,6 +670,25 @@ class RequestController extends Controller
         return view('cdq/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
     }
 
+    //archive
+
+    public function getCDQOptArchive() {
+        return view('cdq/archive_opt_project')->with('projectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getCDQOptArchiveDetails($id){
+        $projectrequest = ProjectRequest::find($id);
+        return view('cdq/archive_opt_project_details')->with('projectrequest', $projectrequest);
+    }
+    public function getCDQNewArchive() {
+        return view('cdq/archive_new_project')->with('newprojectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getCDQNewArchiveDetails($id){
+        $newprojectrequest = ProjectRequest::find($id);
+        return view('cdq/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
+    }
+
     //End CDQ
 
     //ORG
@@ -706,6 +782,25 @@ class RequestController extends Controller
 
     public function getORGAllOptRequests() {
         return view('organisation/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
+    }
+
+    //archive
+
+    public function getORGOptArchive() {
+        return view('organisation/archive_opt_project')->with('projectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getORGOptArchiveDetails($id){
+        $projectrequest = ProjectRequest::find($id);
+        return view('organisation/archive_opt_project_details')->with('projectrequest', $projectrequest);
+    }
+    public function getORGNewArchive() {
+        return view('organisation/archive_new_project')->with('newprojectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getORGNewArchiveDetails($id){
+        $newprojectrequest = ProjectRequest::find($id);
+        return view('organisation/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
     }
     
     //End ORG
@@ -801,9 +896,28 @@ class RequestController extends Controller
         return view('ds/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
     }
 
+    //archive
+
+    public function getDSOptArchive() {
+        return view('ds/archive_opt_project')->with('projectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getDSOptArchiveDetails($id){
+        $projectrequest = ProjectRequest::find($id);
+        return view('ds/archive_opt_project_details')->with('projectrequest', $projectrequest);
+    }
+    public function getDSNewArchive() {
+        return view('ds/archive_new_project')->with('newprojectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getDSNewArchiveDetails($id){
+        $newprojectrequest = ProjectRequest::find($id);
+        return view('ds/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
+    }
+
     //End DS
 
-    //De
+    //Dev
 
     public function getStat(){
         $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();

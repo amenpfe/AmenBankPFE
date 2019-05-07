@@ -120,7 +120,7 @@ Archive des projets
                         @foreach ($projectrequest as $projectRequest)
                         <tr class="gradeX" id="row-{{$projectRequest->requestable->id}}">
                             <td class="userId">{{$projectRequest->requestable->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$projectRequest->requestable->id}}"/></td>
-                            <td class="input email email">{{$projectRequest->title}}</td>
+                            <td class="input email email">{{App\Project::find($projectRequest->requestable->project_id)->name}}</td>
                             <td class="input email email">{{$projectRequest->requestable_type}}</td>
                             <td class="input email email">{{$projectRequest->requestable->created_at}}</td>
                             <td class="actions">
