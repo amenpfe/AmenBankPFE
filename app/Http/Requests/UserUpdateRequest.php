@@ -30,6 +30,8 @@ class UserUpdateRequest extends FormRequest
         return [
             'user.id' => 'required|integer',
             'name' => 'required|string|max:255',
+            "adresse" => "string|max:255|required",
+            "phone" => "integer|required",
             'email' => [
                 'required',
                 'email',

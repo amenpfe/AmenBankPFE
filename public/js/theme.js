@@ -3929,7 +3929,7 @@ window.theme = {};
 		$.extend(true, $.fn.dataTable.defaults, {
 			sDom: "<'row datatables-header form-inline'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>r><'table-responsive't><'row datatables-footer'<'col-sm-12 col-md-6'i><'col-sm-12 col-md-6'p>>",
 			oLanguage: {
-				sLengthMenu: '_MENU_ records per page',
+				sLengthMenu: '_MENU_Enregistrements par page',
 				sProcessing: '<i class="fa fa-spinner fa-spin"></i> Loading'
 			},
 			fnInitComplete: function( settings, json ) {
@@ -3947,7 +3947,7 @@ window.theme = {};
 
 				$search
 					.attr({
-						placeholder: typeof options.searchPlaceholder !== 'undefined' ? options.searchPlaceholder : 'Search'
+						placeholder: typeof options.searchPlaceholder !== 'undefined' ? options.searchPlaceholder : 'Rechercher'
 					})
 					.addClass('form-control');
 

@@ -4,6 +4,7 @@
 
 		<!-- Basic -->
 		<meta charset="UTF-8">
+		<title>Réinitialiser mot de passe</title>
 
 		<meta name="keywords" content="HTML5 Admin Template" />
 		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
@@ -46,7 +47,7 @@
 
 				<div class="panel panel-sign">
 					<div class="panel-title-sign mt-xl text-right">
-						<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Recover Password</h2>
+						<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Récupérer mot de passe</h2>
 					</div>
 					<div class="panel-body">
                         @if (session('status'))
@@ -55,7 +56,7 @@
                             </div>
                         @else
 						    <div class="alert alert-info">
-                                <p class="m-none text-semibold h6">Enter your e-mail below and we will send you reset instructions!</p>
+                                <p class="m-none text-semibold h6">Entrez votre adresse e-mail ci-dessous et nous vous enverrons des instructions de réinitialisation!</p>
                             </div>
                         @endif
 
@@ -65,7 +66,7 @@
 								<div class="input-group">
                                     <input id="email" name="email" type="email" placeholder="E-mail" class="form-control input-lg" value="{{ old('email') }}" required/>
 									<span class="input-group-btn">
-										<button class="btn btn-primary btn-lg" type="submit">Reset!</button>
+										<button class="btn btn-primary btn-lg" type="submit">réinitialiser!</button>
 									</span>
                                 </div>
                                 @if ($errors->has('email'))
@@ -75,7 +76,7 @@
                                 @endif
 							</div>
 
-							<p class="text-center mt-lg">Remembered? <a href="pages-signin.html">Sign In!</a>
+							<br><br>
 						</form>
 					</div>
 				</div>

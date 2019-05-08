@@ -3,7 +3,9 @@
 	<head>
 
 		<!-- Basic -->
-		<meta charset="UTF-8">
+        <meta charset="UTF-8">
+        <title>Nouveau mot de passe</title>
+
 
 		<meta name="keywords" content="HTML5 Admin Template" />
 		<meta name="description" content="Porto Admin - Responsive HTML5 Template">
@@ -46,14 +48,14 @@
 
 				<div class="panel panel-sign">
 					<div class="panel-title-sign mt-xl text-right">
-						<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Sign In</h2>
+						<h2 class="title text-uppercase text-bold m-none"><i class="fa fa-user mr-xs"></i> Récupérer mot de passe</h2>
 					</div>
 					<div class="panel-body">
                         <form class="" method="POST" action="{{ route('password.request') }}">
                             {{ csrf_field() }}
                             <input type="hidden" name="token" value="{{ $token }}">
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }} mb-lg">
-                                <label for="email" class="control-label">E-Mail Address</label>
+                                <label for="email" class="control-label"> Adresse E-Mail</label>
     
                                 <div class="">
                                     <div class="input-group input-group-icon">
@@ -74,7 +76,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }} mb-lg">
-                                <label for="password" class="control-label">Password</label>
+                                <label for="password" class="control-label">Mot de passe</label>
     
                                 <div class="">
                                     <div class="input-group input-group-icon">
@@ -94,7 +96,7 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }} mb-lg">
-                                <label for="password-confirm" class="control-label">Confirm Password</label>
+                                <label for="password-confirm" class="control-label">Confirmer mot de passe</label>
     
                                 <div class="">
                                     <div class="input-group input-group-icon">
@@ -115,8 +117,8 @@
 
 							<div class="row">
 								<div class="col-sm-5 col-sm-offset-7">
-									<button type="submit" class="btn btn-primary hidden-xs col-sm-12">Reset Password</button>
-									<button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">Reset Password</button>
+									<button type="submit" class="btn btn-primary hidden-xs col-sm-12">réinitialiser</button>
+									<button type="submit" class="btn btn-primary btn-block btn-lg visible-xs mt-lg">réinitialiser</button>
 								</div>
                             </div>
 						</form>

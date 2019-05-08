@@ -11,4 +11,6 @@ interface UserRepositoryInterface {
     public function destroy($id);
     public function updateUserInfos($id, $inputs);
     public static function getUserByEmail($email);
+    public function getUsersByRole($role);
+    public function getUsersByRoles($roles);
 }

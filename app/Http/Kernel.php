@@ -57,5 +57,19 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        'user' => \App\Http\Middleware\UserMiddleware::class,
+        'request_details' => \App\Http\Middleware\RequestDetailsMiddleware::class,
+        'chd' => \App\Http\Middleware\ChdMiddleware::class,
+        'ced' => \App\Http\Middleware\CedMiddleware::class,
+        'prop' => \App\Http\Middleware\PropMiddleware::class,
+        'cdd' => \App\Http\Middleware\CddMidleware::class,
+        'cdq' => \App\Http\Middleware\CdqMiddleware::class,
+        'org' => \App\Http\Middleware\OrgMiddleware::class,
+        'ds' => \App\Http\Middleware\DsMiddleware::class,
+        'dv' => \App\Http\Middleware\dvMiddleware::class,
+        'cai' => \App\Http\Middleware\caiMiddleware::class,
+
     ];
+
+    
 }

@@ -39,7 +39,7 @@
 								<div class="row">
 									<div class="col-md-8">
 										<a href="/" class="logo">
-											<img src="{{asset('images/amen_logo.png')}}" height="54" alt="Porto Admin" />
+											<img src="{{asset('images/amen_bank_logo.png')}}" height="54" alt="Porto Admin" />
 										</a>
 									</div>
 								</div>

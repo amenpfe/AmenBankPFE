@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Repositories\User;
-
-use App\User;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 class UserRepository implements UserRepositoryInterface {
-    
-    protected $user;
 
+    protected $user;
+    
     function __construct(User $user)
     {
         $this->user = $user;
@@ -16,10 +15,15 @@ class UserRepository implements UserRepositoryInterface {
 
     function save(User $user, $inputs) {
         $user->name = $inputs['name'];
+        $user->adresse = $inputs['adresse'];
+        $user->phone = $inputs['phone'];
         $user->email = $inputs['email'];
-        $user->password = bcrypt($inputs['password']);
+        if($inputs['password'] && $inputs['password']!=''){
+            $user->password = bcrypt($inputs['password']);
+        }
         $user->role = $inputs['role'];
         $user->save();
+        return $user;
     }
 
     public function getAll()
@@ -40,7 +44,8 @@ class UserRepository implements UserRepositoryInterface {
     public function store($inputs)
     {
         $user = new $this->user;
-        $this->save($user, $inputs);
+        
+        return $this->save($user, $inputs);
     }
 
     public function destroy($id) {
@@ -50,13 +55,27 @@ class UserRepository implements UserRepositoryInterface {
     public function updateUserInfos($id, $inputs)
     {
         $u = $this->getById($id);
-        $inputs['password'] = $u->password;
-        $this->save($u, $inputs);
+        return $this->save($u, $inputs);
     }
 
     public static function getUserByEmail($email)
     {
         return $this->getByEmail($email);
+    }
+
+    public function getUsersByRole($role)
+    {
+        return $this->user->findUsersByRole($role);
+    }
+
+    public function getUsersByRoles($roles)
+    {   
+        $users = [];
+        foreach ($roles as $role) {
+            $users = array_merge($users, getUsersByRole($role));
+        }
+
+        return $users;
     }
 }
 
