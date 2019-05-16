@@ -7,22 +7,20 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class MailAddUserNotification extends Notification
+class MiseEnPlaceNotification extends Notification
 {
     use Queueable;
-    public $name, $role, $password;
-
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct($name, $role, $password)
+    public function __construct($name, $creation, $project)
     {
         $this->name = $name;
-        $this->role = $role;
-        $this->password = $password;
+        $this->creation = $creation;
+        $this->project = $project;
     }
 
     /**
@@ -45,12 +43,8 @@ class MailAddUserNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    
-                    ->line('Bonjour <b>'.$this->name. '</b>')
-                    ->line('Vous avez été ajouté par l\'administrateur en tant que <b>'.$this->role.'</b>')
-                    ->line('Votre mot de passe est: ')
-                    ->line('<b style="color: black; font-size: 30px;">'.$this->password.'</b>');
-                    
+        ->line('Bonjour <b>'.$this->name. '</b>')
+        ->line('Suite à votre demande crée le '.$this->creation.' concernant le développement du nouveau projet'.'<strong>'.$this->project.' </strong>'.'<br> Votre logiciel a été mis en place. </b>');
     }
 
     /**

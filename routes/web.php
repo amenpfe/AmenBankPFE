@@ -99,6 +99,8 @@ Route::group(['prefix' => 'ced', 'middleware' => 'ced'], function () {
 
     Route::get('/archiveNew', 'RequestController@getCEDNewArchive')->name('get_ced_new_archive');
     Route::get('/archiveNewDetails{id}', 'RequestController@getCEDNewArchiveDetails')->name('get_ced_new_archive_details');
+    
+    Route::get('/stat', 'RequestController@getStatCed')->name('get_ced_stat');
 
 });
 

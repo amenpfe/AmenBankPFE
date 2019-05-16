@@ -42,7 +42,7 @@
     <li class="nav-parent nav-active nav-expanded">
         <a>
             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            <span>Envoyer une demandes</span>
+            <span>Envoyer une demande</span>
         </a>
         <ul class="nav nav-children">
             <li class="">

@@ -69,13 +69,13 @@
         <li class="nav-active">
             <a href="">
                 <i class="fa fa-plus" aria-hidden="true"></i>
-                Des nouveaux projets
+                les nouveaux projets
             </a>
         </li>
         <li class="">
         <a href="{{route('get_ced_opt_archive')}}">
                 <i class="fa  fa-wrench" aria-hidden="true"></i>
-                D'améliorations
+                Les projets d'amélioration
             </a>
         </li>
         

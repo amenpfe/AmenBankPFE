@@ -17,6 +17,7 @@ use App\OptimizationRequest;
 use App\Enums\UserRole;
 use App\Notifications\WorkAdded;
 use App\Notifications\DeploymentNotification;
+use App\Notifications\MiseEnPlaceNotification;
 use Illuminate\Support\Facades\DB;
 use App\User;
 
@@ -356,6 +357,23 @@ class RequestController extends Controller
         $newprojectrequest = ProjectRequest::find($id);
         return view('ced/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
     }
+
+    //stat
+
+    public function getStatCed(){
+        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
+        $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        $notCedProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
+        $cedProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_CED')->getValue()])->count();
+        $cedProjPercentage = ($cedProjCount / $notCedProjCount) * 100;
+        $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
+    
+        $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
+        
+        return view('ced/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('cedProjPercentage', $cedProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
+        
+    }
+
     
 
     //End CED
@@ -821,6 +839,8 @@ class RequestController extends Controller
         $request = ProjectRequest::find($id);
         $user = User::find($request->user_id); 
         $name = $user->name;
+        $creation = $request->created_at;
+        $title = $request->requestable->title;
         
         $inputs['status'] = StatusRequest::byKey("progressing_circulaire")->getValue();
         $inputs['ced_doc'] = $request->ced_doc;
@@ -841,7 +861,7 @@ class RequestController extends Controller
         $this->markNotificationAsReaded($request);
         return redirect()->route('get_ds_new');
 
-        $user->notify(new DeploymentNotification($name));
+        $user->notify(new DeploymentNotification($name, $creation, $title));
         return redirect()->back();
     
     }
@@ -862,6 +882,8 @@ class RequestController extends Controller
         $request = ProjectRequest::find($id);
         $user = User::find($request->user_id); 
         $name = $user->name;
+        $creation = $request->created_at;
+        $project = Project::find($request->requestable->project_id)->name;
 
         $inputs['status'] = StatusRequest::byKey("progressing_circulaire")->getValue();
         $inputs['chd_doc'] = $request->chd_doc;
@@ -879,7 +901,7 @@ class RequestController extends Controller
         $inputs['circulaire_doc'] = $request->circulaire_doc;
         $inputs['user_id'] = $request->user_id;
 
-        $user->notify(new DeploymentNotification($name));
+        $user->notify(new MiseEnPlaceNotification($name, $creation, $project));
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
         $this->markNotificationAsReaded($request);
@@ -925,7 +947,12 @@ class RequestController extends Controller
         $notDevProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $devProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_devlop')->getValue()])->count();
         $devProjPercentage = ($devProjCount / $notDevProjCount) * 100;
-        return view('dev/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('devProjPercentage', $devProjPercentage);
+        $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
+    
+        $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
+        
+        return view('dev/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('devProjPercentage', $devProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
+        
     }
 
     //End Dev
