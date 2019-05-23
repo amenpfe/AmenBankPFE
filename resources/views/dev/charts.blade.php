@@ -82,10 +82,9 @@ Les statistiques
 
 <section class="panel">
         <div class="panel-body">
-            <div class="col-sm-12" style="margin-bottom: 20px; margin-top: 20px; font-size: 7em; text-align: center; height: 100%">
-                <div class="col-sm-4" style="padding-top: 30px; padding-bottom: 30px;"><strong><span class='numscroller' data-min='1' data-max='{{$untreatedCount}}' data-delay='5' data-increment='10'>{{$untreatedCount}}</span></strong></div>
-                <div class="col-sm-4" style="padding-top: 30px; padding-bottom: 30px; border-left: solid black 3px; border-right: solid black 3px;"><strong><span class='numscroller' data-min='1' data-max='{{$avgHours}}' data-delay='5' data-increment='10'>{{$avgHours}}</span></strong></div>
-                <div class="col-sm-4" style="padding-top: 30px; padding-bottom: 30px;"><strong><span class='numscroller' data-min='1' data-max='1000' data-delay='5' data-increment='10'>1000</span></strong></div>
+            <div class="col-sm-12" style="margin-bottom: 20px; margin-top: 20px; font-size: 7em; text-align: center; height: 100%; ">
+                <div class="col-sm-4 col-sm-offset-2" style="padding-top: 30px; padding-bottom: 30px;"><strong><span class='numscroller' data-min='1' data-max='{{$untreatedCount}}' data-delay='5' data-increment='10'>{{$untreatedCount}}</span></strong></div>
+                <div class="col-sm-4 " style="padding-top: 30px; padding-bottom: 30px; border-left: solid black 3px;"><strong><span class='numscroller' data-min='1' data-max='{{$avgHours}}' data-delay='5' data-increment='10'>{{$avgHours}}</span></strong></div>
             </div>
             <div  style="margin-top: 25%; margin-bottom: 25%">
                 <div class="col-sm-6">
