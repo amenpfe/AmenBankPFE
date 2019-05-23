@@ -57,6 +57,27 @@
             
         </ul>
     </li>
+    <li class="nav-parent">
+    <a>
+        <i class="fa fa-archive" aria-hidden="true"></i>
+        <span>Archive des projets</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+            <a href="{{route('get_cai_new_archive')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Des nouveaux projets
+            </a>
+        </li>
+        <li class="nav-">
+        <a href="{{route('get_cai_opt_archive')}}">
+                <i class="fa  fa-wrench" aria-hidden="true"></i>
+                D'améliorations
+            </a>
+        </li>
+        
+    </ul>
+</li>
     
 @endsection
 

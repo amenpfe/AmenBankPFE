@@ -215,6 +215,11 @@ Route::get('/shownewd', 'RequestController@getdvsecNewProjectRequest')->name('ge
 
     
 //
+    Route::get('/archiveOpt', 'RequestController@getdvOptArchive')->name('get_dv_opt_archive');
+    Route::get('/archiveOptDetails{id}', 'RequestController@getdvOptArchiveDetails')->name('get_dv_opt_archive_details');
+
+    Route::get('/archiveNew', 'RequestController@getdvNewArchive')->name('get_dv_new_archive');
+    Route::get('/archiveNewDetails{id}', 'RequestController@getdvNewArchiveDetails')->name('get_dv_new_archive_details');
 
     Route::get('/edit', 'UserController@getEditProfildv')->name('edit_dv');
     Route::post('/editprofil', 'UserController@editProfildvSubmit')->name('submit_dv_edit');
@@ -231,12 +236,19 @@ Route::group(['prefix' => 'cai', 'middleware' => 'cai'], function () {
     Route::any('/detailrefu/{id}', 'RequestController@caiRefuseOptRequest')->name('cairefuse_request');
 
     Route::get('/detailopt/{id}', 'RequestController@getcaiOptDetails')->middleware('request_details')->name('opt-request-details-cai');
-
+ 
     Route::get('/allnew', 'RequestController@getcaiAllNewProjectRequests')->name('all_new_request_cai');
     Route::get('/allopt', 'RequestController@getcaiAllOptRequests')->name('all_opt_request_cai');
 
     Route::get('/edit', 'UserController@getEditProfilcai')->name('edit_cai');
     Route::post('/editprofil', 'UserController@editProfilcaiSubmit')->name('submit_cai_edit'); 
+    //
+    Route::get('/archiveOpt', 'RequestController@getcaiOptArchive')->name('get_cai_opt_archive');
+    Route::get('/archiveOptDetails{id}', 'RequestController@getcaiOptArchiveDetails')->name('get_cai_opt_archive_details');
+
+    Route::get('/archiveNew', 'RequestController@getcaiNewArchive')->name('get_cai_new_archive');
+    Route::get('/archiveNewDetails{id}', 'RequestController@getcaiNewArchiveDetails')->name('get_cai_new_archive_details');
+
 });
 
 

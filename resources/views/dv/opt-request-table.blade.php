@@ -15,24 +15,24 @@
 @endsection
 
 @section('navigation')
-<li class="nav-parent">
+<li class="nav-parent nav-expanded">
 										<a>
 											<i class="fa fa-align-left" aria-hidden="true"></i>
 											<span>Consulter les demandes</span>
 										</a>
 										<ul class="nav nav-children">
 											
-											<li class="nav-parent">
+											<li class="nav-parent nav-expanded">
 												<a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
 												<ul class="nav nav-children">
-													<li class="nav-parent">
+													<li class="nav-parent nav-expanded">
 														<a>Conception globale</a>
 														<ul class="nav nav-children">
 															<li>
 																<a href="{{route('get_dv_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
                                                                     Des nouveaux projets</a>
 															</li>
-															<li>
+															<li class="nav-active">
 																<a href="{{route('get_dv_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
                                                                     D'améliorations</a>
 															</li>
@@ -78,6 +78,27 @@
                                             
 										</ul>
 									</li>
+                                    <li class="nav-parent">
+                                        <a>
+                                            <i class="fa fa-archive" aria-hidden="true"></i>
+                                            <span>Archive des projets</span>
+                                        </a>
+                                        <ul class="nav nav-children">
+                                            <li class="">
+                                                <a href="{{route('get_dv_new_archive')}}">
+                                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                                    Des nouveaux projets
+                                                </a>
+                                            </li>
+                                            <li class="">
+                                            <a href="{{route('get_dv_opt_archive')}}">
+                                                    <i class="fa  fa-wrench" aria-hidden="true"></i>
+                                                    D'améliorations
+                                                </a>
+                                            </li>
+                                            
+                                        </ul>
+                                    </li>
 @endsection
 
 @section('content-title')

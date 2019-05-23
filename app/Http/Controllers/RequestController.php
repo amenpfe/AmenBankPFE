@@ -453,7 +453,7 @@ class RequestController extends Controller
         return redirect()->route('get_cdd_opt');
     }
     
-    //CDD1
+    //CDDsec
 
     public function getCDDPNewProjectRequest(){ 
         return view('cdd/new-p-table')->with('newprojectrequests', 
@@ -827,7 +827,7 @@ class RequestController extends Controller
 
     //End DS
 
-      //dv
+    //devloppeurs
 
       public function getdvNewProjectRequest(){ 
         return view('dv/new-request-table')->with('newprojectrequests', 
@@ -999,6 +999,26 @@ class RequestController extends Controller
     public function getdvAllOptRequests() {
         return view('dv/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
     }
+    
+    //archive
+
+      public function getdvOptArchive() {
+        return view('dv/archive_opt_project')->with('projectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getdvOptArchiveDetails($id){
+        $projectrequest = ProjectRequest::find($id);
+        return view('dv/archive_opt_project_details')->with('projectrequest', $projectrequest);
+    }
+    public function getdvNewArchive() {
+        return view('dv/archive_new_project')->with('newprojectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getdvNewArchiveDetails($id){
+        $newprojectrequest = ProjectRequest::find($id);
+        return view('dv/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
+    }
+    
 
     //End 
 
@@ -1068,7 +1088,7 @@ class RequestController extends Controller
     public function caiRefuseOptRequest($id){
         $request = ProjectRequest::find($id);
 
-        $inputs['status'] = StatusRequest::byKey("progressing_devlop")->getValue();
+        $inputs['status'] = StatusRequest::byKey("progressing_p")->getValue();
         $inputs['chd_doc'] = $request->chd_doc;
         $inputs['type'] = $request->requestable->type;
         $inputs['project_id'] = $request->requestable->project_id;
@@ -1109,6 +1129,28 @@ class RequestController extends Controller
     public function getcaiAllOptRequests() {
         return view('cai/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
     }
+    //archive
+
+    public function getcaiOptArchive() {
+        return view('cai/archive_opt_project')->with('projectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getcaiOptArchiveDetails($id){
+        $projectrequest = ProjectRequest::find($id);
+        return view('cai/archive_opt_project_details')->with('projectrequest', $projectrequest);
+    }
+    public function getcaiNewArchive() {
+        return view('cai/archive_new_project')->with('newprojectrequest', 
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getcaiNewArchiveDetails($id){
+        $newprojectrequest = ProjectRequest::find($id);
+        return view('cai/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
+    }
+    
+
+    //End 
+
 
 
 }   
