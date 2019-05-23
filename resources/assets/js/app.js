@@ -29,19 +29,23 @@ $(document).ready(function() {
         console.log(chan);
         window.Echo.private(chan)
             .notification((notification) => {
+                
+                badgeContainer = $('#badge-container');
                 console.log("Hello");
                 console.log(notification);
                 console.log((notification.projectRequest.requestable_type == "App\\NewProjectRequest" ? newRouteLink : optRouteLink) + notification.projectRequest.id);
                 $('#notifications-container').prepend('' + 
                 '<li>' +
                     '<a href="' + (notification.projectRequest.requestable_type == "App\\NewProjectRequest" ? newRouteLink : optRouteLink) + notification.projectRequest.id +'">' +
-                        notification.projectRequest.id +
+                    (notification.projectRequest.requestable_type == "App\\NewProjectRequest" ? "Demande de nouveau projet" : "Demande d'amélioration") +
+                    '<span class="message">' + notification.projectRequest.created_at + '</span>' +
                     '</a>' +
                 '</li>' + 
                 '');
 
                 outerBadge = $('#notifications-outer-badge');
                 outerBadge.html(+outerBadge.html() + 1);
+                outerBadge.show();
 
                 innerBadge = $('#notifications-inner-badge');
                 innerBadge.html(+innerBadge.html() + 1);

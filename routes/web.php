@@ -70,6 +70,14 @@ Route::group(['prefix' => 'chd', 'middleware' => 'chd'], function () {
     Route::get('/edit', 'UserController@getEditProfilChd')->name('edit_chd');
     Route::post('/editprofil', 'UserController@editProfilChdSubmit')->name('submit_chd_edit');
 
+    Route::get('/archiveOpt', 'RequestController@getCDOptArchive')->name('get_chd_opt_archive');
+    Route::get('/archiveOptDetails{id}', 'RequestController@getCDOptArchiveDetails')->name('get_chd_opt_archive_details');
+
+    Route::get('/archiveNew', 'RequestController@getCDNewArchive')->name('get_chd_new_archive');
+    Route::get('/archiveNewDetails{id}', 'RequestController@getCDNewArchiveDetails')->name('get_chd_new_archive_details');
+    //stat
+    Route::get('/stat', 'RequestController@getStatchd')->name('get_chd_stat');
+
 });
 
 Route::group(['prefix' => 'ced', 'middleware' => 'ced'], function () {
@@ -88,6 +96,14 @@ Route::group(['prefix' => 'ced', 'middleware' => 'ced'], function () {
     Route::get('/edit', 'UserController@getEditProfilCED')->name('edit_ced');
     Route::post('/editprofil', 'UserController@editProfilCEDSubmit')->name('submit_ced_edit');
 
+    Route::get('/archiveOpt', 'RequestController@getCEDOptArchive')->name('get_ced_opt_archive');
+    Route::get('/archiveOptDetails{id}', 'RequestController@getCEDOptArchiveDetails')->name('get_ced_opt_archive_details');
+
+    Route::get('/archiveNew', 'RequestController@getCEDNewArchive')->name('get_ced_new_archive');
+    Route::get('/archiveNewDetails{id}', 'RequestController@getCEDNewArchiveDetails')->name('get_ced_new_archive_details');
+    
+    Route::get('/stat', 'RequestController@getStatCed')->name('get_ced_stat');
+
 });
 
 Route::group(['prefix' => 'prop', 'middleware' => 'prop'], function () {
@@ -102,11 +118,25 @@ Route::group(['prefix' => 'prop', 'middleware' => 'prop'], function () {
 
     Route::get('/edit', 'UserController@getEditProfilProp')->name('edit_prop');
     Route::post('/editprofil', 'UserController@editProfilPropSubmit')->name('submit_prop_edit');
+
+    Route::get('/archiveOpt', 'RequestController@getPropOptArchive')->name('get_prop_opt_archive');
+    Route::get('/archiveOptDetails{id}', 'RequestController@getPropOptArchiveDetails')->name('get_prop_opt_archive_details');
+
+    Route::get('/archiveNew', 'RequestController@getPropNewArchive')->name('get_prop_new_archive');
+    Route::get('/archiveNewDetails{id}', 'RequestController@getPropNewArchiveDetails')->name('get_prop_new_archive_details');
+     //stat
+     Route::get('/stat', 'RequestController@getStatprop')->name('get_prop_stat');
 });
 
 Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
     Route::get('/shownew', 'RequestController@getCDDNewProjectRequest')->name('get_cdd_new');
     Route::get('/showopt', 'RequestController@getCDDOptRequest')->name('get_cdd_opt');
+
+    Route::get('/archiveOpt', 'RequestController@getCDDOptArchive')->name('get_cdd_opt_archive');
+    Route::get('/archiveOptDetails{id}', 'RequestController@getCDDOptArchiveDetails')->name('get_cdd_opt_archive_details');
+
+    Route::get('/archiveNew', 'RequestController@getCDDNewArchive')->name('get_cdd_new_archive');
+    Route::get('/archiveNewDetails{id}', 'RequestController@getCDDNewArchiveDetails')->name('get_cdd_new_archive_details');
 
     Route::get('/detail/{id}', 'RequestController@getCDDNewDetails')->middleware('request_details')->name('new-request-details-cdd');
     Route::post('/detailsubmit', 'RequestController@submitCDDNewRequestForm')->name('new-request-detail-cdd-submit');
@@ -119,6 +149,8 @@ Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
 
     Route::get('/edit', 'UserController@getEditProfilCDD')->name('edit_cdd');
     Route::post('/editprofil', 'UserController@editProfilCDDSubmit')->name('submit_cdd_edit');
+    //stat
+    Route::get('/stat', 'RequestController@getStatCdd')->name('get_cdd_stat');
 
 });
 
@@ -137,6 +169,14 @@ Route::group(['prefix' => 'org', 'middleware' => 'org'], function () {
 
     Route::get('/edit', 'UserController@getEditProfilORG')->name('edit_org');
     Route::post('/editprofil', 'UserController@editProfilORGSubmit')->name('submit_org_edit');
+
+    Route::get('/archiveOpt', 'RequestController@getORGOptArchive')->name('get_org_opt_archive');
+    Route::get('/archiveOptDetails{id}', 'RequestController@getORGOptArchiveDetails')->name('get_org_opt_archive_details');
+
+    Route::get('/archiveNew', 'RequestController@getORGNewArchive')->name('get_org_new_archive');
+    Route::get('/archiveNewDetails{id}', 'RequestController@getORGNewArchiveDetails')->name('get_org_new_archive_details');
+        //stat
+        Route::get('/stat', 'RequestController@getStatorg')->name('get_org_stat');
 
 
 });
@@ -157,6 +197,14 @@ Route::group(['prefix' => 'ds', 'middleware' => 'ds'], function () {
     Route::get('/edit', 'UserController@getEditProfilDS')->name('edit_ds');
     Route::post('/editprofil', 'UserController@editProfilDSSubmit')->name('submit_ds_edit');
 
+    Route::get('/archiveOpt', 'RequestController@getDSOptArchive')->name('get_ds_opt_archive');
+    Route::get('/archiveOptDetails{id}', 'RequestController@getDSOptArchiveDetails')->name('get_ds_opt_archive_details');
+
+    Route::get('/archiveNew', 'RequestController@getDSNewArchive')->name('get_ds_new_archive');
+    Route::get('/archiveNewDetails{id}', 'RequestController@getDSNewArchiveDetails')->name('get_ds_new_archive_details');
+    //stat
+    Route::get('/stat', 'RequestController@getStatds')->name('get_ds_stat');
+
 });
 
 Route::group(['prefix' => 'cdq', 'middleware' => 'cdq'], function () {
@@ -175,6 +223,26 @@ Route::group(['prefix' => 'cdq', 'middleware' => 'cdq'], function () {
 
     Route::get('/edit', 'UserController@getEditProfilCDQ')->name('edit_cdq');
     Route::post('/editprofil', 'UserController@editProfilCDQSubmit')->name('submit_cdq_edit');
+
+    Route::get('/archiveOpt', 'RequestController@getCDQOptArchive')->name('get_cdq_opt_archive');
+    Route::get('/archiveOptDetails{id}', 'RequestController@getCDQOptArchiveDetails')->name('get_cdq_opt_archive_details');
+
+    Route::get('/archiveNew', 'RequestController@getCDQNewArchive')->name('get_cdq_new_archive');
+    Route::get('/archiveNewDetails{id}', 'RequestController@getCDQNewArchiveDetails')->name('get_cdq_new_archive_details');
+    Route::get('/stat', 'RequestController@getStatCdq')->name('get_cdq_stat');
+
+});
+
+Route::group(['prefix' => 'dev'], function () {
+
+    Route::get('/stat', 'RequestController@getStat')->name('get_dev_stat');
+
+});
+
+Route::group(['prefix' => 'cai', 'middleware' => 'cai'], function () {
+
+   
+    Route::get('/stat', 'RequestController@getStatcai')->name('get_cai_stat'); 
 
 });
 

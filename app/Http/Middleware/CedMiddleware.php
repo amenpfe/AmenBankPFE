@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Enums\UserRole;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Response;
+use Symfony\Component\HttpFoundation\Response;
 
 class CedMiddleware
 {

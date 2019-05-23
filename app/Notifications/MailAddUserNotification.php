@@ -45,6 +45,7 @@ class MailAddUserNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
+                    
                     ->line('Bonjour <b>'.$this->name. '</b>')
                     ->line('Vous avez été ajouté par l\'administrateur en tant que <b>'.$this->role.'</b>')
                     ->line('Votre mot de passe est: ')

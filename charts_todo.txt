@@ -1,0 +1,14 @@
+Nombre de projets en cours de traitement
+Nombre d'heure moyenne
+
+
+PieChart: pourcentage de projets du developpeur par rapport au autres projets
+Line chart (3 lines):
+- Nouveaux projet de type NewProjectRequest par mois
+- Nouveaux projet de type OptimzationRequest par mois
+- Total des Nouveaux projet par mois
+
+Bar char (3 bars):
+- Projet traités de type NewProjectRequest par mois
+- Projet traités de type OptimzationRequest par mois
+- Total des projets traités par mois

@@ -54,9 +54,38 @@
         
     </ul>
 </li>
+<li class="nav-parent">
+    <a>
+        <i class="fa fa-archive" aria-hidden="true"></i>
+        <span>Archive des projets</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+            <a href="{{route('get_ds_new_archive')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Des nouveaux projets
+            </a>
+        </li>
+        <li class="">
+        <a href="{{route('get_ds_opt_archive')}}">
+                <i class="fa  fa-wrench" aria-hidden="true"></i>
+                D'améliorations
+            </a>
+        </li>
+        
+    </ul>
+</li>
+<li class="nav-active">
+    <a href="{{route('get_ds_stat')}}">
+        <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+        <span>Les Statistiques</span>
+    </a>
+</li>
 
 @endsection
 
+@section('new-notification-route')new-request-details-ds @endsection
+@section('opt-notification-route')opt-request-details-ds @endsection
 @section('content-title')
 Détails de demande
 @endsection

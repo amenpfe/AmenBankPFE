@@ -16,9 +16,11 @@ class DeploymentNotification extends Notification
      *
      * @return void
      */
-    public function __construct($name)
+    public function __construct($name, $creation, $title)
     {
         $this->name = $name;
+        $this->creation = $creation;
+        $this->title = $title;
     }
 
     /**
@@ -42,7 +44,7 @@ class DeploymentNotification extends Notification
     {
         return (new MailMessage)
                     ->line('Bonjour <b>'.$this->name. '</b>')
-                    ->line('Votre logiciel a été mis en place </b>');
+                    ->line('Suite à votre demande crée le '.$this->creation.' concernant le développement du nouveau projet'.'<strong>'.$this->title.'</strong>'.'<br> Votre logiciel a été mis en place. </b>');
     }
 
     /**

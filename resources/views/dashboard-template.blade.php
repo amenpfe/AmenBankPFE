@@ -48,49 +48,60 @@
         <div class="header-right">
 
             
-
+            
+            @if (Auth::user()->role != App\Enums\UserRole::byKey('Admin')->getValue()&& Auth::user()->role != App\Enums\UserRole::byKey('User')->getValue())
             <span class="separator"></span>
 
             <ul class="notifications">
                 
                     <li>
+                        @php
+                            $notificationCount = Count(Auth::user()->unreadNotifications);
+                        @endphp
                         <a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
-                            <i class="fa fa-bell"></i>
-                            <span class="badge" id="notifications-outer-badge">{{Count(Auth::user()->unreadNotifications)}}</span>
+                            <i class="fa fa-tasks"></i>
+                            <span @if($notificationCount == 0) style="display: none;" @endif class="badge" id="notifications-outer-badge">{{$notificationCount}}</span>
                         </a>
     
                         <div class="dropdown-menu notification-menu">
                             <div class="notification-title">
-                                <span class="pull-right label label-default" id="notifications-inner-badge">{{Count(Auth::user()->unreadNotifications)}}</span>
-                                Alerts
+                                <span class="pull-right label label-default" id="notifications-inner-badge">{{$notificationCount}}</span>
+                                Tâches
                             </div>
     
                             <div class="content">
-                                <ul id="notifications-container">
-                                    <?php 
-                                        $newRequestRouteName = trim(app()->view->getSections()['new-notification-route']); 
-                                        $optRequestRouteName = trim(app()->view->getSections()['opt-notification-route']); 
-                                    ?>
-                                    @foreach (Auth::user()->unreadNotifications as $notification)
-                                        <li>
-                                            @php
-                                                $routeLink;
-                                                if($notification->data['projectRequest']['requestable_type'] == "App\\NewProjectRequest")
-                                                    $routeLink = route($newRequestRouteName, $notification->data['projectRequest']['id']);
-                                                else
-                                                    $routeLink = route($optRequestRouteName, $notification->data['projectRequest']['id']);
-                                            @endphp
-                                            <a href="{{$routeLink}}" class="clearfix">
-                                                {{$notification->data['projectRequest']['id']}}
-                                                <!--<div class="image">
-                                                    <i class="fa fa-thumbs-down bg-danger"></i>
-                                                </div>
-                                                <span class="title">Server is Down!</span>
-                                                <span class="message">Just now</span>-->
-                                            </a>
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                    <ul id="notifications-container">
+                                        <?php 
+
+                                            $newRequestRouteName = trim(app()->view->getSections()['new-notification-route']); 
+                                            $optRequestRouteName = trim(app()->view->getSections()['opt-notification-route']); 
+                                        ?>
+                                        @foreach (Auth::user()->unreadNotifications as $notification)
+                                            <li>
+                                                @php
+                                                    $routeLink;
+                                                    if($notification->data['projectRequest']['requestable_type'] == "App\\NewProjectRequest")
+                                                        $routeLink = route($newRequestRouteName, $notification->data['projectRequest']['id']);
+                                                    else
+                                                        $routeLink = route($optRequestRouteName, $notification->data['projectRequest']['id']);
+                                                @endphp
+                                                <a href="{{$routeLink}}" class="clearfix">
+                                                    @if($notification->data['projectRequest']['requestable_type'] == "App\\NewProjectRequest")
+                                                        Demande d'un nouveau projet
+                                                    @else 
+                                                        Demande d'amélioration
+                                                    @endif
+                                                    <span class="message">{{$notification->data['projectRequest']['updated_at']}}</span>
+                                                    <!--<div class="image">
+                                                        <i class="fa fa-thumbs-down bg-danger"></i>
+                                                    </div>
+                                                    <span class="title">Server is Down!</span>
+                                                    <span class="message">Just now</span>-->
+                                                </a>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+
     
                                 <hr />
     
@@ -101,14 +112,12 @@
                         </div>
                     </li>
                 </ul>
-
+                
+                @endif
             <span class="separator"></span>
 
             <div id="userbox" class="userbox">
                 <a href="#" data-toggle="dropdown">
-                    <figure class="profile-picture">
-                        <img src="assets/images/!logged-user.jpg" alt="Joseph Doe" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg" />
-                    </figure>
                     <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@JSOFT.com">
                         <span class="name">{{Auth::user()->name}}</span>
                         <span class="role">{{\App\Enums\UserRole::getEnumDescriptionByValue(Auth::user()->role)}}</span>
@@ -187,16 +196,6 @@
     </div>
     
 </section>
-<script>
-    newRouteLink = '{{route($newRequestRouteName, 0)}}';
-    newRouteLink = newRouteLink.substring(0, newRouteLink.lastIndexOf("/")+1);
-
-    optRouteLink = '{{route($optRequestRouteName, 0)}}';
-    optRouteLink = optRouteLink.substring(0, optRouteLink.lastIndexOf("/")+1);
-
-    console.log(newRouteLink);
-    console.log(optRouteLink);
-</script>
 {!! HTML::script('js/jquery.js') !!}
 {!! HTML::script('js/jquery-browser-mobile.js') !!}
 {!! HTML::script('js/bootstrap.js') !!}
@@ -210,10 +209,22 @@
 {!! HTML::script('js/theme.custom.js') !!}
 {!! HTML::script('js/theme.init.js') !!}
 
+                
+@if (Auth::user()->role != App\Enums\UserRole::byKey('Admin')->getValue()&& Auth::user()->role != App\Enums\UserRole::byKey('User')->getValue()) {
 <script>
+    newRouteLink = '{{route($newRequestRouteName, 0)}}';
+    newRouteLink = newRouteLink.substring(0, newRouteLink.lastIndexOf("/")+1);
+
+    optRouteLink = '{{route($optRequestRouteName, 0)}}';
+    optRouteLink = optRouteLink.substring(0, optRouteLink.lastIndexOf("/")+1);
+
+    console.log(newRouteLink);
+    console.log(optRouteLink);
     window.Laravel = {!! json_encode(['csrfToken' => csrf_token()]) !!};
     window.Laravel.userId = {{Auth::user()->id}}
 </script>
+}
+@endif
 <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

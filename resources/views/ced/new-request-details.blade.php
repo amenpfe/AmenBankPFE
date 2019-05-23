@@ -54,11 +54,34 @@
         
     </ul>
 </li>
+<li class="nav-parent">
+    <a>
+        <i class="fa fa-archive" aria-hidden="true"></i>
+        <span>Archive des projets</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+            <a href="{{route('get_ced_new_archive')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Des nouveaux projets
+            </a>
+        </li>
+        <li class="">
+        <a href="{{route('get_ced_opt_archive')}}">
+                <i class="fa  fa-wrench" aria-hidden="true"></i>
+                D'améliorations
+            </a>
+        </li>
+        
+    </ul>
+</li>
 @endsection
 
 @section('content-title')
 Détails de demande
 @endsection
+@section('new-notification-route')new-request-details-ced @endsection
+@section('opt-notification-route')opt-request-details-ced @endsection
 
 @section('content')
     @php 

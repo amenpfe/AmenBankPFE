@@ -65,7 +65,7 @@ class Kernel extends HttpKernel
         'cdd' => \App\Http\Middleware\CddMidleware::class,
         'cdq' => \App\Http\Middleware\CdqMiddleware::class,
         'org' => \App\Http\Middleware\OrgMiddleware::class,
-        'ds' => \App\Http\Middleware\DsMiddleware::class
-
+        'ds' => \App\Http\Middleware\DsMiddleware::class,
+        'cai' => \App\Http\Middleware\caiMiddleware::class
     ];
 }

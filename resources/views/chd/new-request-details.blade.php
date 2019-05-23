@@ -13,13 +13,13 @@
 @endsection
 
 @section('navigation')
-<li class="nav-parent nav-active nav-expanded">
+<li class="nav-parent">
     <a>
         <i class="fa fa-table" aria-hidden="true"></i>
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-        <li class="nav-active">
+        <li class="">
                 <a href="">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
@@ -53,6 +53,12 @@
         </li>
         
     </ul>
+</li>
+<li class="nav-active">
+    <a href="{{route('get_chd_stat')}}">
+        <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+        <span>Les Statistiques</span>
+    </a>
 </li>
 @endsection
 
@@ -172,7 +178,7 @@ Détails de demande
                                                             </div>
                                                                 @if ($errors->has('doc'))
                                                                 <span class="help-block">
-                                                                    <strong>{{ $errors->first('doc') }}</strong>
+                                                                    <strong>{{$errors->first('doc')}}</strong>
                                                                 </span>
                                                             @endif
                                                         </div>
