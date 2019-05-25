@@ -48,7 +48,7 @@
 @endsection
 
 @section('content-title')
-Modifier le profil
+Détails de demande
 @endsection
 
 @section('new-notification-route')detail_request @endsection
