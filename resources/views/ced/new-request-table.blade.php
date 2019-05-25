@@ -18,7 +18,7 @@
 @section('navigation')
 <li class="nav-parent nav-active nav-expanded">
     <a>
-        <i class="fa fa-tasks" aria-hidden="true"></i>
+        <i class="fa fa-table" aria-hidden="true"></i>
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
