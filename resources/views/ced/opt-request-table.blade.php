@@ -57,6 +57,12 @@
         
     </ul>
 </li>
+<li class="">
+    <a href="{{route('get_ced_stat')}}">
+        <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+        <span>Les Statistiques</span>
+    </a>
+</li>
     
 @endsection
 

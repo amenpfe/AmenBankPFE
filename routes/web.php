@@ -76,6 +76,8 @@ Route::group(['prefix' => 'chd', 'middleware' => 'chd'], function () {
     Route::get('/archiveNew', 'RequestController@getCDNewArchive')->name('get_chd_new_archive');
     Route::get('/archiveNewDetails{id}', 'RequestController@getCDNewArchiveDetails')->name('get_chd_new_archive_details');
 
+    Route::get('/stat', 'RequestController@getStatChd')->name('get_chd_stat');
+
 });
 
 Route::group(['prefix' => 'ced', 'middleware' => 'ced'], function () {
@@ -122,6 +124,8 @@ Route::group(['prefix' => 'prop', 'middleware' => 'prop'], function () {
 
     Route::get('/archiveNew', 'RequestController@getPropNewArchive')->name('get_prop_new_archive');
     Route::get('/archiveNewDetails{id}', 'RequestController@getPropNewArchiveDetails')->name('get_prop_new_archive_details');
+
+    Route::get('/stat', 'RequestController@getStatProp')->name('get_prop_stat');
 });
 
 Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
@@ -170,6 +174,8 @@ Route::group(['prefix' => 'org', 'middleware' => 'org'], function () {
     Route::get('/archiveNew', 'RequestController@getORGNewArchive')->name('get_org_new_archive');
     Route::get('/archiveNewDetails{id}', 'RequestController@getORGNewArchiveDetails')->name('get_org_new_archive_details');
 
+    Route::get('/stat', 'RequestController@getStatOrg')->name('get_org_stat');
+
 
 });
 
@@ -195,6 +201,8 @@ Route::group(['prefix' => 'ds', 'middleware' => 'ds'], function () {
     Route::get('/archiveNew', 'RequestController@getDSNewArchive')->name('get_ds_new_archive');
     Route::get('/archiveNewDetails{id}', 'RequestController@getDSNewArchiveDetails')->name('get_ds_new_archive_details');
 
+    Route::get('/stat', 'RequestController@getStatDs')->name('get_ds_stat');
+
 });
 
 Route::group(['prefix' => 'cdq', 'middleware' => 'cdq'], function () {
@@ -219,6 +227,8 @@ Route::group(['prefix' => 'cdq', 'middleware' => 'cdq'], function () {
 
     Route::get('/archiveNew', 'RequestController@getCDQNewArchive')->name('get_cdq_new_archive');
     Route::get('/archiveNewDetails{id}', 'RequestController@getCDQNewArchiveDetails')->name('get_cdq_new_archive_details');
+
+    Route::get('/stat', 'RequestController@getStatCdq')->name('get_cdq_stat');
 
 });
 

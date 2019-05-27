@@ -25,13 +25,13 @@
     </a>
     <ul class="nav nav-children">
         <li class="">
-        <a href="{{route('get_ced_new')}}">
+        <a href="{{route('get_org_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
         <li class="">
-        <a href="{{route('get_ced_opt')}}">
+        <a href="{{route('get_org_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations
             </a>
@@ -45,13 +45,13 @@
         </a>
         <ul class="nav nav-children">
             <li class="">
-                <a href="{{route('all_new_request_ced')}}">
+                <a href="{{route('all_new_request_org')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
             <li class="">
-            <a href="{{route('all_opt_request_ced')}}">
+            <a href="{{route('all_opt_request_org')}}">
                     <i class="fa  fa-wrench" aria-hidden="true"></i>
                     D'améliorations
                 </a>
@@ -66,13 +66,13 @@
         </a>
         <ul class="nav nav-children">
             <li class="">
-                <a href="{{route('get_ced_new_archive')}}">
+                <a href="{{route('get_org_new_archive')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
             <li class="">
-            <a href="{{route('get_ced_opt_archive')}}">
+            <a href="{{route('get_org_opt_archive')}}">
                     <i class="fa  fa-wrench" aria-hidden="true"></i>
                     D'améliorations
                 </a>
@@ -119,7 +119,7 @@ Les statistiques
             </div>
             <div>
                 <div class="col-sm-6" style="margin-top: 60px; margin-bottom: 20px;">
-                    <canvas id="cedProjCanvas"></canvas>
+                    <canvas id="orgProjCanvas"></canvas>
                 </div>
                 <div class="col-sm-6" style="margin-top: 60px; margin-bottom: 20px;">
                     <canvas id="newProjCanvas"></canvas>
@@ -148,19 +148,19 @@ Les statistiques
 
     <script>
         @php
-            $rest = 100 - $cedProjPercentage;
+            $rest = 100 - $orgProjPercentage;
         @endphp
-        //CedProjChart
-        var cedProjCtx = document.getElementById('cedProjCanvas').getContext('2d');
+        //ChdProjChart
+        var orgProjCtx = document.getElementById('orgProjCanvas').getContext('2d');
 
-        new Chart(cedProjCtx, {
+        new Chart(orgProjCtx, {
             type: 'doughnut',
             data: {
                 labels: ["Autres", "Projets affectés"],
                 datasets: [
                 {
                     label: "TeamA Score",
-                    data: [{{$cedProjPercentage}}, {{$rest}}],
+                    data: [{{$orgProjPercentage}}, {{$rest}}],
                     backgroundColor: [
                     "rgba(40,187,105)",
                     "rgba(37,129,188)"
@@ -192,7 +192,7 @@ Les statistiques
                 }
             }
         });
-        //End CedProjChart
+        //End ChdProjChart
 
         //NewProjChart
         var newProjCtx = document.getElementById('newProjCanvas').getContext('2d');
