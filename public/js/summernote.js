@@ -2986,7 +2986,7 @@
         });
       },
       paragraph: function (lang) {
-        var leftButton = tplIconButton('fa fa-align-left icon-align-left', {
+        var leftButton = tplIconButton('fa fa-table icon-align-left', {
           title: lang.paragraph.left,
           event: 'justifyLeft'
         });
@@ -3021,7 +3021,7 @@
                          '</div>' +
                        '</div>';
 
-        return tplIconButton('fa fa-align-left icon-align-left', {
+        return tplIconButton('fa fa-table icon-align-left', {
           title: lang.paragraph.paragraph,
           dropdown: dropdown
         });
@@ -3105,12 +3105,12 @@
           value: '0.25'
         });
 
-        var leftButton = tplIconButton('fa fa-align-left icon-align-left', {
+        var leftButton = tplIconButton('fa fa-table icon-align-left', {
           title: lang.image.floatLeft,
           event: 'floatMe',
           value: 'left'
         });
-        var rightButton = tplIconButton('fa fa-align-left icon-align-right', {
+        var rightButton = tplIconButton('fa fa-table icon-align-right', {
           title: lang.image.floatRight,
           event: 'floatMe',
           value: 'right'

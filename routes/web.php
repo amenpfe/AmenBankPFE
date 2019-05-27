@@ -131,6 +131,8 @@ Route::get('/shownewp', 'RequestController@getCDDPNewProjectRequest')->name('get
 
     Route::get('/edit', 'UserController@getEditProfilCDD')->name('edit_cdd');
     Route::post('/editprofil', 'UserController@editProfilCDDSubmit')->name('submit_cdd_edit');
+    //stat
+    Route::get('/stat', 'RequestController@getStatCdd')->name('get_cdd_stat');
 
 });
 
@@ -223,6 +225,8 @@ Route::get('/shownewd', 'RequestController@getdvsecNewProjectRequest')->name('ge
 
     Route::get('/edit', 'UserController@getEditProfildv')->name('edit_dv');
     Route::post('/editprofil', 'UserController@editProfildvSubmit')->name('submit_dv_edit');
+    //stat
+    Route::get('/stat', 'RequestController@getStat')->name('get_dev_stat');
 
 });
 
@@ -248,6 +252,7 @@ Route::group(['prefix' => 'cai', 'middleware' => 'cai'], function () {
 
     Route::get('/archiveNew', 'RequestController@getcaiNewArchive')->name('get_cai_new_archive');
     Route::get('/archiveNewDetails{id}', 'RequestController@getcaiNewArchiveDetails')->name('get_cai_new_archive_details');
+    Route::get('/stat', 'RequestController@getStatcai')->name('get_cai_stat'); 
 
 });
 

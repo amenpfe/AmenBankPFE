@@ -19,7 +19,7 @@
 @section('navigation')
 <li class="nav-parent">
 										<a>
-											<i class="fa fa-align-left" aria-hidden="true"></i>
+											<i class="fa fa-table" aria-hidden="true"></i>
 											<span>Consulter les demandes</span>
 										</a>
 										<ul class="nav nav-children">
@@ -56,7 +56,11 @@
 													
 												</ul>
                                             </li>
-                                            <li class="nav-parent">
+                                           
+                                            
+										</ul>
+									</li>
+                                    <li class="nav-parent">
                                                 <a>
                                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                                     <span>Suivi des demande</span>
@@ -77,30 +81,33 @@
                                                     
                                                 </ul>
                                             </li>
-                                            
-										</ul>
-									</li>
-<li class="nav-parent nav-active nav-expanded">
-    <a>
-        <i class="fa fa-archive" aria-hidden="true"></i>
-        <span>Archive des projets</span>
-    </a>
-    <ul class="nav nav-children">
-        <li class="nav-active">
-            <a href="">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                Des nouveaux projets
-            </a>
-        </li>
-        <li class="">
-        <a href="{{route('get_dv_opt_archive')}}">
-                <i class="fa  fa-wrench" aria-hidden="true"></i>
-                D'améliorations
-            </a>
-        </li>
-        
-    </ul>
-</li>
+                                            <li class="nav-parent nav-active nav-expanded">
+                                                <a>
+                                                    <i class="fa fa-archive" aria-hidden="true"></i>
+                                                    <span>Archive des projets</span>
+                                                </a>
+                                                <ul class="nav nav-children">
+                                                    <li class="nav-active">
+                                                        <a href="">
+                                                            <i class="fa fa-plus" aria-hidden="true"></i>
+                                                            Des nouveaux projets
+                                                        </a>
+                                                    </li>
+                                                    <li class="">
+                                                    <a href="{{route('get_dv_opt_archive')}}">
+                                                            <i class="fa  fa-wrench" aria-hidden="true"></i>
+                                                            D'améliorations
+                                                        </a>
+                                                    </li>
+                                                    
+                                                </ul>
+                                            </li>
+                                            <li class="nav-active">
+                                            <a href="{{route('get_dev_stat')}}">
+                                                <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+                                                <span>Les Statistiques</span>
+                                            </a>
+                                        </li>
     
 @endsection
 

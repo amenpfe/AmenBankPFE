@@ -70,6 +70,10 @@ class StatusRequest extends Enum
     * @description('En cours du premier traitement par le chef de division développement')
     */
     const progressing_p  = 13;
+     /**
+    * @description('En cours du deuxiéme traitement par les développeurs')
+    */
+    const progressing_devp  = 14;
 
     public static function getEnumDescriptionByKey($key) {
         try {

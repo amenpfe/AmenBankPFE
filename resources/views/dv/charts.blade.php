@@ -1,7 +1,7 @@
 @extends('dashboard-template')
 
 @section('title')
-    Suivi des demandes
+    Statistiques
 @endsection
 
 @section('page-stylesheets')
@@ -14,9 +14,11 @@
 {{route('edit_dv')}}
 @endsection
 
+@section('new-notification-route')new-request-details-chd @endsection
+@section('opt-notification-route')opt-request-details-chd @endsection
 
 @section('navigation')
-<li class="nav-parent ">
+<li class="nav-parent">
 										<a>
 											<i class="fa fa-table" aria-hidden="true"></i>
 											<span>Consulter les demandes</span>
@@ -59,13 +61,13 @@
                                             
 										</ul>
 									</li>
-                                    <li class="nav-parent  nav-expanded">
+                                    <li class="nav-parent">
                                                 <a>
                                                     <i class="fa fa-calendar" aria-hidden="true"></i>
                                                     <span>Suivi des demande</span>
                                                 </a>
                                                 <ul class="nav nav-children">
-                                                    <li class="nav-active">
+                                                    <li class="">
                                                         <a href="{{route('all_new_request_dv')}}">
                                                             <i class="fa fa-plus" aria-hidden="true"></i>
                                                             Des nouveaux projets
@@ -107,52 +109,37 @@
                                             <span>Les Statistiques</span>
                                         </a>
                                     </li>
-                                   
+    
 @endsection
 
 @section('content-title')
-Suivi des demandes des nouveaux projets
+Les statistiques
 @endsection
 
 @section('content-path')
     <li>
-        <span>Suivi des demandes</span>
-    </li>
-    <li>
-        <span>Des nouveaux projets</span>
+        <span>Les statistiques</span>
     </li>
 @endsection
 
 @section('content')
 
 <section class="panel">
-        <header class="panel-heading">
-            <h2 class="panel-title">Suivi des demandes</h2>
-        </header>
         <div class="panel-body">
-            <form method="POST" action="">
-            {{ csrf_field() }}
-                <table class="table table-bordered table-striped mb-none" id="datatable-default">
-                    <thead>
-                        <tr>
-                            <th>#Ref</th>
-                            <th>Titre</th>
-                            <th>Etat</th>
-                            <th>Créé à</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($newprojectrequests as $NewprojectRequest)
-                        <tr class="gradeX" id="row-{{$NewprojectRequest->id}}">
-                            <td class="userId">{{$NewprojectRequest->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$NewprojectRequest->id}}"/></td>
-                            <td class="input email email">{{$NewprojectRequest->title}}</td>
-                            <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($NewprojectRequest->request->status)}}</td>
-                            <td class="input email email">{{$NewprojectRequest->created_at}}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </form>
+            <div class="col-sm-12" style="margin-bottom: 20px; margin-top: 20px; font-size: 7em; text-align: center; height: 100%; ">
+                <div class="col-sm-4 col-sm-offset-2" style="padding-top: 30px; padding-bottom: 30px;"><strong><span class='numscroller' data-min='1' data-max='{{$untreatedCount}}' data-delay='5' data-increment='10'>{{$untreatedCount}}</span></strong></div>
+                <div class="col-sm-4 " style="padding-top: 30px; padding-bottom: 30px; border-left: solid black 3px;"><strong><span class='numscroller' data-min='1' data-max='{{$avgHours}}' data-delay='5' data-increment='10'>{{$avgHours}}</span></strong></div>
+            </div>
+            <div  style="margin-top: 25%; margin-bottom: 25%">
+                <div class="col-sm-6">
+                    <canvas id="dvProjCanvas"></canvas>
+                </div>
+                <div class="col-sm-6">
+                    <canvas id="newProjCanvas"></canvas>
+                </div>
+            </div>
+            
+
         </div>
     </section>
 @endsection
@@ -166,7 +153,111 @@ Suivi des demandes des nouveaux projets
     {!! HTML::script('js/jquery.dataTables.js') !!}
     {!! HTML::script('js/dataTables.tableTools.min.js') !!}
     {!! HTML::script('js/datatables.js') !!}
+    {!! HTML::script('js/numscroller-1.0.js') !!}
     
     <!-- Table script -->
     {!! HTML::script('js/examples.datatables.default.js') !!}
+    {!! HTML::script('js/chart.bundle.js') !!}
+
+    <script>
+        @php
+            $rest = 100 - $dvProjPercentage;
+        @endphp
+        //DevProjChart
+        var dvProjCtx = document.getElementById('dvProjCanvas').getContext('2d');
+
+        new Chart(dvProjCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ["Autres", "Projets affectés"],
+                datasets: [
+                {
+                    label: "TeamA Score",
+                    data: [{{$dvProjPercentage}}, {{$rest}}],
+                    backgroundColor: [
+                    "rgba(40,187,105)",
+                    "rgba(37,129,188)"
+                    ],
+                    borderColor: [
+                    "#CDA776",
+                    "#989898"
+                    ],
+                    borderWidth: [1, 1]
+                }
+                ]
+            },
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    position: "top",
+                    text: "Les projets affectés",
+                    fontSize: 18,
+                    fontColor: "#111"
+                },
+                legend: {
+                    display: true,
+                    position: "bottom",
+                    labels: {
+                    fontColor: "#333",
+                    fontSize: 16
+                    }
+                }
+            }
+        });
+        //End DevProjChart
+
+        //NewProjChart
+        var newProjCtx = document.getElementById('newProjCanvas').getContext('2d');
+        
+        var dataFirst = {
+            label: "Les demandes des nouveaux projets",
+            data: {!!json_encode($newProjectRequestData)!!},
+            lineTension: 0.3,
+            fill: false,
+            borderColor: 'rgba(239,135,46)',
+            backgroundColor: 'transparent',
+            pointBorderColor: 'rgba(239,135,46)',
+            pointBackgroundColor: 'rgba(239,135,46,0.5)',
+            pointRadius: 5,
+            pointHoverRadius: 10,
+            pointHitRadius: 30,
+            pointBorderWidth: 2,
+            pointStyle: 'rectRounded'
+        };
+            
+        var dataSecond = {
+            label: "Les demandes d'optimisation des projets existants",
+            data: {!!json_encode($optProjectRequestData)!!},
+            lineTension: 0.3,
+            fill: false,
+            borderColor: 'rgba(37,129,188)',
+            backgroundColor: 'transparent',
+            pointBorderColor: 'rgba(37,129,188)',
+            pointBackgroundColor: 'rgba(37,129,188,0.5)',
+            pointRadius: 5,
+            pointHoverRadius: 10,
+            pointHitRadius: 30,
+            pointBorderWidth: 2,
+            pointStyle: 'rectRounded'
+        };
+
+        var lineChart = new Chart(newProjCtx, {
+            type: 'line',
+            data: {
+                labels: ["Janv.", "Fev.", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Sept.", "Oct.", "Nov.", "Dec."],
+                datasets: [dataFirst, dataSecond]
+            },
+            options: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                    labels: {
+                    boxWidth: 80,
+                    fontColor: 'black'
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

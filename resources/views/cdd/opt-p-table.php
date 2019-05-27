@@ -15,14 +15,14 @@
 @endsection
 
 @section('navigation')
-<li class="nav-parent">
+<li class="nav-parent  nav-expanded">
     <a>
-        <i class="fa fa-align-left" aria-hidden="true"></i>
+        <i class="fa fa-table" aria-hidden="true"></i>
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
         
-        <li class="nav-parent">
+        <li class="nav-parent  nav-expanded">
             <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
             <ul class="nav nav-children">
                 <li class="nav-parent">
@@ -38,14 +38,14 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-parent">
+                <li class="nav-parent  nav-expanded">
                     <a>Analyse des besoins</a>
                     <ul class="nav nav-children">
                         <li>
                             <a href="{{route('get_cddp_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
                                 Des nouveaux projets</a>
                         </li>
-                        <li>
+                        <li class=" nav-active">
                             <a href="{{route('get_cddp_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
                                 D'améliorations</a>
                         </li>
@@ -54,7 +54,10 @@
                 
             </ul>
         </li>
-        <li class="nav-parent">
+       
+    </ul>
+</li>
+<li class="nav-parent">
             <a>
                 <i class="fa fa-calendar" aria-hidden="true"></i>
                 <span>Suivi des demande</span>
@@ -75,9 +78,12 @@
                 
             </ul>
         </li>
-        
-    </ul>
-</li>
+        <li class="">
+            <a href="{{route('get_cdd_stat')}}">
+                <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+                <span>Les Statistiques</span>
+            </a>
+        </li>
 @endsection
 
 @section('content-title')

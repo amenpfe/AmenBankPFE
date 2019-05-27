@@ -70,7 +70,7 @@
             </a>
         </li>
         <li class="nav-">
-        <a href="">
+        <a href="{{route('get_cai_opt_archive')}}">
                 <i class="fa  fa-wrench" aria-hidden="true"></i>
                 D'améliorations
             </a>
@@ -78,7 +78,12 @@
         
     </ul>
 </li>
-    
+<li class="nav-active">
+    <a href="{{route('get_cai_stat')}}">
+        <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+        <span>Les Statistiques</span>
+    </a>
+</li>
     
 @endsection
 

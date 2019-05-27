@@ -17,7 +17,7 @@
 @section('navigation')
 <li class="nav-parent nav-expanded">
 										<a>
-											<i class="fa fa-align-left" aria-hidden="true"></i>
+											<i class="fa fa-table" aria-hidden="true"></i>
 											<span>Consulter les demandes</span>
 										</a>
 										<ul class="nav nav-children">
@@ -54,9 +54,13 @@
 													
 												</ul>
                                             </li>
-                                            <li class="nav-parent">
+                                            
+                                            
+										</ul>
+									</li>
+                                    <li class="nav-parent">
                                                 <a>
-                                                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    <i class="fa fa-table" aria-hidden="true"></i>
                                                     <span>Suivi des demande</span>
                                                 </a>
                                                 <ul class="nav nav-children">
@@ -75,9 +79,6 @@
                                                     
                                                 </ul>
                                             </li>
-                                            
-										</ul>
-									</li>
                                     <li class="nav-parent">
                                         <a>
                                             <i class="fa fa-archive" aria-hidden="true"></i>
@@ -99,7 +100,13 @@
                                             
                                         </ul>
                                     </li>
-    
+                                    <li class="nav-active">
+                                        <a href="{{route('get_dev_stat')}}">
+                                            <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+                                            <span>Les Statistiques</span>
+                                        </a>
+                                    </li>
+                                        
 @endsection
 
 @section('content-title')

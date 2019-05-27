@@ -78,6 +78,12 @@
         
     </ul>
 </li>
+<li class="nav-active">
+    <a href="{{route('get_cai_stat')}}">
+        <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+        <span>Les Statistiques</span>
+    </a>
+</li>
 @endsection
 
 @section('content-title')

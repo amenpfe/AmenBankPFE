@@ -16,9 +16,9 @@
 
 
 @section('navigation')
-<li class="nav-parent">
+<li class="nav-parent ">
     <a>
-        <i class="fa fa-align-left" aria-hidden="true"></i>
+        <i class="fa fa-table" aria-hidden="true"></i>
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
@@ -55,7 +55,11 @@
                 
             </ul>
         </li>
-        <li class="nav-parent">
+        
+        
+    </ul>
+</li>
+<li class="nav-parent  nav-expanded">
             <a>
                 <i class="fa fa-calendar" aria-hidden="true"></i>
                 <span>Suivi des demande</span>
@@ -67,7 +71,7 @@
                         Des nouveaux projets
                     </a>
                 </li>
-                <li class="">
+                <li class="nav-active">
                 <a href="{{route('all_opt_request_cdd')}}">
                         <i class="fa  fa-wrench" aria-hidden="true"></i>
                         D'améliorations
@@ -76,9 +80,12 @@
                 
             </ul>
         </li>
-        
-    </ul>
-</li>
+        <li class="">
+            <a href="{{route('get_cdd_stat')}}">
+                <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+                <span>Les Statistiques</span>
+            </a>
+        </li>
     
 @endsection
 
