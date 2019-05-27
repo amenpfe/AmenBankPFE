@@ -41,6 +41,8 @@ class RequestDetailsMiddleware
 
         } else if ($user->role == UserRole::byKey('dev_chef')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_div')->getValue()) {
             return $next($request);
+        } else if ($user->role == UserRole::byKey('dev_chef')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_p')->getValue()) {
+            return $next($request);
 
         } else if ($user->role == UserRole::byKey('quality_chef')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_recette')->getValue()) {
             return $next($request);
@@ -52,6 +54,8 @@ class RequestDetailsMiddleware
             return $next($request);
 
         } else if ($user->role == UserRole::byKey('Developpeur')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_devlop')->getValue()) {
+            return $next($request);
+        } else if ($user->role == UserRole::byKey('Developpeur')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_devp')->getValue()) {
             return $next($request);}
 
         $trueUser = User::find($projectRequest->user_id);
