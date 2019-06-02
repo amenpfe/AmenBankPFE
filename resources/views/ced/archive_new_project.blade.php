@@ -63,19 +63,19 @@
 <li class="nav-parent nav-active nav-expanded">
     <a>
         <i class="fa fa-archive" aria-hidden="true"></i>
-        <span>Archive des projets</span>
+        <span>Archive</span>
     </a>
     <ul class="nav nav-children">
         <li class="nav-active">
             <a href="">
                 <i class="fa fa-plus" aria-hidden="true"></i>
-                les nouveaux projets
+                Des nouveaux projets
             </a>
         </li>
         <li class="">
         <a href="{{route('get_ced_opt_archive')}}">
                 <i class="fa  fa-wrench" aria-hidden="true"></i>
-                Les projets d'amélioration
+                Des projets améliorés
             </a>
         </li>
         

@@ -60,6 +60,27 @@
         
     </ul>
 </li>
+<li class="nav-parent">
+    <a>
+        <i class="fa fa-archive" aria-hidden="true"></i>
+        <span>Archive</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+            <a href="{{route('get_org_new_archive')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Des nouveaux projets
+            </a>
+        </li>
+        <li class="">
+        <a href="{{route('get_org_opt_archive')}}">
+                <i class="fa  fa-wrench" aria-hidden="true"></i>
+                Des projets améliorés
+            </a>
+        </li>
+        
+    </ul>
+</li>
 <li class="">
     <a href="{{route('get_org_stat')}}">
         <i class="fa fa-bar-chart-o" aria-hidden="true"></i>

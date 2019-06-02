@@ -62,7 +62,7 @@
     <li class="nav-parent">
         <a>
             <i class="fa fa-archive" aria-hidden="true"></i>
-            <span>Archive des projets</span>
+            <span>Archive</span>
         </a>
         <ul class="nav nav-children">
             <li class="">
@@ -74,7 +74,7 @@
             <li class="">
             <a href="{{route('get_ds_opt_archive')}}">
                     <i class="fa  fa-wrench" aria-hidden="true"></i>
-                    D'améliorations
+                    Des projets améliorés
                 </a>
             </li>
             
