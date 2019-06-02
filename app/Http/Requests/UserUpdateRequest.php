@@ -28,7 +28,7 @@ class UserUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'user.id' => 'required|integer',
+            'updateUserId' => 'required|integer',
             'name' => 'required|string|max:255',
             "adresse" => "string|max:255|required",
             "phone" => "integer|required",
@@ -36,7 +36,7 @@ class UserUpdateRequest extends FormRequest
                 'required',
                 'email',
                 'max:255',
-                Rule::unique('users')->ignore($this->user['id']),
+                Rule::unique('users')->ignore($this->updateUserId),
             ],
             'role' => 'required|integer'
         ];
@@ -44,7 +44,7 @@ class UserUpdateRequest extends FormRequest
 
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
     {
-        $validator->errors()->add('row', $this->user['id']);
+        $validator->errors()->add('row', $this->updateUserId);
         $validator->errors()->add('oldMail', $this->input('email'));
         throw new HttpResponseException($this->response(
             $this->formatErrors($validator)

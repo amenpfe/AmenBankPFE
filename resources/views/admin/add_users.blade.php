@@ -69,7 +69,7 @@ Ajouter
                 <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                     <label class="col-sm-3 control-label">Nom <span class="required">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" id="name" name="name" class="form-control" placeholder="eg.: John Doe" required />
+                        <input type="text" id="name" name="name" class="form-control" placeholder="p. ex.: Salim Khamessi" required />
                         @if ($errors->has('name'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -80,7 +80,7 @@ Ajouter
                 <div class="form-group {{ $errors->has('adresse') ? ' has-error' : '' }}">
                     <label class="col-sm-3 control-label">Adresse <span class="required">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" id="adresse" name="adresse" class="form-control" placeholder="eg.: John Doe" required />
+                        <input type="text" id="adresse" name="adresse" class="form-control" placeholder="p. ex.: La Marsa" required />
                         @if ($errors->has('adresse'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('adresse') }}</strong>
@@ -91,7 +91,7 @@ Ajouter
                 <div class="form-group {{ $errors->has('phone') ? ' has-error' : '' }}">
                     <label class="col-sm-3 control-label">Numéro <span class="required">*</span></label>
                     <div class="col-sm-9">
-                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="eg.: John Doe" required />
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="p. ex.: 22 777 777" required />
                         @if ($errors->has('phone'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('phone') }}</strong>
@@ -107,7 +107,7 @@ Ajouter
                                 <i class="fa fa-envelope"></i>
                             </span>
                             <input type="email" id="email" name="email" class="form-control"
-                                placeholder="eg.: email@email.com" required />
+                                placeholder="p. ex.: email@email.com" required />
 
                             @if ($errors->has('email'))
                             <span class="help-block">

@@ -62,7 +62,7 @@ var editableRow;
 				.on('click', 'a.save-row', function( e ) {
 					e.preventDefault();
 					var $row = $(this).closest( 'tr' );
-					$($row.find('.form_submit')[0]).click()
+					$('#update_form_submit').click();
 					if($row.find('.u').toArray().every(validate)){
 						_self.rowSave( $(this).closest( 'tr' ) );
 					}
@@ -81,7 +81,7 @@ var editableRow;
 					e.preventDefault();
 
 					var $row = $(this).closest( 'tr' );
-					$('#userId').val($($row.find("input[name^='userId']")[0]).val());
+					$('#userId').val($($row.find(".userId")[0]).text());
 					console.log($('#userId').val());
 					$.magnificPopup.open({
 						items: {
@@ -245,6 +245,11 @@ var editableRow;
 		}
 		editableRow = $row;
 		var data = EditableTable.datatable.row( $row.get(0) ).data();
+
+		var tds = $row.children("td");
+
+		var idColumn = $(tds[0]);
+		idColumn.append('<input hidden name="updateUserId" value="' + idColumn.text()+'"/>');
 
 		$row.children( 'td' ).each(function( i ) {
 			var $this = $( this );

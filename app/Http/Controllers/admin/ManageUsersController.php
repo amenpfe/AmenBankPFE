@@ -36,8 +36,8 @@ class ManageUsersController extends Controller
     }
 
     public function update(UserUpdateRequest $request) {
-        if($request->has('user.id')) {
-            $this->userRepository->updateUserInfos($request->input('user.id'), $request->all());
+        if($request->has('updateUserId')) {
+            $this->userRepository->updateUserInfos($request->input('updateUserId'), $request->all());
         }
         return redirect()->back();
     }

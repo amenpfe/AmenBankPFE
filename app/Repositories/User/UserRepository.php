@@ -18,7 +18,7 @@ class UserRepository implements UserRepositoryInterface {
         $user->adresse = $inputs['adresse'];
         $user->phone = $inputs['phone'];
         $user->email = $inputs['email'];
-        if($inputs['password'] && $inputs['password']!=''){
+        if(array_key_exists('password', $inputs) && $inputs['password']!=''){
             $user->password = bcrypt($inputs['password']);
         }
         $user->role = $inputs['role'];
