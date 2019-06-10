@@ -31,7 +31,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('add', 'Admin\ManageUsersController@add')->name('add_users');
     Route::post('add/register', array('uses'=>'Admin\ManageUsersController@addUser'))->name('add_user');
     Route::get('/edit', 'UserController@editProfilAdmin')->name('edit_admin');
-    Route::post('/adminedit', 'UserController@editProfilPostAdmin')->name('submit_adminedit');
+    Route::post('/edit', 'UserController@editProfilPostAdmin')->name('submit_adminedit');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => 'user'], function () {
@@ -68,7 +68,7 @@ Route::group(['prefix' => 'chd', 'middleware' => 'chd'], function () {
     Route::get('/allopt', 'RequestController@getCDAllOptRequests')->name('all_opt_request_chd');
 
     Route::get('/edit', 'UserController@getEditProfilChd')->name('edit_chd');
-    Route::post('/editprofil', 'UserController@editProfilChdSubmit')->name('submit_chd_edit');
+    Route::post('/edit', 'UserController@editProfilChdSubmit')->name('submit_chd_edit');
 
     Route::get('/archiveOpt', 'RequestController@getCDOptArchive')->name('get_chd_opt_archive');
     Route::get('/archiveOptDetails{id}', 'RequestController@getCDOptArchiveDetails')->name('get_chd_opt_archive_details');
@@ -94,7 +94,7 @@ Route::group(['prefix' => 'ced', 'middleware' => 'ced'], function () {
     Route::get('/allopt', 'RequestController@getCEDAllOptRequests')->name('all_opt_request_ced');
 
     Route::get('/edit', 'UserController@getEditProfilCED')->name('edit_ced');
-    Route::post('/editprofil', 'UserController@editProfilCEDSubmit')->name('submit_ced_edit');
+    Route::post('/edit', 'UserController@editProfilCEDSubmit')->name('submit_ced_edit');
 
     Route::get('/archiveOpt', 'RequestController@getCEDOptArchive')->name('get_ced_opt_archive');
     Route::get('/archiveOptDetails{id}', 'RequestController@getCEDOptArchiveDetails')->name('get_ced_opt_archive_details');
@@ -117,7 +117,7 @@ Route::group(['prefix' => 'prop', 'middleware' => 'prop'], function () {
     Route::get('/allopt', 'RequestController@getPropAllOptRequests')->name('all_opt_request_prop');
 
     Route::get('/edit', 'UserController@getEditProfilProp')->name('edit_prop');
-    Route::post('/editprofil', 'UserController@editProfilPropSubmit')->name('submit_prop_edit');
+    Route::post('/edit', 'UserController@editProfilPropSubmit')->name('submit_prop_edit');
 
     Route::get('/archiveOpt', 'RequestController@getPropOptArchive')->name('get_prop_opt_archive');
     Route::get('/archiveOptDetails{id}', 'RequestController@getPropOptArchiveDetails')->name('get_prop_opt_archive_details');
@@ -148,7 +148,7 @@ Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
     Route::get('/allopt', 'RequestController@getCDDAllOptRequests')->name('all_opt_request_cdd');
 
     Route::get('/edit', 'UserController@getEditProfilCDD')->name('edit_cdd');
-    Route::post('/editprofil', 'UserController@editProfilCDDSubmit')->name('submit_cdd_edit');
+    Route::post('/edit', 'UserController@editProfilCDDSubmit')->name('submit_cdd_edit');
 
 });
 
@@ -166,7 +166,7 @@ Route::group(['prefix' => 'org', 'middleware' => 'org'], function () {
     Route::get('/allopt', 'RequestController@getORGAllOptRequests')->name('all_opt_request_org');
 
     Route::get('/edit', 'UserController@getEditProfilORG')->name('edit_org');
-    Route::post('/editprofil', 'UserController@editProfilORGSubmit')->name('submit_org_edit');
+    Route::post('/edit', 'UserController@editProfilORGSubmit')->name('submit_org_edit');
 
     Route::get('/archiveOpt', 'RequestController@getORGOptArchive')->name('get_org_opt_archive');
     Route::get('/archiveOptDetails{id}', 'RequestController@getORGOptArchiveDetails')->name('get_org_opt_archive_details');
@@ -193,7 +193,7 @@ Route::group(['prefix' => 'ds', 'middleware' => 'ds'], function () {
     Route::get('/allopt', 'RequestController@getDSAllOptRequests')->name('all_opt_request_ds');
 
     Route::get('/edit', 'UserController@getEditProfilDS')->name('edit_ds');
-    Route::post('/editprofil', 'UserController@editProfilDSSubmit')->name('submit_ds_edit');
+    Route::post('/edit', 'UserController@editProfilDSSubmit')->name('submit_ds_edit');
 
     Route::get('/archiveOpt', 'RequestController@getDSOptArchive')->name('get_ds_opt_archive');
     Route::get('/archiveOptDetails{id}', 'RequestController@getDSOptArchiveDetails')->name('get_ds_opt_archive_details');
@@ -220,7 +220,7 @@ Route::group(['prefix' => 'cdq', 'middleware' => 'cdq'], function () {
     Route::get('/allopt', 'RequestController@getCDQAllOptRequests')->name('all_opt_request_cdq');
 
     Route::get('/edit', 'UserController@getEditProfilCDQ')->name('edit_cdq');
-    Route::post('/editprofil', 'UserController@editProfilCDQSubmit')->name('submit_cdq_edit');
+    Route::post('/edit', 'UserController@editProfilCDQSubmit')->name('submit_cdq_edit');
 
     Route::get('/archiveOpt', 'RequestController@getCDQOptArchive')->name('get_cdq_opt_archive');
     Route::get('/archiveOptDetails{id}', 'RequestController@getCDQOptArchiveDetails')->name('get_cdq_opt_archive_details');

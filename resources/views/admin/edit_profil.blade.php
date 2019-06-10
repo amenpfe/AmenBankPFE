@@ -170,10 +170,10 @@ Modifier le profil
                         <button class="btn btn-primary" type="button" onclick="showPopup()">Valider</button>
                         <button type="reset" class="btn btn-default">Annuler</button>
                         @if ($errors->has('password_confirmation'))
-                        <span class="help-block">
-                            <strong>{{ $errors->first('password_confirmation') }}</strong>
-                        </span>
-                    @endif
+                            <span class="help-block">
+                                <strong>{{ $errors->first('password_confirmation') }}</strong>
+                            </span>
+                        @endif
                     </div>
                 </div>
             </footer>
