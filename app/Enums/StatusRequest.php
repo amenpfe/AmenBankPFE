@@ -6,7 +6,6 @@ use Zul3s\EnumPhp\Enum;
  * UserRole enum
  *
  * @method static Simpson::HOMER()
- * @method static Simpson::MARGE()
  */
 class StatusRequest extends Enum
 {
