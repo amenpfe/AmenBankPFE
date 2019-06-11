@@ -51,9 +51,6 @@
 Détails de demande
 @endsection
 
-@section('new-notification-route')detail_request @endsection
-@section('opt-notification-route')opt_detail_request @endsection
-
 @section('content')
     @php 
         $user = App\User::find($request->user_id);

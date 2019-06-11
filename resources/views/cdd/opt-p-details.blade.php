@@ -23,27 +23,27 @@
         <li class="nav-parent nav-active nav-expanded">
             <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
             <ul class="nav nav-children">
-                <li class="nav-parent  nav-expanded">
+                <li class="nav-parent">
                     <a>Test unitaire</a>
                     <ul class="nav nav-children">
                         <li>
                             <a href="{{route('get_cdd_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
                                 Des nouveaux projets</a>
                         </li>
-                        <li class="nav-active">
+                        <li>
                             <a href="{{route('get_cdd_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
                                 D'améliorations</a>
                         </li>
                     </ul>
                 </li>
-                <li class="nav-parent">
+                <li class="nav-parent  nav-expanded">
                     <a>Analyse des besoins</a>
                     <ul class="nav nav-children">
                         <li>
                             <a href="{{route('get_cddp_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
                                 Des nouveaux projets</a>
                         </li>
-                        <li>
+                        <li class=" nav-active">
                             <a href="{{route('get_cddp_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
                                 D'améliorations</a>
                         </li>
@@ -52,6 +52,7 @@
 
             </ul>
         </li>
+
 
     </ul>
 </li>
@@ -182,7 +183,7 @@ Détails de demande
                 </div>
             </div>
             <div class="table-responsive col-sm-10 col-sm-offset-1"><br>
-                                <form class="form-horizontal form-bordered" method="POST" action="{{route('opt-request-detail-cdd-submit')}}" enctype="multipart/form-data">
+                                <form class="form-horizontal form-bordered" method="POST" action="{{route('opt-p-detail-cdd-submit')}}" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     <table class="table invoice-items" border="0">
                                         <tbody>

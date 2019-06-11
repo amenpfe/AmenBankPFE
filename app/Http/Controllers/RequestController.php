@@ -224,7 +224,7 @@ class RequestController extends Controller
     //archive
 
     public function getCDOptArchive() {
-        return view('chd/archive_opt_project')->with('projectrequest', 
+        return view('chd/archive_opt_project')->with('projectrequest',
             ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getCDOptArchiveDetails($id){
@@ -232,14 +232,14 @@ class RequestController extends Controller
         return view('chd/archive_opt_project_details')->with('projectrequest', $projectrequest);
     }
     public function getCDNewArchive() {
-        return view('chd/archive_new_project')->with('newprojectrequest', 
+        return view('chd/archive_new_project')->with('newprojectrequest',
             ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getCDNewArchiveDetails($id){
         $newprojectrequest = ProjectRequest::find($id);
         return view('chd/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
     }
-    
+
     //stat
 
     public function getStatChd(){
@@ -247,13 +247,13 @@ class RequestController extends Controller
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
         $notChdProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $chdProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_chd')->getValue()])->count();
-        $chdProjPercentage = ($chdProjCount / $notchdProjCount) * 100;
+        $chdProjPercentage = ($chdProjCount / $notChdProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-    
+
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-        
+
         return view('chd/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('chdProjPercentage', $chdProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
-        
+
     }
 
     //End CD
@@ -358,7 +358,7 @@ class RequestController extends Controller
     //archive
 
     public function getCEDOptArchive() {
-        return view('ced/archive_opt_project')->with('projectrequest', 
+        return view('ced/archive_opt_project')->with('projectrequest',
             ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getCEDOptArchiveDetails($id){
@@ -366,7 +366,7 @@ class RequestController extends Controller
         return view('ced/archive_opt_project_details')->with('projectrequest', $projectrequest);
     }
     public function getCEDNewArchive() {
-        return view('ced/archive_new_project')->with('newprojectrequest', 
+        return view('ced/archive_new_project')->with('newprojectrequest',
             ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getCEDNewArchiveDetails($id){
@@ -383,14 +383,12 @@ class RequestController extends Controller
         $cedProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_CED')->getValue()])->count();
         $cedProjPercentage = ($cedProjCount / $notCedProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-    
-        $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-        
-        return view('ced/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('cedProjPercentage', $cedProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
-        
-    }
 
-    
+        $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
+
+        return view('ced/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('cedProjPercentage', $cedProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
+
+    }
 
     //End CED
 
@@ -472,7 +470,7 @@ class RequestController extends Controller
     //archive
 
     public function getPropOptArchive() {
-        return view('prop/archive_opt_project')->with('projectrequest', 
+        return view('prop/archive_opt_project')->with('projectrequest',
             ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getPropOptArchiveDetails($id){
@@ -480,14 +478,14 @@ class RequestController extends Controller
         return view('prop/archive_opt_project_details')->with('projectrequest', $projectrequest);
     }
     public function getPropNewArchive() {
-        return view('prop/archive_new_project')->with('newprojectrequest', 
+        return view('prop/archive_new_project')->with('newprojectrequest',
             ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getPropNewArchiveDetails($id){
         $newprojectrequest = ProjectRequest::find($id);
         return view('prop/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
     }
-    
+
     //stat
 
     public function getStatProp(){
@@ -497,11 +495,11 @@ class RequestController extends Controller
         $propProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('waiting')->getValue()])->count();
         $propProjPercentage = ($propProjCount / $notPropProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-    
+
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-        
+
         return view('prop/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('propProjPercentage', $propProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
-        
+
     }
 
     //End Prop
@@ -593,6 +591,87 @@ class RequestController extends Controller
         return redirect()->route('get_cdd_opt');
     }
 
+    //CDDsec
+
+    public function getCDDPNewProjectRequest(){
+        return view('cdd/new-p-table')->with('newprojectrequests',
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest', 'status' => StatusRequest::byKey('progressing_p')->getValue()])->get());
+    }
+
+    public function getCDDPNewDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('cdd/new-p-details')->with('request', $request);
+    }
+
+    public function submitCDDPNewRequestForm(NewRequestDetailsRequest $newRequestDetailsRequest){
+        $inputs = $newRequestDetailsRequest->all();
+        $requestId = $inputs['requestId'];
+        $request = ProjectRequest::find($requestId);
+
+        $file = $newRequestDetailsRequest->file('doc');
+        $newFileName = 'analyse_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_devlop")->getValue();
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['title'] = $request->requestable->title;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $newFileName;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] =$request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        return redirect()->route('get_cddp_new');
+    }
+
+    //opt request
+
+    public function getCDDPOptRequest(){
+        return view('cdd/opt-p-table')->with('optimizationRequests',
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_p')->getValue()])->get());
+    }
+
+    public function getCDDPOptDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('cdd/opt-p-details')->with('request', $request);
+    }
+
+    public function submitCDDPOptRequestForm(OptRequestDetailsRequest $optRequestDetailsRequest){
+        $inputs = $optRequestDetailsRequest->all();
+        $request_id = $inputs['request_id'];
+        $request = ProjectRequest::find($request_id);
+
+        $file = $optRequestDetailsRequest->file('doc');
+        $newFileName = 'analyse_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_devlop")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $newFileName;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] =$request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_cddp_opt');
+    }
+
     //All Requests
 
     public function getCDDAllNewProjectRequests() {
@@ -604,9 +683,24 @@ class RequestController extends Controller
     }
 
     //archive
+      //stat
+
+      public function getStatcdd(){
+        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
+        $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        $notcddProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
+        $cddProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_div','progressing_p')->getValue()])->count();
+        $cddProjPercentage = ($cddProjCount / $notcddProjCount) * 100;
+        $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
+
+        $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
+
+        return view('cdd/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('cddProjPercentage', $cddProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
+
+    }
 
     public function getCDDOptArchive() {
-        return view('cdd/archive_opt_project')->with('projectrequest', 
+        return view('cdd/archive_opt_project')->with('projectrequest',
             ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getCDDOptArchiveDetails($id){
@@ -614,7 +708,7 @@ class RequestController extends Controller
         return view('cdd/archive_opt_project_details')->with('projectrequest', $projectrequest);
     }
     public function getCDDNewArchive() {
-        return view('cdd/archive_new_project')->with('newprojectrequest', 
+        return view('cdd/archive_new_project')->with('newprojectrequest',
             ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getCDDNewArchiveDetails($id){
@@ -723,7 +817,7 @@ class RequestController extends Controller
     //archive
 
     public function getCDQOptArchive() {
-        return view('cdq/archive_opt_project')->with('projectrequest', 
+        return view('cdq/archive_opt_project')->with('projectrequest',
             ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getCDQOptArchiveDetails($id){
@@ -731,7 +825,7 @@ class RequestController extends Controller
         return view('cdq/archive_opt_project_details')->with('projectrequest', $projectrequest);
     }
     public function getCDQNewArchive() {
-        return view('cdq/archive_new_project')->with('newprojectrequest', 
+        return view('cdq/archive_new_project')->with('newprojectrequest',
             ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getCDQNewArchiveDetails($id){
@@ -748,11 +842,11 @@ class RequestController extends Controller
         $cdqProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_recette')->getValue()])->count();
         $cdqProjPercentage = ($cdqProjCount / $notCdqProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-    
+
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-        
+
         return view('cdq/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('cdqProjPercentage', $cdqProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
-        
+
     }
 
     //End CDQ
@@ -853,7 +947,7 @@ class RequestController extends Controller
     //archive
 
     public function getORGOptArchive() {
-        return view('organisation/archive_opt_project')->with('projectrequest', 
+        return view('organisation/archive_opt_project')->with('projectrequest',
             ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getORGOptArchiveDetails($id){
@@ -861,7 +955,7 @@ class RequestController extends Controller
         return view('organisation/archive_opt_project_details')->with('projectrequest', $projectrequest);
     }
     public function getORGNewArchive() {
-        return view('organisation/archive_new_project')->with('newprojectrequest', 
+        return view('organisation/archive_new_project')->with('newprojectrequest',
             ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getORGNewArchiveDetails($id){
@@ -878,13 +972,13 @@ class RequestController extends Controller
         $orgProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_circulaire')->getValue()])->count();
         $orgProjPercentage = ($orgProjCount / $notOrgProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-    
+
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-        
+
         return view('organisation/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('orgProjPercentage', $orgProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
-        
+
     }
-    
+
     //End ORG
 
     //DS
@@ -905,7 +999,7 @@ class RequestController extends Controller
         $name = $user->name;
         $creation = $request->created_at;
         $title = $request->requestable->title;
-        
+
         $inputs['status'] = StatusRequest::byKey("progressing_circulaire")->getValue();
         $inputs['ced_doc'] = $request->ced_doc;
         $inputs['title'] = $request->requestable->title;
@@ -985,7 +1079,7 @@ class RequestController extends Controller
     //archive
 
     public function getDSOptArchive() {
-        return view('ds/archive_opt_project')->with('projectrequest', 
+        return view('ds/archive_opt_project')->with('projectrequest',
             ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getDSOptArchiveDetails($id){
@@ -993,7 +1087,7 @@ class RequestController extends Controller
         return view('ds/archive_opt_project_details')->with('projectrequest', $projectrequest);
     }
     public function getDSNewArchive() {
-        return view('ds/archive_new_project')->with('newprojectrequest', 
+        return view('ds/archive_new_project')->with('newprojectrequest',
             ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
     }
     public function getDSNewArchiveDetails($id){
@@ -1010,42 +1104,367 @@ class RequestController extends Controller
         $dsProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_systeme')->getValue()])->count();
         $dsProjPercentage = ($dsProjCount / $notDsProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-    
+
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-        
+
         return view('organisation/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('dsProjPercentage', $dsProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
-        
+
     }
-    
+
 
     //End DS
 
-    //Dev
+    //devloppeurs
 
+      public function getdvNewProjectRequest(){
+        return view('dv/new-request-table')->with('newprojectrequests',
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest', 'status' => StatusRequest::byKey('progressing_devlop')->getValue()])->get());
+    }
+
+    public function getdvNewDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('dv/new-request-details')->with('request', $request);
+    }
+
+    public function submitdvNewRequestForm(NewRequestDetailsRequest $newRequestDetailsRequest){
+        $inputs = $newRequestDetailsRequest->all();
+        $requestId = $inputs['requestId'];
+        $request = ProjectRequest::find($requestId);
+
+        $file = $newRequestDetailsRequest->file('doc');
+        $newFileName = 'conception_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_archi")->getValue();
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['title'] = $request->requestable->title;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] =$request->analyse_doc ;
+        $inputs['conception_doc'] =$newFileName ;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] =$request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        return redirect()->route('get_dv_new');
+    }
+
+    //opt request
+
+    public function getdvOptRequest(){
+        return view('dv/opt-request-table')->with('optimizationRequests',
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_devlop')->getValue()])->get());
+    }
+
+    public function getdvOptDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('dv/opt-request-details')->with('request', $request);
+    }
+
+    public function submitdvOptRequestForm(OptRequestDetailsRequest $optRequestDetailsRequest){
+        $inputs = $optRequestDetailsRequest->all();
+        $request_id = $inputs['request_id'];
+        $request = ProjectRequest::find($request_id);
+
+        $file = $optRequestDetailsRequest->file('doc');
+        $newFileName = 'conception_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_archi")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] =$request->analyse_doc;
+        $inputs['conception_doc'] = $newFileName;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] =$request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_dv_opt');
+    }
+
+
+    //dvsec
+
+    public function getdvsecNewProjectRequest(){
+        return view('dv/new-sec-table')->with('newprojectrequests',
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest', 'status' => StatusRequest::byKey('progressing_devp')->getValue()])->get());
+    }
+
+    public function getdvsecNewDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('dv/new-sec-details')->with('request', $request);
+    }
+
+    public function submitdvsecNewRequestForm(NewRequestDetailsRequest $newRequestDetailsRequest){
+        $inputs = $newRequestDetailsRequest->all();
+        $requestId = $inputs['requestId'];
+        $request = ProjectRequest::find($requestId);
+
+        $file = $newRequestDetailsRequest->file('doc');
+        $newFileName = 'logiciel_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_div")->getValue();
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['title'] = $request->requestable->title;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] =$request->analyse_doc ;
+        $inputs['conception_doc'] =$request->conception_doc ;
+        $inputs['logiciel_doc'] = $newFileName ;
+        $inputs['test_doc'] =$request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        return redirect()->route('get_sec_new');
+    }
+
+    //opt request
+
+    public function getdvsecOptRequest(){
+        return view('dv/opt-sec-table')->with('optimizationRequests',
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_devp')->getValue()])->get());
+    }
+
+    public function getdvsecPOptDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('dv/opt-sec-details')->with('request', $request);
+    }
+
+    public function submitdvsecOptRequestForm(OptRequestDetailsRequest $optRequestDetailsRequest){
+        $inputs = $optRequestDetailsRequest->all();
+        $request_id = $inputs['request_id'];
+        $request = ProjectRequest::find($request_id);
+
+        $file = $optRequestDetailsRequest->file('doc');
+        $newFileName = 'logiciel_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_div")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] =$request->analyse_doc;
+        $inputs['conception_doc'] =$request->conception_doc;
+        $inputs['logiciel_doc'] =  $newFileName;
+        $inputs['test_doc'] =$request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_sec_opt');
+    }
+
+    //All Requests
+
+    public function getdvAllNewProjectRequests() {
+        return view('dv/all-new-requests')->with('newprojectrequests', NewProjectRequest::all());
+    }
+
+    public function getdvAllOptRequests() {
+        return view('dv/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
+    }
+
+    //archive
+
+      public function getdvOptArchive() {
+        return view('dv/archive_opt_project')->with('projectrequest',
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getdvOptArchiveDetails($id){
+        $projectrequest = ProjectRequest::find($id);
+        return view('dv/archive_opt_project_details')->with('projectrequest', $projectrequest);
+    }
+    public function getdvNewArchive() {
+        return view('dv/archive_new_project')->with('newprojectrequest',
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getdvNewArchiveDetails($id){
+        $newprojectrequest = ProjectRequest::find($id);
+        return view('dv/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
+    }
+    //stat
     public function getStat(){
         $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
-        $notDevProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
-        $devProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_devlop')->getValue()])->count();
-        $devProjPercentage = ($devProjCount / $notDevProjCount) * 100;
+        $notdvProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
+        $dvProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_devlop','progressing_devp')->getValue()])->count();
+        $dvProjPercentage = ($dvProjCount / $notdvProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-    
+
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
-        
-        return view('dev/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('devProjPercentage', $devProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
-        
+
+        return view('dv/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('dvProjPercentage', $dvProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
+
     }
 
     //End Dev
 
-    private function markNotificationAsReaded(ProjectRequest $projectRequest){
-        $userNotifications = Auth::user()->unreadNotifications;
-        for($i = 0; $i < sizeof($userNotifications); $i++) {
-            if($userNotifications[$i]->data['projectRequest']['id'] == $projectRequest->id){
-                $userNotifications[$i]->markAsRead();
-                break;
-            }
-        }
+    //End
+
+
+      //cai
+
+      public function getcaiNewProjectRequest(){
+        return view('cai/new-request-table')->with('newprojectrequests',
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest', 'status' => StatusRequest::byKey('progressing_archi')->getValue()])->get());
     }
 
-}  
+    public function getcaiNewDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('cai/new-request-details')->with('request', $request);
+    }
+
+    public function submitcaiNewRequestForm(NewRequestDetailsRequest $newRequestDetailsRequest){
+        $inputs = $newRequestDetailsRequest->all();
+        $requestId = $inputs['requestId'];
+        $request = ProjectRequest::find($requestId);
+
+        $file = $newRequestDetailsRequest->file('doc');
+        $newFileName = 'conception_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
+        $file->move('files', $newFileName);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_devlop")->getValue();
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['title'] = $request->requestable->title;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] =$request->analyse_doc ;
+        $inputs['conception_doc'] =$newFileName ;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] =$request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        return redirect()->route('get_cai_new');
+    }
+    public function caiAcceptOptRequest($id){
+        $request = ProjectRequest::find($id);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_devlop")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_cai_new');
+    }
+
+    public function caiRefuseOptRequest($id){
+        $request = ProjectRequest::find($id);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_p")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        return redirect()->route('get_cai_opt');
+    }
+
+    //opt request
+
+    public function getcaiOptRequest(){
+        return view('cai/opt-request-table')->with('optimizationRequests',
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_devlop')->getValue()])->get());
+    }
+
+    public function getcaiOptDetails($id){
+        $request = ProjectRequest::find($id);
+        return view('cai/opt-request-details')->with('request', $request);
+    }
+
+
+
+    public function getcaiAllNewProjectRequests() {
+        return view('cai/all-new-requests')->with('newprojectrequests', NewProjectRequest::all());
+    }
+
+    public function getcaiAllOptRequests() {
+        return view('cai/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
+    }
+    //archive
+
+    public function getcaiOptArchive() {
+        return view('cai/archive_opt_project')->with('projectrequest',
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getcaiOptArchiveDetails($id){
+        $projectrequest = ProjectRequest::find($id);
+        return view('cai/archive_opt_project_details')->with('projectrequest', $projectrequest);
+    }
+    public function getcaiNewArchive() {
+        return view('cai/archive_new_project')->with('newprojectrequest',
+            ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest','status' => StatusRequest::byKey('done')->getValue()])->get());
+    }
+    public function getcaiNewArchiveDetails($id){
+        $newprojectrequest = ProjectRequest::find($id);
+        return view('cai/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
+    }
+    public function getStatcai(){
+        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
+        $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        $notcaiProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
+        $caiProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_archi')->getValue()])->count();
+        $caiProjPercentage = ($caiProjCount / $notcaiProjCount) * 100;
+        $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
+
+        $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
+
+        return view('cai/charts')->with('untreatedCount', $untreatedCount)->with('avgHours', $avgHours)->with('caiProjPercentage', $caiProjPercentage)->with('newProjectRequestData', $newProjectRequestData)->with('optProjectRequestData', $optProjectRequestData);
+
+    }
+
+    //End
+
+
+
+}

@@ -11,11 +11,11 @@
 @endsection
 
 @section('edit')
-{{route('edit_cdd')}}
+{{route('edit_cai')}}
 @endsection
 
-@section('new-notification-route')new-request-details-cdd @endsection
-@section('opt-notification-route')opt-request-details-cdd @endsection
+@section('new-notification-route')new-request-details-cai @endsection
+@section('opt-notification-route')opt-request-details-cai @endsection
 
 
 @section('navigation')
@@ -25,57 +25,55 @@
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-
-        <li class="nav-parent">
-            <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
-            <ul class="nav nav-children">
-                <li class="nav-parent">
-                    <a>Test unitaire</a>
-                    <ul class="nav nav-children">
-                        <li>
-                            <a href="{{route('get_cdd_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
-                                Des nouveaux projets</a>
-                        </li>
-                        <li>
-                            <a href="{{route('get_cdd_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
-                                D'améliorations</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-parent">
-                    <a>Analyse des besoins</a>
-                    <ul class="nav nav-children">
-                        <li>
-                            <a href="{{route('get_cddp_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
-                                Des nouveaux projets</a>
-                        </li>
-                        <li>
-                            <a href="{{route('get_cddp_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
-                                D'améliorations</a>
-                        </li>
-                    </ul>
-                </li>
-
-            </ul>
-        </li>
-
-
+        <li class="">
+        <a href="{{route('get_cai_new')}}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Des nouveaux projets
+                </a>
+            </li>
+        <li class="">
+        <a href="{{route('get_cai_opt')}}">
+                <i class="fa fa-wrench" aria-hidden="true"></i>
+                    D'améliorations
+            </a>
+        </li>               
     </ul>
 </li>
-<li class="nav-parent nav-active nav-expanded">
+    <li class="nav-parent nav-active nav-expanded">
+        <a>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <span>Suivi des demande</span>
+        </a>
+        <ul class="nav nav-children">
+            <li class="nav-active">
+                <a href="">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Des nouveaux projets
+                </a>
+            </li>
+            <li class="">
+            <a href="{{route('all_opt_request_cai')}}">
+                    <i class="fa  fa-wrench" aria-hidden="true"></i>
+                    D'améliorations
+                </a>
+            </li>
+            
+        </ul>
+    </li>
+    <li class="nav-parent">
     <a>
-        <i class="fa fa-calendar" aria-hidden="true"></i>
-        <span>Suivi des demande</span>
+        <i class="fa fa-archive" aria-hidden="true"></i>
+        <span>Archive des projets</span>
     </a>
     <ul class="nav nav-children">
-        <li class="nav-active">
-            <a href="{{route('all_new_request_cdd')}}">
+        <li class="">
+            <a href="{{route('get_cai_new_archive')}}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Des nouveaux projets
             </a>
         </li>
-        <li class="">
-        <a href="{{route('all_opt_request_cdd')}}">
+        <li class="nav-">
+        <a href="{{route('get_cai_opt_archive')}}">
                 <i class="fa  fa-wrench" aria-hidden="true"></i>
                 D'améliorations
             </a>
@@ -83,34 +81,12 @@
 
     </ul>
 </li>
-<li class="nav-parent">
-    <a>
-        <i class="fa fa-archive" aria-hidden="true"></i>
-        <span>Archive</span>
-    </a>
-    <ul class="nav nav-children">
-        <li class="">
-            <a href="{{route('get_cdd_new_archive')}}">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                Des nouveaux projets
-            </a>
-        </li>
-        <li class="">
-            <a href="{{route('get_cdd_opt_archive')}}">
-                <i class="fa  fa-wrench" aria-hidden="true"></i>
-                Des projets améliorés
-            </a>
-        </li>
-
-    </ul>
-</li>
-<li class="">
-    <a href="{{route('get_cdd_stat')}}">
+<li class="nav-active">
+    <a href="{{route('get_cai_stat')}}">
         <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
         <span>Les Statistiques</span>
     </a>
 </li>
-
 @endsection
 
 @section('content-title')

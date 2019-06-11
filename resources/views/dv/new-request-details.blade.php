@@ -9,108 +9,109 @@
 @endsection
 
 @section('edit')
-{{route('edit_cdd')}}
+{{route('edit_dv')}}
 @endsection
 
 @section('navigation')
-<li class="nav-parent nav-active nav-expanded">
-    <a>
-        <i class="fa fa-table" aria-hidden="true"></i>
-        <span>Consulter les demandes</span>
-    </a>
-    <ul class="nav nav-children">
-
-        <li class="nav-parent nav-active nav-expanded">
-            <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
-            <ul class="nav nav-children">
-                <li class="nav-parent  nav-expanded">
-                    <a>Test unitaire</a>
-                    <ul class="nav nav-children">
-                        <li>
-                            <a href="{{route('get_cdd_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
-                                Des nouveaux projets</a>
-                        </li>
-                        <li class="nav-active">
-                            <a href="{{route('get_cdd_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
-                                D'améliorations</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-parent">
-                    <a>Analyse des besoins</a>
-                    <ul class="nav nav-children">
-                        <li>
-                            <a href="{{route('get_cddp_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
-                                Des nouveaux projets</a>
-                        </li>
-                        <li>
-                            <a href="{{route('get_cddp_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
-                                D'améliorations</a>
-                        </li>
-                    </ul>
-                </li>
-
-            </ul>
-        </li>
-
-    </ul>
-</li>
 <li class="nav-parent">
-            <a>
-                <i class="fa fa-calendar" aria-hidden="true"></i>
-                <span>Suivi des demande</span>
-            </a>
-            <ul class="nav nav-children">
-                <li class="">
-                    <a href="{{route('all_new_request_cdd')}}">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        Des nouveaux projets
-                    </a>
-                </li>
-                <li class="">
-                <a href="{{route('all_opt_request_cdd')}}">
-                        <i class="fa  fa-wrench" aria-hidden="true"></i>
-                        D'améliorations
-                    </a>
-                </li>
+        <a>
+            <i class="fa fa-table" aria-hidden="true"></i>
+            <span>Consulter les demandes</span>
+        </a>
+        <ul class="nav nav-children">
 
-            </ul>
-        </li>
-        <li class="nav-parent">
-            <a>
-                <i class="fa fa-archive" aria-hidden="true"></i>
-                <span>Archive</span>
-            </a>
-            <ul class="nav nav-children">
-                <li class="">
-                    <a href="{{route('get_cdd_new_archive')}}">
-                        <i class="fa fa-plus" aria-hidden="true"></i>
-                        Des nouveaux projets
-                    </a>
-                </li>
-                <li class="">
-                    <a href="{{route('get_cdd_opt_archive')}}">
-                        <i class="fa  fa-wrench" aria-hidden="true"></i>
-                        Des projets améliorés
-                    </a>
-                </li>
+            <li class="nav-parent">
+                <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
+                <ul class="nav nav-children">
+                    <li class="nav-parent">
+                        <a>Conception globale</a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="{{route('get_dv_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
+                                    Des nouveaux projets</a>
+                            </li>
+                            <li>
+                                <a href="{{route('get_dv_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
+                                    D'améliorations</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-parent">
+                        <a>Codage</a>
+                        <ul class="nav nav-children">
+                            <li>
+                                <a href="{{route('get_sec_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
+                                    Des nouveaux projets</a>
+                            </li>
+                            <li>
+                                <a href="{{route('get_sec_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
+                                    D'améliorations</a>
+                            </li>
+                        </ul>
+                    </li>
 
-            </ul>
-        </li>
-        <li class="">
-            <a href="{{route('get_cdd_stat')}}">
-                <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
-                <span>Les Statistiques</span>
-            </a>
-        </li>
+                </ul>
+            </li>
+
+
+        </ul>
+    </li>
+    <li class="nav-parent">
+                <a>
+                    <i class="fa fa-calendar" aria-hidden="true"></i>
+                    <span>Suivi des demande</span>
+                </a>
+                <ul class="nav nav-children">
+                    <li class="">
+                        <a href="{{route('all_new_request_dv')}}">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Des nouveaux projets
+                        </a>
+                    </li>
+                    <li class="">
+                    <a href="{{route('all_opt_request_dv')}}">
+                            <i class="fa  fa-wrench" aria-hidden="true"></i>
+                            D'améliorations
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+    <li class="nav-parent">
+        <a>
+            <i class="fa fa-archive" aria-hidden="true"></i>
+            <span>Archive des projets</span>
+        </a>
+        <ul class="nav nav-children">
+            <li class="">
+                <a href="{{route('get_dv_new_archive')}}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Des nouveaux projets
+                </a>
+            </li>
+            <li class="">
+            <a href="{{route('get_dv_opt_archive')}}">
+                    <i class="fa  fa-wrench" aria-hidden="true"></i>
+                    D'améliorations
+                </a>
+            </li>
+
+        </ul>
+    </li>
+    <li class="nav-active">
+        <a href="{{route('get_dev_stat')}}">
+            <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+            <span>Les Statistiques</span>
+        </a>
+    </li>
 @endsection
 
 @section('content-title')
 Détails de demande
 @endsection
 
-@section('new-notification-route')new-request-details-cdd @endsection
-@section('opt-notification-route')opt-request-details-cdd @endsection
+@section('new-notification-route')new-request-details-dev @endsection
+@section('opt-notification-route')opt-request-details-dev @endsection
 
 @section('content')
     @php 
@@ -168,6 +169,7 @@ Détails de demande
                         <tr>
                             <td class="text-dark col-sm-3"><h4><b>Fichier</b></h4></td> 
                             <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$request->chd_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$request->analyse_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                         </tr>
                     </tbody>
                 </table>
@@ -182,19 +184,23 @@ Détails de demande
                 </div>
             </div>
             <div class="table-responsive col-sm-10 col-sm-offset-1"><br>
-                                <form class="form-horizontal form-bordered" method="POST" action="{{route('opt-request-detail-cdd-submit')}}" enctype="multipart/form-data">
+                                <form class="form-horizontal form-bordered" method="POST" action="{{route('new-request-detail-dv-submit')}}" enctype="multipart/form-data">
                                     {{ csrf_field() }}
+                                    @if ($errors->any())
+                                        @foreach ($errors->all() as $error)
+                                            <div>{{$error}}</div>
+                                        @endforeach
+                                    @endif
                                     <table class="table invoice-items" border="0">
                                         <tbody>
                                             <tr>
-                                                
-                                                <div class="form-group {{ $errors->has('request_id') ? ' has-error' : '' }}">
+                                                <div class="form-group {{ $errors->has('requestId') ? ' has-error' : '' }}">
                                                             <div class="input-group input-group-icon">
-                                                                    <input type="text" value="{{$request->id}}" name="request_id" hidden>
+                                                                    <input type="text" value="{{$request->id}}" name="requestId" hidden>
                                                             </div>
-                                                            @if ($errors->has('request_id'))
+                                                            @if ($errors->has('requestId'))
                                                                 <span class="help-block">
-                                                                    <strong>{{ $errors->first('request_id') }}</strong>
+                                                                    <strong>{{ $errors->first('requestId') }}</strong>
                                                                 </span>
                                                             @endif
                                                         </div>
@@ -217,7 +223,7 @@ Détails de demande
                                                             </div>
                                                                 @if ($errors->has('doc'))
                                                                 <span class="help-block">
-                                                                    <strong>{{ $errors->first('doc') }}</strong>
+                                                                    <strong>{{$errors->first('doc')}}</strong>
                                                                 </span>
                                                             @endif
                                                         </div>

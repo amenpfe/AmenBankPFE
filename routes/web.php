@@ -101,7 +101,7 @@ Route::group(['prefix' => 'ced', 'middleware' => 'ced'], function () {
 
     Route::get('/archiveNew', 'RequestController@getCEDNewArchive')->name('get_ced_new_archive');
     Route::get('/archiveNewDetails{id}', 'RequestController@getCEDNewArchiveDetails')->name('get_ced_new_archive_details');
-    
+
     Route::get('/stat', 'RequestController@getStatCed')->name('get_ced_stat');
 
 });
@@ -146,6 +146,18 @@ Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
 
     Route::get('/allnew', 'RequestController@getCDDAllNewProjectRequests')->name('all_new_request_cdd');
     Route::get('/allopt', 'RequestController@getCDDAllOptRequests')->name('all_opt_request_cdd');
+//next
+    Route::get('/shownewp', 'RequestController@getCDDPNewProjectRequest')->name('get_cddp_new');
+    Route::get('/showoppt', 'RequestController@getCDDOptRequest')->name('get_cddp_opt');
+
+    Route::get('/detailp/{id}', 'RequestController@getCDDPNewDetails')->middleware('request_details')->name('new-p-details-cdd');
+    Route::post('/detailsubmitp', 'RequestController@submitCDDPNewRequestForm')->name('new-p-detail-cdd-submit');
+
+    Route::get('/detailoptp/{id}', 'RequestController@getCDDPOptDetails')->middleware('request_details')->name('opt-p-details-cdd');
+    Route::post('/detailoptsubmitp', 'RequestController@submitCDDPOptRequestForm')->name('opt-p-detail-cdd-submit');
+
+
+//
 
     Route::get('/edit', 'UserController@getEditProfilCDD')->name('edit_cdd');
     Route::post('/edit', 'UserController@editProfilCDDSubmit')->name('submit_cdd_edit');
@@ -232,12 +244,69 @@ Route::group(['prefix' => 'cdq', 'middleware' => 'cdq'], function () {
 
 });
 
-Route::group(['prefix' => 'dev'], function () {
+//dv
+Route::group(['prefix' => 'dv', 'middleware' => 'dv'], function () {
+    Route::get('/shownew', 'RequestController@getdvNewProjectRequest')->name('get_dv_new');
+    Route::get('/showopt', 'RequestController@getdvOptRequest')->name('get_dv_opt');
 
+    Route::get('/detail/{id}', 'RequestController@getdvNewDetails')->middleware('request_details')->name('new-request-details-dv');
+    Route::post('/detailsubmit', 'RequestController@submitdvNewRequestForm')->name('new-request-detail-dv-submit');
+
+    Route::get('/detailopt/{id}', 'RequestController@getdvOptDetails')->middleware('request_details')->name('opt-request-details-dv');
+    Route::post('/detailoptsubmit', 'RequestController@submitdvOptRequestForm')->name('opt-request-detail-dv-submit');
+
+    Route::get('/allnew', 'RequestController@getdvAllNewProjectRequests')->name('all_new_request_dv');
+    Route::get('/allopt', 'RequestController@getdvAllOptRequests')->name('all_opt_request_dv');
+//next
+Route::get('/shownewd', 'RequestController@getdvsecNewProjectRequest')->name('get_sec_new');
+    Route::get('/showoptd', 'RequestController@getdvsecOptRequest')->name('get_sec_opt');
+
+    Route::get('/detaild/{id}', 'RequestController@getdvsecNewDetails')->middleware('request_details')->name('new-sec-details-dv');
+    Route::post('/detailsubmitd', 'RequestController@submitdvsecNewRequestForm')->name('new-sec-detail-dv-submit');
+
+    Route::get('/detailoptd/{id}', 'RequestController@getdvsecOptDetails')->middleware('request_details')->name('opt-sec-details-dv');
+    Route::post('/detailoptsubmitd', 'RequestController@submitdvsecOptRequestForm')->name('opt-sec-detail-dv-submit');
+
+
+//
+    Route::get('/archiveOpt', 'RequestController@getdvOptArchive')->name('get_dv_opt_archive');
+    Route::get('/archiveOptDetails{id}', 'RequestController@getdvOptArchiveDetails')->name('get_dv_opt_archive_details');
+
+    Route::get('/archiveNew', 'RequestController@getdvNewArchive')->name('get_dv_new_archive');
+    Route::get('/archiveNewDetails{id}', 'RequestController@getdvNewArchiveDetails')->name('get_dv_new_archive_details');
+
+    Route::get('/edit', 'UserController@getEditProfildv')->name('edit_dv');
+    Route::post('/edit', 'UserController@editProfildvSubmit')->name('submit_dv_edit');
+    //stat
     Route::get('/stat', 'RequestController@getStat')->name('get_dev_stat');
 
 });
 
+Route::group(['prefix' => 'cai', 'middleware' => 'cai'], function () {
+
+    Route::get('/shownew', 'RequestController@getcaiNewProjectRequest')->name('get_cai_new');
+    Route::get('/showopt', 'RequestController@getcaiOptRequest')->name('get_cai_opt');
+
+    Route::get('/detail/{id}', 'RequestController@getcaiNewDetails')->middleware('request_details')->name('new-request-details-cai');
+    Route::any('/detailaccept/{id}', 'RequestController@caiAcceptOptRequest')->name('caiaccept_request');
+    Route::any('/detailrefu/{id}', 'RequestController@caiRefuseOptRequest')->name('cairefuse_request');
+
+    Route::get('/detailopt/{id}', 'RequestController@getcaiOptDetails')->middleware('request_details')->name('opt-request-details-cai');
+
+    Route::get('/allnew', 'RequestController@getcaiAllNewProjectRequests')->name('all_new_request_cai');
+    Route::get('/allopt', 'RequestController@getcaiAllOptRequests')->name('all_opt_request_cai');
+
+    Route::get('/edit', 'UserController@getEditProfilcai')->name('edit_cai');
+    Route::post('/edit', 'UserController@editProfilcaiSubmit')->name('submit_cai_edit');
+    //
+    Route::get('/archiveOpt', 'RequestController@getcaiOptArchive')->name('get_cai_opt_archive');
+    Route::get('/archiveOptDetails{id}', 'RequestController@getcaiOptArchiveDetails')->name('get_cai_opt_archive_details');
+
+    Route::get('/archiveNew', 'RequestController@getcaiNewArchive')->name('get_cai_new_archive');
+    Route::get('/archiveNewDetails{id}', 'RequestController@getcaiNewArchiveDetails')->name('get_cai_new_archive_details');
+    Route::get('/stat', 'RequestController@getStatcai')->name('get_cai_stat');
+
+});
 
 
 /*Route::get('users/{role}', 'UserController@usersByRole');

@@ -62,9 +62,6 @@ Modifier le profil
 @endsection
 
 
-@section('new-notification-route')detail_request @endsection
-@section('opt-notification-route')opt_detail_request @endsection
-
 @section('content')
     <div id="dialog" class="modal-block mfp-hide">
         <section class="panel">

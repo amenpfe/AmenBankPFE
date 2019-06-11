@@ -43,7 +43,7 @@ class StatusRequest extends Enum
     */
     const done  = 6;
     /**
-    * @description('En cours de traitement par le chef de division développement')
+    * @description('En cours du deuxieme traitement par le chef de division développement')
     */
     const progressing_div  = 7;
     /**
@@ -66,6 +66,14 @@ class StatusRequest extends Enum
     * @description('En cours de rédaction de circulaire par l'organisation informatique')
     */
     const progressing_circulaire  = 12;
+     /**
+    * @description('En cours du premier traitement par le chef de division développement')
+    */
+    const progressing_p  = 13;
+     /**
+    * @description('En cours du deuxiéme traitement par les développeurs')
+    */
+    const progressing_devp  = 14;
 
     public static function getEnumDescriptionByKey($key) {
         try {

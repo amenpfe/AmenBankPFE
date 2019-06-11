@@ -48,7 +48,7 @@
         <div class="header-right">
 
             
-            
+
             @if (Auth::user()->role != App\Enums\UserRole::byKey('Admin')->getValue()&& Auth::user()->role != App\Enums\UserRole::byKey('User')->getValue())
             <span class="separator"></span>
 
@@ -62,19 +62,19 @@
                             <i class="fa fa-tasks"></i>
                             <span @if($notificationCount == 0) style="display: none;" @endif class="badge" id="notifications-outer-badge">{{$notificationCount}}</span>
                         </a>
-    
+
                         <div class="dropdown-menu notification-menu">
                             <div class="notification-title">
                                 <span class="pull-right label label-default" id="notifications-inner-badge">{{$notificationCount}}</span>
                                 Tâches
                             </div>
-    
+
                             <div class="content">
                                     <ul id="notifications-container">
-                                        <?php 
+                                        <?php
 
-                                            $newRequestRouteName = trim(app()->view->getSections()['new-notification-route']); 
-                                            $optRequestRouteName = trim(app()->view->getSections()['opt-notification-route']); 
+                                            $newRequestRouteName = trim(app()->view->getSections()['new-notification-route']);
+                                            $optRequestRouteName = trim(app()->view->getSections()['opt-notification-route']);
                                         ?>
                                         @foreach (Auth::user()->unreadNotifications as $notification)
                                             <li>
@@ -88,7 +88,7 @@
                                                 <a href="{{$routeLink}}" class="clearfix">
                                                     @if($notification->data['projectRequest']['requestable_type'] == "App\\NewProjectRequest")
                                                         Demande d'un nouveau projet
-                                                    @else 
+                                                    @else
                                                         Demande d'amélioration
                                                     @endif
                                                     <span class="message">{{$notification->data['projectRequest']['updated_at']}}</span>
@@ -102,9 +102,9 @@
                                         @endforeach
                                     </ul>
 
-    
+
                                 <hr />
-    
+
                                 <div class="text-right">
                                     <a href="#" class="view-more">View All</a>
                                 </div>
@@ -112,7 +112,7 @@
                         </div>
                     </li>
                 </ul>
-                
+
                 @endif
             <span class="separator"></span>
 
@@ -209,7 +209,7 @@
 {!! HTML::script('js/theme.custom.js') !!}
 {!! HTML::script('js/theme.init.js') !!}
 
-                
+
 @if (Auth::user()->role != App\Enums\UserRole::byKey('Admin')->getValue()&& Auth::user()->role != App\Enums\UserRole::byKey('User')->getValue()) {
 <script>
     newRouteLink = '{{route($newRequestRouteName, 0)}}';

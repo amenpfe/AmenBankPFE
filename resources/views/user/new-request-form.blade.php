@@ -76,9 +76,6 @@ Demande d'un nouveau projet
     </li>
 @endsection
 
-@section('new-notification-route')detail_request @endsection
-@section('opt-notification-route')opt_detail_request @endsection
-
 @section('content')
     <form class="form-horizontal form-bordered" method="POST" action="{{route('add_new_request')}}" enctype="multipart/form-data">
         {{ csrf_field() }}

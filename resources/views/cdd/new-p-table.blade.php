@@ -1,7 +1,7 @@
 @extends('dashboard-template')
 
 @section('title')
-    Suivi des demandes
+    Consulter les demandes
 @endsection
 
 @section('page-stylesheets')
@@ -19,14 +19,14 @@
 
 
 @section('navigation')
-<li class="nav-parent">
+<li class="nav-parent nav-active nav-expanded">
     <a>
         <i class="fa fa-table" aria-hidden="true"></i>
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
 
-        <li class="nav-parent">
+        <li class="nav-parent nav-active nav-expanded">
             <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
             <ul class="nav nav-children">
                 <li class="nav-parent">
@@ -42,10 +42,10 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-parent">
+                <li class="nav-parent  nav-expanded">
                     <a>Analyse des besoins</a>
                     <ul class="nav nav-children">
-                        <li>
+                        <li class=" nav-active">
                             <a href="{{route('get_cddp_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
                                 Des nouveaux projets</a>
                         </li>
@@ -59,67 +59,66 @@
             </ul>
         </li>
 
-
-    </ul>
-</li>
-<li class="nav-parent nav-active nav-expanded">
-    <a>
-        <i class="fa fa-calendar" aria-hidden="true"></i>
-        <span>Suivi des demande</span>
-    </a>
-    <ul class="nav nav-children">
-        <li class="nav-active">
-            <a href="{{route('all_new_request_cdd')}}">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                Des nouveaux projets
-            </a>
-        </li>
-        <li class="">
-        <a href="{{route('all_opt_request_cdd')}}">
-                <i class="fa  fa-wrench" aria-hidden="true"></i>
-                D'améliorations
-            </a>
-        </li>
-
     </ul>
 </li>
 <li class="nav-parent">
-    <a>
-        <i class="fa fa-archive" aria-hidden="true"></i>
-        <span>Archive</span>
-    </a>
-    <ul class="nav nav-children">
+            <a>
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+                <span>Suivi des demande</span>
+            </a>
+            <ul class="nav nav-children">
+                <li class="">
+                    <a href="{{route('all_new_request_cdd')}}">
+                        <i class="fa fa-plus" aria-hidden="true"></i>
+                        Des nouveaux projets
+                    </a>
+                </li>
+                <li class="">
+                <a href="{{route('all_opt_request_cdd')}}">
+                        <i class="fa  fa-wrench" aria-hidden="true"></i>
+                        D'améliorations
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+    <li class="nav-parent">
+        <a>
+            <i class="fa fa-archive" aria-hidden="true"></i>
+            <span>Archive</span>
+        </a>
+        <ul class="nav nav-children">
+            <li class="">
+                <a href="{{route('get_cdd_new_archive')}}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Des nouveaux projets
+                </a>
+            </li>
+            <li class="">
+                <a href="{{route('get_cdd_opt_archive')}}">
+                    <i class="fa  fa-wrench" aria-hidden="true"></i>
+                    Des projets améliorés
+                </a>
+            </li>
+
+        </ul>
+    </li>
         <li class="">
-            <a href="{{route('get_cdd_new_archive')}}">
-                <i class="fa fa-plus" aria-hidden="true"></i>
-                Des nouveaux projets
+            <a href="{{route('get_cdd_stat')}}">
+                <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+                <span>Les Statistiques</span>
             </a>
         </li>
-        <li class="">
-            <a href="{{route('get_cdd_opt_archive')}}">
-                <i class="fa  fa-wrench" aria-hidden="true"></i>
-                Des projets améliorés
-            </a>
-        </li>
-
-    </ul>
-</li>
-<li class="">
-    <a href="{{route('get_cdd_stat')}}">
-        <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
-        <span>Les Statistiques</span>
-    </a>
-</li>
-
+    
 @endsection
 
 @section('content-title')
-Suivi des demandes des nouveaux projets
+Demandes des nouveaux projets
 @endsection
 
 @section('content-path')
     <li>
-        <span>Suivi des demandes</span>
+        <span>Consulter les demandes</span>
     </li>
     <li>
         <span>Des nouveaux projets</span>
@@ -130,7 +129,7 @@ Suivi des demandes des nouveaux projets
 
 <section class="panel">
         <header class="panel-heading">
-            <h2 class="panel-title">Suivi des demandes</h2>
+            <h2 class="panel-title">Liste des demandes</h2>
         </header>
         <div class="panel-body">
             <form method="POST" action="">
@@ -142,15 +141,19 @@ Suivi des demandes des nouveaux projets
                             <th>Titre</th>
                             <th>Etat</th>
                             <th>Créé à</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($newprojectrequests as $NewprojectRequest)
-                        <tr class="gradeX" id="row-{{$NewprojectRequest->id}}">
-                            <td class="userId">{{$NewprojectRequest->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$NewprojectRequest->id}}"/></td>
-                            <td class="input email email">{{$NewprojectRequest->title}}</td>
-                            <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($NewprojectRequest->request->status)}}</td>
-                            <td class="input email email">{{$NewprojectRequest->created_at}}</td>
+                        @foreach ($newprojectrequests as $projectRequest)
+                        <tr class="gradeX" id="row-{{$projectRequest->requestable->id}}">
+                            <td class="userId">{{$projectRequest->requestable->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$projectRequest->requestable->id}}"/></td>
+                            <td class="input email email">{{$projectRequest->requestable->title}}</td>
+                            <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($projectRequest->status)}}</td>
+                            <td class="input email email">{{$projectRequest->requestable->created_at}}</td>
+                            <td class="actions">
+                                <a href="{{route('new-p-details-cdd', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

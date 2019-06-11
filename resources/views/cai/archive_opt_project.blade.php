@@ -1,7 +1,7 @@
 @extends('dashboard-template')
 
 @section('title')
-    Consulter les demandes
+    Archive des projets
 @endsection
 
 @section('page-stylesheets')
@@ -11,62 +11,91 @@
 @endsection
 
 @section('edit')
-{{route('edit_user')}}
+{{route('edit_cai')}}
 @endsection
 
-@section('navigation')
 
-<li class="nav-parent nav-active nav-expanded">
+
+@section('navigation')
+<li class="nav-parent">
     <a>
         <i class="fa fa-table" aria-hidden="true"></i>
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-            <li class="">
-                <a href="{{route('get_new')}}">
+        <li class="nav-active">
+                <a href="{{route('get_cai_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
-        <li class="nav-active">
-            <a href="">
+        <li class="">
+        <a href="{{route('get_cai_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations
             </a>
         </li>               
     </ul>
 </li>
-    <li class="nav-parent">
-        <a>
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            <span>Envoyer une demande</span>
-        </a>
-        <ul class="nav nav-children">
-            <li class="">
-                <a href="{{route('add_new_request')}}">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    D'un nouveau projet
-                </a>
-            </li>
-            <li class="">
-            <a href="{{route('add_opt_request')}}">
-                    <i class="fa  fa-wrench" aria-hidden="true"></i>
-                    D'amélioration 
-                </a>
-            </li>
-            
-        </ul>
-    </li>
+<li class="nav-parent">
+    <a>
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <span>Suivi des demande</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+            <a href="{{route('all_new_request_cai')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Des nouveaux projets
+            </a>
+        </li>
+        <li class="">
+        <a href="{{route('all_opt_request_cai')}}">
+                <i class="fa  fa-wrench" aria-hidden="true"></i>
+                D'améliorations
+            </a>
+        </li>
+        
+    </ul>
+</li>
+    
+<li class="nav-parent nav-active nav-expanded">
+    <a>
+        <i class="fa fa-archive" aria-hidden="true"></i>
+        <span>Archive des projets</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+            <a href="{{route('get_cai_new_archive')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Des nouveaux projets
+            </a>
+        </li>
+        <li class="nav-active">
+        <a href="">
+                <i class="fa  fa-wrench" aria-hidden="true"></i>
+                D'améliorations
+            </a>
+        </li>
+        
+    </ul>
+</li>
+<li class="nav-active">
+    <a href="{{route('get_cai_stat')}}">
+        <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+        <span>Les Statistiques</span>
+    </a>
+</li>
     
 @endsection
 
 @section('content-title')
-Demandes d'améliorations
+Archive des projets
 @endsection
 
 @section('content-path')
     <li>
-        <span>Consulter les demandes</span>
+        <span>Archive des projets</span>
     </li>
     <li>
         <span>D'améliorations</span>
@@ -77,7 +106,7 @@ Demandes d'améliorations
 
 <section class="panel">
         <header class="panel-heading">
-            <h2 class="panel-title">Liste des demandes d'améliorations</h2>
+            <h2 class="panel-title">Archive des projets traités</h2>
         </header>
         <div class="panel-body">
             <form method="POST" action="">
@@ -86,21 +115,21 @@ Demandes d'améliorations
                     <thead>
                         <tr>
                             <th>#Ref</th>
+                            <th>Titre</th>
                             <th>Type</th>
-                            <th>Etat</th>
                             <th>Créé à</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($optimizationRequests as $projectRequest)
+                        @foreach ($projectrequest as $projectRequest)
                         <tr class="gradeX" id="row-{{$projectRequest->requestable->id}}">
                             <td class="userId">{{$projectRequest->requestable->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$projectRequest->requestable->id}}"/></td>
-                            <td class="input email email">{{App\Enums\RequestTypes::getEnumDescriptionByValue($projectRequest->requestable->type)}}</td>
-                            <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($projectRequest->status)}}</td>
+                            <td class="input email email">{{App\Project::find($projectRequest->requestable->project_id)->name}}</td>
+                            <td class="input email email">{{$projectRequest->requestable_type}}</td>
                             <td class="input email email">{{$projectRequest->requestable->created_at}}</td>
                             <td class="actions">
-                                <a href="{{route('opt_detail_request', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
+                                <a href="{{route('get_cai_opt_archive_details', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach
@@ -120,7 +149,7 @@ Demandes d'améliorations
     {!! HTML::script('js/jquery.dataTables.js') !!}
     {!! HTML::script('js/dataTables.tableTools.min.js') !!}
     {!! HTML::script('js/datatables.js') !!}
-
+    
     <!-- Table script -->
     {!! HTML::script('js/examples.datatables.default.js') !!}
 @endsection

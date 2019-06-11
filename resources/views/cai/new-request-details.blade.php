@@ -2,51 +2,89 @@
 @section('title')
     Détails de demande
 @endsection
+
+@section('page-stylesheets')
+    <!-- Specific Page Vendor CSS -->
+    {!! HTML::style('css/bootstrap-fileupload.min.css') !!}
+@endsection
+
+@section('edit')
+{{route('edit_cai')}}
+@endsection
+
 @section('navigation')
 <li class="nav-parent nav-active nav-expanded">
     <a>
         <i class="fa fa-table" aria-hidden="true"></i>
-        <span>Consulter</span>
+        <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
         <li class="nav-active">
-                <a href="{{route('get_new')}}">
+                <a href="{{route('get_cai_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
-                    Demandes des nouveaux projets
+                    Des nouveaux projets
                 </a>
             </li>
         <li class="">
-        <a href="{{route('get_opt')}}">
+        <a href="{{route('get_cai_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
-                    Demandes d'améliorations
+                    D'améliorations
             </a>
         </li>               
     </ul>
 </li>
-    <li class="nav-parent">
-        <a>
-            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            <span>Envoyer une demande</span>
-        </a>
-        <ul class="nav nav-children">
-            <li class="">
-                <a href="{{route('add_new_request')}}">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    Demande d'un nouveau projet
-                </a>
-            </li>
-            <li class="">
-            <a href="{{route('add_opt_request')}}">
-                    <i class="fa  fa-wrench" aria-hidden="true"></i>
-                    Demande d'amélioration 
-                </a>
-            </li>
-            
-        </ul>
-    </li>
-    
+<li class="nav-parent">
+    <a>
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        <span>Suivi des demande</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+            <a href="{{route('all_new_request_cai')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Des nouveaux projets
+            </a>
+        </li>
+        <li class="">
+        <a href="{{route('all_opt_request_cai')}}">
+                <i class="fa  fa-wrench" aria-hidden="true"></i>
+                D'améliorations
+            </a>
+        </li>
+        
+    </ul>
+</li>
+<li class="nav-parent">
+    <a>
+        <i class="fa fa-archive" aria-hidden="true"></i>
+        <span>Archive des projets</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+            <a href="{{route('get_cai_new_archive')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Des nouveaux projets
+            </a>
+        </li>
+        <li class="nav-">
+        <a href="{{route('get_cai_opt_archive')}}">
+                <i class="fa  fa-wrench" aria-hidden="true"></i>
+                D'améliorations
+            </a>
+        </li>
+
+    </ul>
+</li>
+<li class="nav-active">
+    <a href="{{route('get_cai_stat')}}">
+        <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+        <span>Les Statistiques</span>
+    </a>
+</li>
 @endsection
 
+@section('new-notification-route')new-request-details-ds @endsection
+@section('opt-notification-route')opt-request-details-ds @endsection
 @section('content-title')
 Détails de demande
 @endsection
@@ -63,10 +101,6 @@ Détails de demande
                     <div class="col-sm-6 mt-md">
                         <h2 class="h2 mt-none mb-sm text-dark text-bold">Réference</h2>
                     <h4 class="h4 m-none text-dark text-bold">#{{$request->requestable->id}}</h4><br>
-                    </div>
-                    <div class="col-sm-6 text-right mt-md mb-md">
-                        <h2 class="h2 mt-none mb-sm text-dark text-bold">Etat</h2>
-                        <h4 class="h4 m-none text-danger text-bold">{{App\Enums\StatusRequest::getEnumDescriptionByValue($request->status)}}</h4><br>
                     </div>
                 </div>
             </header>
@@ -109,24 +143,36 @@ Détails de demande
                             <td class="text-dark"><h4>{{$request->requestable->title}}</h4></td>
                         </tr>
                         <tr>
-                            <td class="text-dark col-sm-3"><h4><b>Fichier</b></h4></td>
-                            @if ($user->role == App\Enums\UserRole::bykey('User')->getValue()) 
-                                <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$request->user_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
-                            @endif
+                            <td class="text-dark col-sm-3"><h4><b>Fichier</b></h4></td> 
+                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$request->conception_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                         </tr>
                     </tbody>
                 </table>
                 <div>
-                    <h4 class="text-dark" style="padding-left: 0.5%"><b>Remarques</b></h4><br>
+                    <h4 class="text-dark" style="padding-left: 0.5%; padding-right: 0.5%"><b>Remarques</b></h4><br>
                     <h4><div class="" 
                         style="border-left: 5px solid #114E9E; border-top-left-radius: 5px; border-bottom-left-radius: 5px;
                         border-right: 5px solid #114E9E; border-top-right-radius: 5px; border-bottom-right-radius: 5px;
                         margin-top: 5px; padding-left: 1%;">
                             {!!$request->remarques!!}
-                    </div><br></h4>
+                            </div><br><br><br></h4>
                 </div>
             </div>
+            <footer>
+                <div class="row ">
+                    <div class="col-sm-3 col-sm-offset-9">
+                    <button class="btn btn-success"><a href="{{route('caiaccept_request', $request->id)}}">Valider</a></button>
+                    <button class="btn btn-danger"><a href="{{route('cairefuse_request', $request->id)}}">Refuser</a></button>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
 </section>
+@endsection
+
+@section('page-scripts')
+    
+    <!-- Specific Page Vendor -->
+    {!! HTML::script('js/bootstrap-fileupload.min.js') !!}
 @endsection
