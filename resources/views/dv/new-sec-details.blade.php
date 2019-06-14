@@ -12,71 +12,72 @@
 {{route('edit_dv')}}
 @endsection
 
+@section('new-notification-route')new-request-details-dv @endsection
+@section('opt-notification-route')opt-request-details-dv @endsection
+
 @section('navigation')
 <li class="nav-parent">
-        <a>
-            <i class="fa fa-table" aria-hidden="true"></i>
-            <span>Consulter les demandes</span>
-        </a>
+<a>
+    <i class="fa fa-table" aria-hidden="true"></i>
+    <span>Consulter les demandes</span>
+</a>
+<ul class="nav nav-children">
+
+    <li class="nav-parent">
+        <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
         <ul class="nav nav-children">
-
             <li class="nav-parent">
-                <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
+                <a>Conception globale</a>
                 <ul class="nav nav-children">
-                    <li class="nav-parent">
-                        <a>Conception globale</a>
-                        <ul class="nav nav-children">
-                            <li>
-                                <a href="{{route('get_dv_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
-                                    Des nouveaux projets</a>
-                            </li>
-                            <li>
-                                <a href="{{route('get_dv_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
-                                    D'améliorations</a>
-                            </li>
-                        </ul>
+                    <li>
+                        <a href="{{route('get_dv_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
+                            Des nouveaux projets</a>
                     </li>
-                    <li class="nav-parent">
-                        <a>Codage</a>
-                        <ul class="nav nav-children">
-                            <li>
-                                <a href="{{route('get_sec_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
-                                    Des nouveaux projets</a>
-                            </li>
-                            <li>
-                                <a href="{{route('get_sec_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
-                                    D'améliorations</a>
-                            </li>
-                        </ul>
+                    <li>
+                        <a href="{{route('get_dv_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
+                            D'améliorations</a>
                     </li>
-
                 </ul>
             </li>
-
+            <li class="nav-parent">
+                <a>Codage</a>
+                <ul class="nav nav-children">
+                    <li>
+                        <a href="{{route('get_sec_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
+                            Des nouveaux projets</a>
+                    </li>
+                    <li>
+                        <a href="{{route('get_sec_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
+                            D'améliorations</a>
+                    </li>
+                </ul>
+            </li>
 
         </ul>
     </li>
+        </ul>
+    </li>
     <li class="nav-parent">
-                <a>
-                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                    <span>Suivi des demande</span>
+        <a>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <span>Suivi des demande</span>
+        </a>
+        <ul class="nav nav-children">
+            <li class="">
+                <a href="{{route('all_new_request_dv')}}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Des nouveaux projets
                 </a>
-                <ul class="nav nav-children">
-                    <li class="">
-                        <a href="{{route('all_new_request_dv')}}">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            Des nouveaux projets
-                        </a>
-                    </li>
-                    <li class="">
-                    <a href="{{route('all_opt_request_dv')}}">
-                            <i class="fa  fa-wrench" aria-hidden="true"></i>
-                            D'améliorations
-                        </a>
-                    </li>
-
-                </ul>
             </li>
+            <li class="">
+            <a href="{{route('all_opt_request_dv')}}">
+                    <i class="fa  fa-wrench" aria-hidden="true"></i>
+                    D'améliorations
+                </a>
+            </li>
+
+        </ul>
+    </li>
     <li class="nav-parent">
         <a>
             <i class="fa fa-archive" aria-hidden="true"></i>
@@ -109,9 +110,6 @@
 @section('content-title')
 Détails de demande
 @endsection
-
-@section('new-notification-route')new-request-details-dev @endsection
-@section('opt-notification-route')opt-request-details-dev @endsection
 
 @section('content')
     @php 

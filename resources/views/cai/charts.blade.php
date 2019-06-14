@@ -14,8 +14,8 @@
 {{route('edit_chd')}}
 @endsection
 
-@section('new-notification-route')new-request-details-ced @endsection
-@section('opt-notification-route')opt-request-details-ced @endsection
+@section('new-notification-route')new-request-details-cai @endsection
+@section('opt-notification-route')opt-request-details-cai @endsection
 
 @section('navigation')
 <li class="nav-parent">

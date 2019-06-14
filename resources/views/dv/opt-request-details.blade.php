@@ -12,6 +12,9 @@
 {{route('edit_dv')}}
 @endsection
 
+@section('new-notification-route')new-request-details-dv @endsection
+@section('opt-notification-route')opt-request-details-dv @endsection
+
 @section('navigation')
 <li class="nav-parent">
     <a>
@@ -52,8 +55,6 @@
 
             </ul>
         </li>
-
-
     </ul>
 </li>
 <li class="nav-parent">
@@ -109,9 +110,6 @@
 @section('content-title')
 Détails de demande
 @endsection
-
-@section('new-notification-route')new-request-details-dev @endsection
-@section('opt-notification-route')opt-request-details-dev @endsection
 
 @section('content')
     @php 

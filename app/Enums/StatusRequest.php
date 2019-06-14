@@ -42,11 +42,11 @@ class StatusRequest extends Enum
     */
     const done  = 6;
     /**
-    * @description('En cours du deuxieme traitement par le chef de division développement')
+    * @description('Contrôle du fonctionnement du logiciel par le chef de division développement')
     */
     const progressing_div  = 7;
     /**
-    * @description('En cours de traitement par les développeurs')
+    * @description('En cours de traitement du dossier de conception par les développeurs')
     */
     const progressing_devlop  = 8;
     /**
@@ -66,11 +66,11 @@ class StatusRequest extends Enum
     */
     const progressing_circulaire  = 12;
      /**
-    * @description('En cours du premier traitement par le chef de division développement')
+    * @description('En cours de réalisation du document d'analyse de besoin par le chef de division développement')
     */
     const progressing_p  = 13;
      /**
-    * @description('En cours du deuxiéme traitement par les développeurs')
+    * @description('En cours de codage du logicel traitement par les développeurs')
     */
     const progressing_devp  = 14;
 

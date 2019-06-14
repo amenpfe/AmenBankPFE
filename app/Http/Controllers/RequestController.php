@@ -62,7 +62,6 @@ class RequestController extends Controller
         $file->move('files', $newFileName);
 
         $inputs['status'] = StatusRequest::byKey("progressing_CED")->getValue();
-        
         $inputs['user_id'] = $user->id;
 
         //files
@@ -150,7 +149,7 @@ class RequestController extends Controller
         $newFileName = 'chd_doc_'  . str_random(8) . '.' . $file->getClientOriginalExtension();
         $file->move('files', $newFileName);
 
-        $inputs['status'] = StatusRequest::byKey("progressing_div")->getValue();
+        $inputs['status'] = StatusRequest::byKey("progressing_p")->getValue();
         $inputs['chd_doc'] = $newFileName;
         $inputs['title'] = $request->requestable->title;
         $inputs['remarques'] = $request->remarques;
@@ -188,7 +187,7 @@ class RequestController extends Controller
         $newFileName = 'chd_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
         $file->move('files', $newFileName);
 
-        $inputs['status'] = StatusRequest::byKey("progressing_div")->getValue();
+        $inputs['status'] = StatusRequest::byKey("progressing_p")->getValue();
         $inputs['chd_doc'] = $newFileName;
         $inputs['type'] = $request->requestable->type;
         $inputs['project_id'] = $request->requestable->project_id;
@@ -628,6 +627,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('Developpeur')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_cddp_new');
     }
 
@@ -669,6 +671,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('Developpeur')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_cddp_opt');
     }
 
@@ -682,11 +687,11 @@ class RequestController extends Controller
         return view('cdd/all-opt-requests')->with('optimizationRequests', OptimizationRequest::all());
     }
 
-    //archive
+
       //stat
 
       public function getStatcdd(){
-        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
+        $untreatedCount = ProjectRequest::where('status', '=', StatusRequest::byKey('progressing_p')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
         $notcddProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $cddProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_div','progressing_p')->getValue()])->count();
@@ -1151,6 +1156,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('ChefArchitectureIntegration')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_dv_new');
     }
 
@@ -1192,6 +1200,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('ChefArchitectureIntegration')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_dv_opt');
     }
 
@@ -1233,6 +1244,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('dev_chef')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_sec_new');
     }
 
@@ -1274,6 +1288,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('dev_chef')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_sec_opt');
     }
 
@@ -1307,7 +1324,7 @@ class RequestController extends Controller
     }
     //stat
     public function getStat(){
-        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
+        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('progressing_devlop')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
         $notdvProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $dvProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_devlop','progressing_devp')->getValue()])->count();
@@ -1336,34 +1353,7 @@ class RequestController extends Controller
         $request = ProjectRequest::find($id);
         return view('cai/new-request-details')->with('request', $request);
     }
-
-    public function submitcaiNewRequestForm(NewRequestDetailsRequest $newRequestDetailsRequest){
-        $inputs = $newRequestDetailsRequest->all();
-        $requestId = $inputs['requestId'];
-        $request = ProjectRequest::find($requestId);
-
-        $file = $newRequestDetailsRequest->file('doc');
-        $newFileName = 'conception_doc'  . str_random(8) . '.' . $file->getClientOriginalExtension();
-        $file->move('files', $newFileName);
-
-        $inputs['status'] = StatusRequest::byKey("progressing_devlop")->getValue();
-        $inputs['ced_doc'] = $request->ced_doc;
-        $inputs['title'] = $request->requestable->title;
-        $inputs['remarques'] = $request->remarques;
-        $inputs['user_doc'] = $request->user_doc;
-        $inputs['chd_doc'] = $request->chd_doc;
-        $inputs['organisation_doc'] = $request->organisation_doc;
-        $inputs['analyse_doc'] =$request->analyse_doc ;
-        $inputs['conception_doc'] =$newFileName ;
-        $inputs['logiciel_doc'] = $request->logiciel_doc;
-        $inputs['test_doc'] =$request->test_doc;
-        $inputs['recette_doc'] = $request->recette_doc;
-        $inputs['circulaire_doc'] = $request->circulaire_doc;
-        $inputs['user_id'] = $request->user_id;
-
-        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
-        return redirect()->route('get_cai_new');
-    }
+    
     public function caiAcceptOptRequest($id){
         $request = ProjectRequest::find($id);
 
@@ -1384,13 +1374,16 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('Developpeur')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_cai_new');
     }
 
     public function caiRefuseOptRequest($id){
         $request = ProjectRequest::find($id);
 
-        $inputs['status'] = StatusRequest::byKey("progressing_p")->getValue();
+        $inputs['status'] = StatusRequest::byKey("progressing_devlop")->getValue();
         $inputs['chd_doc'] = $request->chd_doc;
         $inputs['type'] = $request->requestable->type;
         $inputs['project_id'] = $request->requestable->project_id;
@@ -1407,6 +1400,9 @@ class RequestController extends Controller
         $inputs['user_id'] = $request->user_id;
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('Developpeur')])->first();
+        $user->notify(new WorkAdded($request));
         return redirect()->route('get_cai_opt');
     }
 
@@ -1450,7 +1446,7 @@ class RequestController extends Controller
         return view('cai/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
     }
     public function getStatcai(){
-        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
+        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('progressing_archi')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
         $notcaiProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $caiProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_archi')->getValue()])->count();

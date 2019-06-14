@@ -11,91 +11,47 @@
 @endsection
 
 @section('edit')
-{{route('edit_dv')}}
+{{route('edit_chd')}}
 @endsection
 
-@section('new-notification-route')new-request-details-dv @endsection
-@section('opt-notification-route')opt-request-details-dv @endsection
+@section('new-notification-route')new-request-details-ced @endsection
+@section('opt-notification-route')opt-request-details-ced @endsection
 
 @section('navigation')
 <li class="nav-parent">
-        <a>
-            <i class="fa fa-table" aria-hidden="true"></i>
-            <span>Consulter les demandes</span>
-        </a>
-        <ul class="nav nav-children">
-            
-            <li class="nav-parent">
-                <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
-                <ul class="nav nav-children">
-                    <li class="nav-parent">
-                        <a>Conception globale</a>
-                        <ul class="nav nav-children">
-                            <li>
-                                <a href="{{route('get_dv_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
-                                    Des nouveaux projets</a>
-                            </li>
-                            <li>
-                                <a href="{{route('get_dv_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
-                                    D'améliorations</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-parent">
-                        <a>Codage</a>
-                        <ul class="nav nav-children">
-                            <li>
-                                <a href="{{route('get_sec_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
-                                    Des nouveaux projets</a>
-                            </li>
-                            <li>
-                                <a href="{{route('get_sec_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
-                                    D'améliorations</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                </ul>
-            </li>
-            
-            
-        </ul>
-    </li>
-    <li class="nav-parent">
-                <a>
-                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                    <span>Suivi des demande</span>
+    <a>
+        <i class="fa fa-table" aria-hidden="true"></i>
+        <span>Consulter les demandes</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+        <a href="{{route('get_ced_new')}}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Des nouveaux projets
                 </a>
-                <ul class="nav nav-children">
-                    <li class="">
-                        <a href="{{route('all_new_request_dv')}}">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            Des nouveaux projets
-                        </a>
-                    </li>
-                    <li class="">
-                    <a href="{{route('all_opt_request_dv')}}">
-                            <i class="fa  fa-wrench" aria-hidden="true"></i>
-                            D'améliorations
-                        </a>
-                    </li>
-                    
-                </ul>
             </li>
+        <li class="">
+        <a href="{{route('get_ced_opt')}}">
+                <i class="fa fa-wrench" aria-hidden="true"></i>
+                    D'améliorations
+            </a>
+        </li>               
+    </ul>
+</li>
     <li class="nav-parent">
         <a>
-            <i class="fa fa-archive" aria-hidden="true"></i>
-            <span>Archive des projets</span>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <span>Suivi des demande</span>
         </a>
         <ul class="nav nav-children">
             <li class="">
-                <a href="{{route('get_dv_new_archive')}}">
+                <a href="{{route('all_new_request_ced')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
             <li class="">
-            <a href="{{route('get_dv_opt_archive')}}">
+            <a href="{{route('all_opt_request_ced')}}">
                     <i class="fa  fa-wrench" aria-hidden="true"></i>
                     D'améliorations
                 </a>
@@ -103,12 +59,33 @@
             
         </ul>
     </li>
-    <li class="nav-active">
-        <a href="{{route('get_dev_stat')}}">
-            <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
-            <span>Les Statistiques</span>
+    <li class="nav-parent">
+        <a>
+            <i class="fa fa-archive" aria-hidden="true"></i>
+            <span>Archive</span>
         </a>
+        <ul class="nav nav-children">
+            <li class="">
+                <a href="{{route('get_ced_new_archive')}}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Des nouveaux projets
+                </a>
+            </li>
+            <li class="">
+            <a href="{{route('get_ced_opt_archive')}}">
+                    <i class="fa  fa-wrench" aria-hidden="true"></i>
+                    Des projets améliorés
+                </a>
+            </li>
+            
+        </ul>
     </li>
+<li class="nav-active">
+    <a href="">
+        <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+        <span>Les Statistiques</span>
+    </a>
+</li>
     
 @endsection
 
@@ -126,15 +103,25 @@ Les statistiques
 
 <section class="panel">
         <div class="panel-body">
-            <div class="col-sm-12" style="margin-bottom: 20px; margin-top: 20px; font-size: 7em; text-align: center; height: 100%; ">
-                <div class="col-sm-4 col-sm-offset-2" style="padding-top: 30px; padding-bottom: 30px;"><strong><span class='numscroller' data-min='1' data-max='{{$untreatedCount}}' data-delay='5' data-increment='10'>{{$untreatedCount}}</span></strong></div>
-                <div class="col-sm-4 " style="padding-top: 30px; padding-bottom: 30px; border-left: solid black 3px;"><strong><span class='numscroller' data-min='1' data-max='{{$avgHours}}' data-delay='5' data-increment='10'>{{$avgHours}}</span></strong></div>
-            </div>
-            <div  style="margin-top: 25%; margin-bottom: 25%">
-                <div class="col-sm-6">
-                    <canvas id="dvProjCanvas"></canvas>
+            <div class="col-sm-12" style="margin-bottom: 20px; margin-top: 40px; text-align: center; height: 100%; ">
+                <div class="col-sm-4 col-sm-offset-2" style="padding-bottom: 30px;">
+                    <strong>
+                        <span style="font-size: 1.5em;">Le nombre des projets affectés</span><br/><br/><br/></br>
+                        <span style="font-size: 7em;" class='numscroller' data-min='1' data-max='{{$untreatedCount}}' data-delay='5' data-increment='10'>{{$untreatedCount}}</span>
+                    </strong>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-4 " style="padding-bottom: 30px; border-left: solid black 3px;">
+                    <strong>
+                            <span style="font-size: 1.5em;">la durée moyenne de traitement d'une demande en heures</span><br/><br/><br/>
+                        <span style="font-size: 7em;" class='numscroller' data-min='1' data-max='{{$avgHours}}' data-delay='5' data-increment='10'>{{$avgHours}}</span>
+                    </strong>
+                </div>
+            </div>
+            <div>
+                <div class="col-sm-6" style="margin-top: 60px; margin-bottom: 20px;">
+                    <canvas id="cedProjCanvas"></canvas>
+                </div>
+                <div class="col-sm-6" style="margin-top: 60px; margin-bottom: 20px;">
                     <canvas id="newProjCanvas"></canvas>
                 </div>
             </div>
@@ -161,19 +148,19 @@ Les statistiques
 
     <script>
         @php
-            $rest = 100 - $dvProjPercentage;
+            $rest = 100 - $cedProjPercentage;
         @endphp
-        //DevProjChart
-        var dvProjCtx = document.getElementById('dvProjCanvas').getContext('2d');
+        //CedProjChart
+        var cedProjCtx = document.getElementById('cedProjCanvas').getContext('2d');
 
-        new Chart(dvProjCtx, {
+        new Chart(cedProjCtx, {
             type: 'doughnut',
             data: {
                 labels: ["Autres", "Projets affectés"],
                 datasets: [
                 {
                     label: "TeamA Score",
-                    data: [{{$dvProjPercentage}}, {{$rest}}],
+                    data: [{{$cedProjPercentage}}, {{$rest}}],
                     backgroundColor: [
                     "rgba(40,187,105)",
                     "rgba(37,129,188)"
@@ -191,7 +178,7 @@ Les statistiques
                 title: {
                     display: true,
                     position: "top",
-                    text: "Les projets affectés",
+                    text: "Le taux des projets affectés",
                     fontSize: 18,
                     fontColor: "#111"
                 },
@@ -205,7 +192,7 @@ Les statistiques
                 }
             }
         });
-        //End DevProjChart
+        //End CedProjChart
 
         //NewProjChart
         var newProjCtx = document.getElementById('newProjCanvas').getContext('2d');

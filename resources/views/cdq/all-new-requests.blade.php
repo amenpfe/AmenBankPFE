@@ -11,91 +11,48 @@
 @endsection
 
 @section('edit')
-{{route('edit_dv')}}
+{{route('edit_cdq')}}
 @endsection
 
-@section('new-notification-route')new-request-details-dv @endsection
-@section('opt-notification-route')opt-request-details-dv @endsection
+@section('new-notification-route')new-request-details-cdq @endsection
+@section('opt-notification-route')opt-request-details-cdq @endsection
+
 
 @section('navigation')
 <li class="nav-parent">
-        <a>
-            <i class="fa fa-table" aria-hidden="true"></i>
-            <span>Consulter les demandes</span>
-        </a>
-        <ul class="nav nav-children">
-            
-            <li class="nav-parent">
-                <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
-                <ul class="nav nav-children">
-                    <li class="nav-parent">
-                        <a>Conception globale</a>
-                        <ul class="nav nav-children">
-                            <li>
-                                <a href="{{route('get_dv_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
-                                    Des nouveaux projets</a>
-                            </li>
-                            <li>
-                                <a href="{{route('get_dv_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
-                                    D'améliorations</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-parent">
-                        <a>Codage</a>
-                        <ul class="nav nav-children">
-                            <li>
-                                <a href="{{route('get_sec_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
-                                    Des nouveaux projets</a>
-                            </li>
-                            <li>
-                                <a href="{{route('get_sec_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
-                                    D'améliorations</a>
-                            </li>
-                        </ul>
-                    </li>
-                    
-                </ul>
-            </li>
-            
-            
-        </ul>
-    </li>
-    <li class="nav-parent  nav-expanded">
-                <a>
-                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                    <span>Suivi des demande</span>
+    <a>
+        <i class="fa fa-table" aria-hidden="true"></i>
+        <span>Consulter les demandes</span>
+    </a>
+    <ul class="nav nav-children">
+        <li class="">
+        <a href="{{route('get_cdq_new')}}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Des nouveaux projets
                 </a>
-                <ul class="nav nav-children">
-                    <li class="">
-                        <a href="{{route('all_new_request_dv')}}">
-                            <i class="fa fa-plus" aria-hidden="true"></i>
-                            Des nouveaux projets
-                        </a>
-                    </li>
-                    <li class="nav-active">
-                    <a href="{{route('all_opt_request_dv')}}">
-                            <i class="fa  fa-wrench" aria-hidden="true"></i>
-                            D'améliorations
-                        </a>
-                    </li>
-                    
-                </ul>
             </li>
-    <li class="nav-parent">
+        <li class="">
+        <a href="{{route('get_cdq_opt')}}">
+                <i class="fa fa-wrench" aria-hidden="true"></i>
+                    D'améliorations
+            </a>
+        </li>               
+    </ul>
+</li>
+    <li class="nav-parent nav-active nav-expanded">
         <a>
-            <i class="fa fa-archive" aria-hidden="true"></i>
-            <span>Archive des projets</span>
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <span>Suivi des demande</span>
         </a>
         <ul class="nav nav-children">
-            <li class="">
-                <a href="{{route('get_dv_new_archive')}}">
+            <li class="nav-active">
+                <a href="">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
             <li class="">
-            <a href="{{route('get_dv_opt_archive')}}">
+            <a href="{{route('all_opt_request_cdq')}}">
                     <i class="fa  fa-wrench" aria-hidden="true"></i>
                     D'améliorations
                 </a>
@@ -103,12 +60,34 @@
             
         </ul>
     </li>
-    <li class="nav-active">
-        <a href="{{route('get_dev_stat')}}">
+    <li class="nav-parent">
+        <a>
+            <i class="fa fa-archive" aria-hidden="true"></i>
+            <span>Archive</span>
+        </a>
+        <ul class="nav nav-children">
+            <li class="">
+                <a href="{{route('get_cdq_new_archive')}}">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                    Des nouveaux projets
+                </a>
+            </li>
+            <li class="">
+            <a href="{{route('get_cdq_opt_archive')}}">
+                    <i class="fa  fa-wrench" aria-hidden="true"></i>
+                    Des projets améliorés
+                </a>
+            </li>
+            
+        </ul>
+    </li>
+    <li class="">
+        <a href="{{route('get_cdq_stat')}}">
             <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
             <span>Les Statistiques</span>
         </a>
     </li>
+    
 @endsection
 
 @section('content-title')
@@ -143,7 +122,7 @@ Suivi des demandes des nouveaux projets
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($optimizationRequests as $NewprojectRequest)
+                        @foreach ($newprojectrequests as $NewprojectRequest)
                         <tr class="gradeX" id="row-{{$NewprojectRequest->id}}">
                             <td class="userId">{{$NewprojectRequest->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$NewprojectRequest->id}}"/></td>
                             <td class="input email email">{{$NewprojectRequest->title}}</td>

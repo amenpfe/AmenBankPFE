@@ -11,10 +11,11 @@
 @endsection
 
 @section('edit')
-{{route('edit_cai')}}
+{{route('edit_cdd')}}
 @endsection
-@section('new-notification-route')new-request-details-cai @endsection
-@section('opt-notification-route')opt-request-details-cai @endsection
+
+@section('new-notification-route')new-request-details-cdd @endsection
+@section('opt-notification-route')opt-request-details-cdd @endsection
 
 
 @section('navigation')
@@ -24,14 +25,14 @@
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-        <li class="nav-active">
-                <a href="">
+        <li class="">
+                <a href="{{route('get_ds_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
         <li class="">
-        <a href="{{route('get_cai_opt')}}">
+        <a href="{{route('get_ds_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations
             </a>
@@ -45,13 +46,13 @@
     </a>
     <ul class="nav nav-children">
         <li class="">
-            <a href="{{route('all_new_request_cai')}}">
+            <a href="{{route('all_new_request_ds')}}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Des nouveaux projets
             </a>
         </li>
         <li class="">
-        <a href="{{route('all_opt_request_cai')}}">
+        <a href="{{route('all_opt_request_ds')}}">
                 <i class="fa  fa-wrench" aria-hidden="true"></i>
                 D'améliorations
             </a>
@@ -59,34 +60,34 @@
         
     </ul>
 </li>
-    
 <li class="nav-parent nav-active nav-expanded">
     <a>
         <i class="fa fa-archive" aria-hidden="true"></i>
-        <span>Archive des projets</span>
+        <span>Archive</span>
     </a>
     <ul class="nav nav-children">
-        <li class="nav-active">
-            <a href="">
+        <li class="">
+            <a href="{{route('get_ds_new_archive')}}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Des nouveaux projets
             </a>
         </li>
-        <li class="">
-        <a href="{{route('get_cai_opt_archive')}}">
+        <li class="nav-active">
+        <a href="">
                 <i class="fa  fa-wrench" aria-hidden="true"></i>
-                D'améliorations
+                Des projets améliorés
             </a>
         </li>
         
     </ul>
 </li>
-<li class="nav-active">
-    <a href="{{route('get_cai_stat')}}">
+<li class="">
+    <a href="{{route('get_ds_stat')}}">
         <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
         <span>Les Statistiques</span>
     </a>
 </li>
+    
 @endsection
 
 @section('content-title')
@@ -98,7 +99,7 @@ Archive des projets
         <span>Archive des projets</span>
     </li>
     <li>
-        <span>Des nouveaux projets</span>
+        <span>D'améliorations</span>
     </li>
 @endsection
 
@@ -122,14 +123,14 @@ Archive des projets
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($newprojectrequest as $newProjectRequest)
-                        <tr class="gradeX" id="row-{{$newProjectRequest->requestable->id}}">
-                            <td class="userId">{{$newProjectRequest->requestable->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$newProjectRequest->requestable->id}}"/></td>
-                            <td class="input email email">{{$newProjectRequest->requestable->title}}</td>
-                            <td class="input email email">{{$newProjectRequest->requestable_type}}</td>
-                            <td class="input email email">{{$newProjectRequest->requestable->created_at}}</td>
+                        @foreach ($projectrequest as $projectRequest)
+                        <tr class="gradeX" id="row-{{$projectRequest->requestable->id}}">
+                            <td class="userId">{{$projectRequest->requestable->id}}<input name="user[id]" class="u" hidden required type="number" value="{{$projectRequest->requestable->id}}"/></td>
+                            <td class="input email email">{{App\Project::find($projectRequest->requestable->project_id)->name}}</td>
+                            <td class="input email email">{{$projectRequest->requestable_type}}</td>
+                            <td class="input email email">{{$projectRequest->requestable->created_at}}</td>
                             <td class="actions">
-                                <a href="{{route('get_cai_new_archive_details', $newProjectRequest->id)}}"><i class="fa fa-eye"></i></a>
+                                <a href="{{route('get_ds_opt_archive_details', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach

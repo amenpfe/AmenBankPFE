@@ -19,12 +19,12 @@
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-        <li class="{{route('get_ds_new')}}">
-                <a href="">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    Des nouveaux projets
-                </a>
-            </li>
+        <li class="">
+            <a href="{{route('get_ds_new')}}">
+                <i class="fa fa-plus" aria-hidden="true"></i>
+                Des nouveaux projets
+            </a>
+        </li>
         <li class="">
         <a href="{{route('get_ds_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
@@ -39,7 +39,7 @@
         <span>Suivi des demande</span>
     </a>
     <ul class="nav nav-children">
-        <li class="">
+        <li class="nav-active">
             <a href="{{route('all_new_request_ds')}}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Des nouveaux projets
@@ -60,13 +60,13 @@
         <span>Archive</span>
     </a>
     <ul class="nav nav-children">
-        <li class="">
+        <li class="nav-active">
             <a href="{{route('get_ds_new_archive')}}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Des nouveaux projets
             </a>
         </li>
-        <li class="nav-active">
+        <li class="">
         <a href="{{route('get_ds_opt_archive')}}">
                 <i class="fa  fa-wrench" aria-hidden="true"></i>
                 Des projets améliorés
@@ -93,15 +93,15 @@ Détails de demande
         <span>Archive des projets</span>
     </li>
     <li>
-        <span>D'améliorations</span>
+        <span>Des nouveaux projets</span>
     </li>
 @endsection
-@section('new-notification-route')new-request-details-cai @endsection
-@section('opt-notification-route')opt-request-details-cai @endsection
+@section('new-notification-route')new-request-details-cdd @endsection
+@section('opt-notification-route')opt-request-details-cdd @endsection
 
 @section('content')
     @php 
-        $user = App\User::find($projectrequest->user_id); 
+        $user = App\User::find($newprojectrequest->user_id); 
     @endphp
 <section class="panel">
     <div class="panel-body">
@@ -110,11 +110,11 @@ Détails de demande
                 <div class="row">
                     <div class="col-sm-6 mt-md">
                         <h2 class="h2 mt-none mb-sm text-dark text-bold">Réference</h2>
-                    <h4 class="h4 m-none text-dark text-bold">#{{$projectrequest->requestable->id}}</h4><br>
+                    <h4 class="h4 m-none text-dark text-bold">#{{$newprojectrequest->requestable->id}}</h4><br>
                     </div>
                     <div class="col-sm-6 text-right mt-md mb-md">
                         <h2 class="h2 mt-none mb-sm text-dark text-bold">Etat</h2>
-                        <h4 class="h4 m-none text-danger text-bold">{{App\Enums\StatusRequest::getEnumDescriptionByValue($projectrequest->status)}}</h4><br>
+                        <h4 class="h4 m-none text-danger text-bold">{{App\Enums\StatusRequest::getEnumDescriptionByValue($newprojectrequest->status)}}</h4><br>
                     </div>
                 </div>
             </header>
@@ -138,11 +138,11 @@ Détails de demande
                         <div class="bill-data text-right">
                             <p class="mb-none">
                                 <span class="text-dark"><b>Crée le:</b></span>
-                            <span class="value">{{$projectrequest->requestable->created_at}}</span>
+                            <span class="value">{{$newprojectrequest->requestable->created_at}}</span>
                             </p>
                             <p class="mb-none">
                                 <span class="text-dark"><b>Dérniere modification:</b></span>
-                                <span class="value">{{$projectrequest->requestable->updated_at}}</span>
+                                <span class="value">{{$newprojectrequest->requestable->updated_at}}</span>
                             </p>
                         </div>
                     </div>
@@ -154,47 +154,43 @@ Détails de demande
                     <tbody>
                             <tr>
                                 <td class="text-dark col-sm-3"><h4><b>Titre du projet</b></h4></td>
-                                <td class="text-dark"><h4>{{App\Project::find($projectrequest->requestable->project_id)->name}}</h4></td>
-                            </tr>
-                            <tr>
-                                <td class="text-dark col-sm-3"><h4><b>Type de demande</b></h4></td>
-                                <td class="text-dark"><h4>{{App\Enums\RequestTypes::getEnumDescriptionByValue($projectrequest->requestable->type)}}</h4></td>
+                                <td class="text-dark"><h4>{{$newprojectrequest->requestable->title}}</h4></td>
                             </tr>
                             <tr>
                                 <td class="text-dark col-sm-3"><h4><b>Document d'expression des besoins</b></h4></td> 
-                                <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$projectrequest->user_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                                <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->user_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                             </tr>
                             <tr>
                                 <td class="text-dark col-sm-3"><h4><b>L'ensemble des actions à entreprendre</b></h4></td> 
-                                <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$projectrequest->ced_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                                <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->ced_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                             </tr>
                             <tr>
                                     <td class="text-dark col-sm-3"><h4><b>Cahier des charges</b></h4></td> 
-                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$projectrequest->chd_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->chd_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                             </tr>
                             <tr>
                                     <td class="text-dark col-sm-3"><h4><b>Document d'analyse de besoins</b></h4></td> 
-                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$projectrequest->analyse_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->analyse_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                             </tr>
                             <tr>
                                     <td class="text-dark col-sm-3"><h4><b>Document de conception globale</b></h4></td> 
-                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$projectrequest->conception_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->conception_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                             </tr>
                             <tr>
                                     <td class="text-dark col-sm-3"><h4><b>Le logiciel</b></h4></td> 
-                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$projectrequest->logiciel_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->logiciel_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                             </tr>
                             <tr>
                                     <td class="text-dark col-sm-3"><h4><b>Document du test</b></h4></td> 
-                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$projectrequest->test_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->test_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                             </tr>
                             <tr>
                                     <td class="text-dark col-sm-3"><h4><b>Cahier de recette</b></h4></td> 
-                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$projectrequest->recette_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->recette_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                             </tr>
                             <tr>
                                     <td class="text-dark col-sm-3"><h4><b>circulaire</b></h4></td> 
-                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$projectrequest->circulaire_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                                    <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$newprojectrequest->circulaire_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                             </tr>
                     </tbody>
                 </table>
@@ -207,7 +203,7 @@ Détails de demande
                             <tr>
                                 <div class="form-group {{ $errors->has('requestId') ? ' has-error' : '' }}">
                                     <div class="input-group input-group-icon">
-                                            <input type="text" value="{{$projectrequest->id}}" name="requestId" hidden>
+                                            <input type="text" value="{{$newprojectrequest->id}}" name="requestId" hidden>
                                     </div>
                                     @if ($errors->has('requestId'))
                                         <span class="help-block">

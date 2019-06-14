@@ -13,7 +13,8 @@
 @section('edit')
 {{route('edit_cai')}}
 @endsection
-
+@section('new-notification-route')new-request-details-cai @endsection
+@section('opt-notification-route')opt-request-details-cai @endsection
 
 
 @section('navigation')

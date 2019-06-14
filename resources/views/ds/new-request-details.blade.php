@@ -9,7 +9,7 @@
 @endsection
 
 @section('edit')
-{{route('edit_cai')}}
+{{route('edit_ds')}}
 @endsection
 
 @section('navigation')
@@ -20,13 +20,13 @@
     </a>
     <ul class="nav nav-children">
         <li class="nav-active">
-                <a href="{{route('get_cai_new')}}">
+                <a href="">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
         <li class="">
-        <a href="{{route('get_cai_opt')}}">
+        <a href="{{route('get_ds_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations
             </a>
@@ -40,13 +40,13 @@
     </a>
     <ul class="nav nav-children">
         <li class="">
-            <a href="{{route('all_new_request_cai')}}">
+            <a href="{{route('all_new_request_ds')}}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Des nouveaux projets
             </a>
         </li>
         <li class="">
-        <a href="{{route('all_opt_request_cai')}}">
+        <a href="{{route('all_opt_request_ds')}}">
                 <i class="fa  fa-wrench" aria-hidden="true"></i>
                 D'améliorations
             </a>
@@ -57,34 +57,35 @@
 <li class="nav-parent">
     <a>
         <i class="fa fa-archive" aria-hidden="true"></i>
-        <span>Archive des projets</span>
+        <span>Archive</span>
     </a>
     <ul class="nav nav-children">
         <li class="">
-            <a href="{{route('get_cai_new_archive')}}">
+            <a href="{{route('get_ds_new_archive')}}">
                 <i class="fa fa-plus" aria-hidden="true"></i>
                 Des nouveaux projets
             </a>
         </li>
-        <li class="nav-">
-        <a href="{{route('get_cai_opt_archive')}}">
+        <li class="">
+        <a href="{{route('get_ds_opt_archive')}}">
                 <i class="fa  fa-wrench" aria-hidden="true"></i>
-                D'améliorations
+                Des projets améliorés
             </a>
         </li>
-
+        
     </ul>
 </li>
-<li class="nav-active">
-    <a href="{{route('get_cai_stat')}}">
+<li class="">
+    <a href="{{route('get_ds_stat')}}">
         <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
         <span>Les Statistiques</span>
     </a>
 </li>
+
 @endsection
 
-@section('new-notification-route')new-request-details-cai @endsection
-@section('opt-notification-route')opt-request-details-cai @endsection
+@section('new-notification-route')new-request-details-ds @endsection
+@section('opt-notification-route')opt-request-details-ds @endsection
 @section('content-title')
 Détails de demande
 @endsection
@@ -144,7 +145,7 @@ Détails de demande
                         </tr>
                         <tr>
                             <td class="text-dark col-sm-3"><h4><b>Fichier</b></h4></td> 
-                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$request->conception_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
+                            <td class="text-dark"><h4><a href="{{URL::to('/')}}/files/{{$request->logiciel_doc}}" target="_blank"><i class="fa fa-file-pdf-o"></i> Ouvrir</a></h4></td>
                         </tr>
                     </tbody>
                 </table>
@@ -155,18 +156,17 @@ Détails de demande
                         border-right: 5px solid #114E9E; border-top-right-radius: 5px; border-bottom-right-radius: 5px;
                         margin-top: 5px; padding-left: 1%;">
                             {!!$request->remarques!!}
-                            </div><br><br><br></h4>
+                    </div><br><br><br></h4>
+                </div>
+            </div>  
+        </div>
+        <footer>
+            <div class="row ">
+                <div class="col-sm-3 col-sm-offset-9">
+                <button class="btn btn-success"><a href="{{route('mail_new_request', $request->id)}}">Valider</a></button>
                 </div>
             </div>
-            <footer>
-                <div class="row ">
-                    <div class="col-sm-3 col-sm-offset-9">
-                    <button class="btn btn-success"><a href="{{route('caiaccept_request', $request->id)}}">Valider</a></button>
-                    <button class="btn btn-danger"><a href="{{route('cairefuse_request', $request->id)}}">Refuser</a></button>
-                    </div>
-                </div>
-            </footer>
-        </div>
+        </footer>
     </div>
 </section>
 @endsection
