@@ -1462,5 +1462,13 @@ class RequestController extends Controller
     //End
 
 
-
+    private function markNotificationAsReaded(ProjectRequest $projectRequest){
+        $userNotifications = Auth::user()->unreadNotifications;
+        for($i = 0; $i < sizeof($userNotifications); $i++) {
+            if($userNotifications[$i]->data['projectRequest']['id'] == $projectRequest->id){
+                $userNotifications[$i]->markAsRead();
+                break;
+            }
+        }
+    }
 }
