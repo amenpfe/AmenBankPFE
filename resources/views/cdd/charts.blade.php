@@ -119,7 +119,7 @@ Les statistiques
             </div>
             <div>
                 <div class="col-sm-6" style="margin-top: 60px; margin-bottom: 20px;">
-                    <canvas id="cedProjCanvas"></canvas>
+                    <canvas id="cddProjCanvas"></canvas>
                 </div>
                 <div class="col-sm-6" style="margin-top: 60px; margin-bottom: 20px;">
                     <canvas id="newProjCanvas"></canvas>
@@ -148,19 +148,19 @@ Les statistiques
 
     <script>
         @php
-            $rest = 100 - $cedProjPercentage;
+            $rest = 100 - $cddProjPercentage;
         @endphp
         //CedProjChart
-        var cedProjCtx = document.getElementById('cedProjCanvas').getContext('2d');
+        var cedProjCtx = document.getElementById('cddProjCanvas').getContext('2d');
 
-        new Chart(cedProjCtx, {
+        new Chart(cddProjCtx, {
             type: 'doughnut',
             data: {
                 labels: ["Autres", "Projets affectés"],
                 datasets: [
                 {
                     label: "TeamA Score",
-                    data: [{{$cedProjPercentage}}, {{$rest}}],
+                    data: [{{$cddProjPercentage}}, {{$rest}}],
                     backgroundColor: [
                     "rgba(40,187,105)",
                     "rgba(37,129,188)"

@@ -25,7 +25,7 @@
         </a>
         <ul class="nav nav-children">
             
-            <li class="nav-parent  nav-expanded">
+            <li class="nav-parent nav-active nav-expanded">
                 <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
                 <ul class="nav nav-children">
                     <li class="nav-parent">

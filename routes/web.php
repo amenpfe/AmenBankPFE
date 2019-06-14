@@ -148,7 +148,7 @@ Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
     Route::get('/allopt', 'RequestController@getCDDAllOptRequests')->name('all_opt_request_cdd');
 //next
     Route::get('/shownewp', 'RequestController@getCDDPNewProjectRequest')->name('get_cddp_new');
-    Route::get('/showoppt', 'RequestController@getCDDOptRequest')->name('get_cddp_opt');
+    Route::get('/showoppt', 'RequestController@getCDDPOptRequest')->name('get_cddp_opt');
 
     Route::get('/detailp/{id}', 'RequestController@getCDDPNewDetails')->middleware('request_details')->name('new-p-details-cdd');
     Route::post('/detailsubmitp', 'RequestController@submitCDDPNewRequestForm')->name('new-p-detail-cdd-submit');
@@ -161,6 +161,8 @@ Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
 
     Route::get('/edit', 'UserController@getEditProfilCDD')->name('edit_cdd');
     Route::post('/edit', 'UserController@editProfilCDDSubmit')->name('submit_cdd_edit');
+
+    Route::get('/stat', 'RequestController@getStatcdd')->name('get_cdd_stat');
 
 });
 
