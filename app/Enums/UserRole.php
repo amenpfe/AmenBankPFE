@@ -23,7 +23,7 @@ class UserRole extends Enum
      */
     const proprietaire = 2;
     /**
-     * @description('Comité d'organisation)
+     * @description('Comité d'organisation')
     */
     const comite = 3;
     /**

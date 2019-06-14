@@ -49,8 +49,8 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="main-error mb-xlg">
-								<h2 class="error-code text-dark text-center text-semibold m-none">UNAUTHORIZED </i></h2>
-								<p class="error-explanation text-center">We're sorry, but the page you were looking for is only accissible by {{$role}}</p>
+								<h2 class="error-code text-dark text-center text-semibold m-none">NON AUTORISÉ</h2>
+								<p class="error-explanation text-center">Nous sommes désolés, mais la page que vous recherchez n’est accessible que par {{$role}}</p>
 							</div>
 						</div>
 					</div>

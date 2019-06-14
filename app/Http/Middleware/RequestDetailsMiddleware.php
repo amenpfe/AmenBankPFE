@@ -9,6 +9,7 @@ use App\Enums\UserRole;
 use App\Enums\StatusRequest;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Foundation\Auth\User;
+use App\Enums\RoleStatuses;
 
 class RequestDetailsMiddleware
 {
@@ -58,8 +59,7 @@ class RequestDetailsMiddleware
         } else if ($user->role == UserRole::byKey('Developpeur')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_devp')->getValue()) {
             return $next($request);}
 
-        $trueUser = User::find($projectRequest->user_id);
-        return new Response(view('errors\unauthorized')->with('role', UserRole::byValue($trueUser->role)->getDescription()));
+        return new Response(view('errors\unauthorized')->with('role', RoleStatuses::getEnumDescriptionByRequestStatus($projectRequest->status)));
 
         /*if ($user->role == UserRole::byKey('User')->getValue() && $projectRequest->status == StatusRequest::byKey('send')->getValue()) {
             return $next($request);

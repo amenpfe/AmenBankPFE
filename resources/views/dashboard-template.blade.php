@@ -70,44 +70,37 @@
                             </div>
 
                             <div class="content">
-                                    <ul id="notifications-container">
-                                        <?php
+                                <ul id="notifications-container">
+                                    <?php
 
-                                            $newRequestRouteName = trim(app()->view->getSections()['new-notification-route']);
-                                            $optRequestRouteName = trim(app()->view->getSections()['opt-notification-route']);
-                                        ?>
-                                        @foreach (Auth::user()->unreadNotifications as $notification)
-                                            <li>
-                                                @php
-                                                    $routeLink;
-                                                    if($notification->data['projectRequest']['requestable_type'] == "App\\NewProjectRequest")
-                                                        $routeLink = route($newRequestRouteName, $notification->data['projectRequest']['id']);
-                                                    else
-                                                        $routeLink = route($optRequestRouteName, $notification->data['projectRequest']['id']);
-                                                @endphp
-                                                <a href="{{$routeLink}}" class="clearfix">
-                                                    @if($notification->data['projectRequest']['requestable_type'] == "App\\NewProjectRequest")
-                                                        Demande d'un nouveau projet
-                                                    @else
-                                                        Demande d'amélioration
-                                                    @endif
-                                                    <span class="message">{{$notification->data['projectRequest']['updated_at']}}</span>
-                                                    <!--<div class="image">
-                                                        <i class="fa fa-thumbs-down bg-danger"></i>
-                                                    </div>
-                                                    <span class="title">Server is Down!</span>
-                                                    <span class="message">Just now</span>-->
-                                                </a>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-
-
-                                <hr />
-
-                                <div class="text-right">
-                                    <a href="#" class="view-more">View All</a>
-                                </div>
+                                        $newRequestRouteName = trim(app()->view->getSections()['new-notification-route']);
+                                        $optRequestRouteName = trim(app()->view->getSections()['opt-notification-route']);
+                                    ?>
+                                    @foreach (Auth::user()->unreadNotifications as $notification)
+                                        <li>
+                                            @php
+                                                $routeLink;
+                                                if($notification->data['projectRequest']['requestable_type'] == "App\\NewProjectRequest")
+                                                    $routeLink = route($newRequestRouteName, $notification->data['projectRequest']['id']);
+                                                else
+                                                    $routeLink = route($optRequestRouteName, $notification->data['projectRequest']['id']);
+                                            @endphp
+                                            <a href="{{$routeLink}}" class="clearfix">
+                                                @if($notification->data['projectRequest']['requestable_type'] == "App\\NewProjectRequest")
+                                                    Demande d'un nouveau projet
+                                                @else
+                                                    Demande d'amélioration
+                                                @endif
+                                                <span class="message">{{$notification->data['projectRequest']['updated_at']}}</span>
+                                                <!--<div class="image">
+                                                    <i class="fa fa-thumbs-down bg-danger"></i>
+                                                </div>
+                                                <span class="title">Server is Down!</span>
+                                                <span class="message">Just now</span>-->
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
                         </div>
                     </li>

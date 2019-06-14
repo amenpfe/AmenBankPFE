@@ -15216,7 +15216,7 @@ html.dark .invoice table.table > tbody tr > td {
 /* Error Pages - wrappers */
 .body-error {
 	margin: 0 auto;
-	max-width: 900px;
+	max-width: 1000px;
 	width: 100%;
 }
 .body-error.error-outside {

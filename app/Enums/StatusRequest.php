@@ -32,11 +32,11 @@ class StatusRequest extends Enum
     /**
     * @description('Acceptée')
     */
-    const accept = 4; 
+    const accept = 15; 
     /**
     * @description('Refusée')
     */
-    const refus =5;
+    const refus = 5;
     /**
     * @description('Traitée')
     */
