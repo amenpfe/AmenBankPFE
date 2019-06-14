@@ -11,7 +11,7 @@
 @endsection
 
 @section('edit')
-{{route('edit_cdd')}}
+{{route('edit_prop')}}
 @endsection
 
 @section('new-notification-route')new-request-details-cdd @endsection

@@ -2,6 +2,11 @@
 @section('title')
     Détails de demande
 @endsection
+
+@section('edit')
+{{route('edit_user')}}
+@endsection
+
 @section('navigation')
 <li class="nav-parent nav-active nav-expanded">
     <a>

@@ -9,7 +9,7 @@
 @endsection
 
 @section('edit')
-{{route('edit_cdd')}}
+{{route('edit_chd')}}
 @endsection
 
 @section('navigation')

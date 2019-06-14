@@ -11,7 +11,7 @@
 @endsection
 
 @section('edit')
-{{route('edit_chd')}}
+{{route('edit_cai')}}
 @endsection
 
 @section('new-notification-route')new-request-details-cai @endsection

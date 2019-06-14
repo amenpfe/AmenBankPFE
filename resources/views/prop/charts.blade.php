@@ -11,7 +11,7 @@
 @endsection
 
 @section('edit')
-{{route('edit_chd')}}
+{{route('edit_prop')}}
 @endsection
 
 @section('new-notification-route')new-request-details-ced @endsection
@@ -24,12 +24,6 @@
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-        <li class="">
-        <a href="{{route('get_prop_new')}}">
-                    <i class="fa fa-plus" aria-hidden="true"></i>
-                    Des nouveaux projets
-                </a>
-            </li>
         <li class="">
         <a href="{{route('get_prop_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
