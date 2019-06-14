@@ -71,7 +71,12 @@ Modifier le profil
             <div class="panel-body">
                 <div class="modal-wrapper">
                     <div class="modal-text">
-                        <input required name="current_password" type="password" id="current_password" onkeyup="checkPassword(this)"/>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label" for="current_password">Mot de passe</label>
+                            <div class="col-md-8">
+                                <input required class="form-control" name="current_password" type="password" id="current_password" onkeyup="checkPassword(this)"/>   
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -117,7 +122,7 @@ Modifier le profil
                 <div class="form-group {{ $errors->has('name') ? ' has-error' : '' }}">
                     <label class="col-md-3 control-label" for="name">Nom</label>
                     <div class="col-md-8">
-                        <input type="text" id ="name" name="name" class="form-control" value="{{Auth::user()->name}}" required>
+                        <input type="text" id ="name" name="name" class="form-control" value="{{$user->name}}" required>
                         @if ($errors->has('name'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -129,7 +134,7 @@ Modifier le profil
                 <div class="form-group {{ $errors->has('email') ? ' has-error' : '' }}">
                     <label class="col-md-3 control-label" for="email">Adresse E-mail</label>
                     <div class="col-md-8">
-                        <input type="email" id="email" name="email" class="form-control" value="{{Auth::user()->email}}" required>
+                        <input type="email" id="email" name="email" class="form-control" value="{{$user->email}}" required>
                         @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>

@@ -15,7 +15,7 @@ class UserController extends Controller
     }
 
     public function editProfilUser(){
-        return view('user/edit-user');
+        return view('user/edit-user')->with("user", Auth::user());
     }
 
     public function editProfilPostUser(EditProfilRequest $request){
@@ -24,7 +24,7 @@ class UserController extends Controller
         $currentPassword = $inputs['current_password'];
         if(IlluminateHash::check($currentPassword, $user->password)){
             $inputs['role'] = $user->role;
-            $this->userRepository->updateUserInfos($user->id, $inputs);
+            $user = $this->userRepository->updateUserInfos($user->id, $inputs);
             return view('user/edit-user')->with('user', $user)->with("success", "Profil mis à jour!");
         }else {
             return view('user/edit-user')->with('user', $user)->with("error", "Mot de passe invalide!");
@@ -32,7 +32,7 @@ class UserController extends Controller
     }
 
     public function editProfilAdmin(){
-        return view('admin/edit_profil');
+        return view('admin/edit_profil')->with("user", Auth::user());
     }
 
     public function editProfilPostAdmin(EditProfilRequest $request){
@@ -41,7 +41,7 @@ class UserController extends Controller
         $currentPassword = $inputs['current_password'];
         if(IlluminateHash::check($currentPassword, $user->password)){
             $inputs['role'] = $user->role;
-            $this->userRepository->updateUserInfos($user->id, $inputs);
+            $user = $this->userRepository->updateUserInfos($user->id, $inputs);
             return view('admin/edit_profil')->with('user', $user)->with("success", "Profil mis à jour!");
         }else {
             return view('admin/edit_profil')->with('user', $user)->with("error", "Mot de passe invalide!");
@@ -49,7 +49,7 @@ class UserController extends Controller
     }
 
     public function getEditProfilCED(){
-        return view('ced/edit-profil');
+        return view('ced/edit-profil')->with("user", Auth::user());
     }
 
     public function editProfilCEDSubmit(EditProfilRequest $request){
@@ -58,7 +58,7 @@ class UserController extends Controller
         $currentPassword = $inputs['current_password'];
         if(IlluminateHash::check($currentPassword, $user->password)){
             $inputs['role'] = $user->role;
-            $this->userRepository->updateUserInfos($user->id, $inputs);
+            $user = $this->userRepository->updateUserInfos($user->id, $inputs);
             return view('ced/edit-profil')->with('user', $user)->with("success", "Profil mis à jour!");
         }else {
             return view('ced/edit-profil')->with('user', $user)->with("error", "Mot de passe invalide!");
@@ -66,7 +66,7 @@ class UserController extends Controller
     }
 
     public function getEditProfilCDD(){
-        return view('cdd/edit-profil');
+        return view('cdd/edit-profil')->with("user", Auth::user());
     }
 
     public function editProfilCDDSubmit(EditProfilRequest $request){
@@ -75,7 +75,7 @@ class UserController extends Controller
         $currentPassword = $inputs['current_password'];
         if(IlluminateHash::check($currentPassword, $user->password)){
             $inputs['role'] = $user->role;
-            $this->userRepository->updateUserInfos($user->id, $inputs);
+            $user = $this->userRepository->updateUserInfos($user->id, $inputs);
             return view('cdd/edit-profil')->with('user', $user)->with("success", "Profil mis à jour!");
         }else {
             return view('cdd/edit-profil')->with('user', $user)->with("error", "Mot de passe invalide!");
@@ -83,7 +83,7 @@ class UserController extends Controller
     }
 
     public function getEditProfilCDQ(){
-        return view('cdq/edit-profil');
+        return view('cdq/edit-profil')->with("user", Auth::user());
     }
 
     public function editProfilCDQSubmit(EditProfilRequest $request){
@@ -92,7 +92,7 @@ class UserController extends Controller
         $currentPassword = $inputs['current_password'];
         if(IlluminateHash::check($currentPassword, $user->password)){
             $inputs['role'] = $user->role;
-            $this->userRepository->updateUserInfos($user->id, $inputs);
+            $user = $this->userRepository->updateUserInfos($user->id, $inputs);
             return view('cdq/edit-profil')->with('user', $user)->with("success", "Profil mis à jour!");
         }else {
             return view('cdq/edit-profil')->with('user', $user)->with("error", "Mot de passe invalide!");
@@ -100,7 +100,7 @@ class UserController extends Controller
     }
 
     public function getEditProfilChd(){
-        return view('chd/edit-profil');
+        return view('chd/edit-profil')->with("user", Auth::user());
     }
 
     public function editProfilChdSubmit(EditProfilRequest $request){
@@ -109,7 +109,7 @@ class UserController extends Controller
         $currentPassword = $inputs['current_password'];
         if(IlluminateHash::check($currentPassword, $user->password)){
             $inputs['role'] = $user->role;
-            $this->userRepository->updateUserInfos($user->id, $inputs);
+            $user = $this->userRepository->updateUserInfos($user->id, $inputs);
             return view('chd/edit-profil')->with('user', $user)->with("success", "Profil mis à jour!");
         }else {
             return view('chd/edit-profil')->with('user', $user)->with("error", "Mot de passe invalide!");
@@ -117,7 +117,7 @@ class UserController extends Controller
     }
 
     public function getEditProfilDS(){
-        return view('ds/edit-profil');
+        return view('ds/edit-profil')->with("user", Auth::user());
     }
 
     public function editProfilDSSubmit(EditProfilRequest $request){
@@ -126,7 +126,7 @@ class UserController extends Controller
         $currentPassword = $inputs['current_password'];
         if(IlluminateHash::check($currentPassword, $user->password)){
             $inputs['role'] = $user->role;
-            $this->userRepository->updateUserInfos($user->id, $inputs);
+            $user = $this->userRepository->updateUserInfos($user->id, $inputs);
             return view('ds/edit-profil')->with('user', $user)->with("success", "Profil mis à jour!");
         }else {
             return view('ds/edit-profil')->with('user', $user)->with("error", "Mot de passe invalide!");
@@ -134,7 +134,7 @@ class UserController extends Controller
     }
 
     public function getEditProfilORG(){
-        return view('organisation/edit-profil');
+        return view('organisation/edit-profil')->with("user", Auth::user());
     }
 
     public function editProfilORGSubmit(EditProfilRequest $request){
@@ -143,7 +143,7 @@ class UserController extends Controller
         $currentPassword = $inputs['current_password'];
         if(IlluminateHash::check($currentPassword, $user->password)){
             $inputs['role'] = $user->role;
-            $this->userRepository->updateUserInfos($user->id, $inputs);
+            $user = $this->userRepository->updateUserInfos($user->id, $inputs);
             return view('organisation/edit-profil')->with('user', $user)->with("success", "Profil mis à jour!");
         }else {
             return view('organisation/edit-profil')->with('user', $user)->with("error", "Mot de passe invalide!");
@@ -151,7 +151,7 @@ class UserController extends Controller
     }
 
     public function getEditProfilProp(){
-        return view('prop/edit-profil');
+        return view('prop/edit-profil')->with("user", Auth::user());
     }
 
     public function editProfilPropSubmit(EditProfilRequest $request){
@@ -160,7 +160,7 @@ class UserController extends Controller
         $currentPassword = $inputs['current_password'];
         if(IlluminateHash::check($currentPassword, $user->password)){
             $inputs['role'] = $user->role;
-            $this->userRepository->updateUserInfos($user->id, $inputs);
+            $user = $this->userRepository->updateUserInfos($user->id, $inputs);
             return view('prop/edit-profil')->with('user', $user)->with("success", "Profil mis à jour!");
         }else {
             return view('prop/edit-profil')->with('user', $user)->with("error", "Mot de passe invalide!");
@@ -168,7 +168,7 @@ class UserController extends Controller
     }
     
     public function getEditProfilcai(){
-        return view('cai/edit-profil');
+        return view('cai/edit-profil')->with("user", Auth::user());
     }
 
     public function editProfilcaiSubmit(EditProfilRequest $request){
@@ -177,7 +177,7 @@ class UserController extends Controller
         $currentPassword = $inputs['current_password'];
         if(IlluminateHash::check($currentPassword, $user->password)){
             $inputs['role'] = $user->role;
-            $this->userRepository->updateUserInfos($user->id, $inputs);
+            $user = $this->userRepository->updateUserInfos($user->id, $inputs);
             return view('cai/edit-profil')->with('user', $user)->with("success", "Profil mis à jour!");
         }else {
             return view('cai/edit-profil')->with('user', $user)->with("error", "Mot de passe invalide!");
@@ -185,7 +185,7 @@ class UserController extends Controller
     }
 
     public function getEditProfildv(){
-        return view('dv/edit-profil');
+        return view('dv/edit-profil')->with("user", Auth::user());
     }
 
     public function editProfildvSubmit(EditProfilRequest $request){
@@ -194,7 +194,7 @@ class UserController extends Controller
         $currentPassword = $inputs['current_password'];
         if(IlluminateHash::check($currentPassword, $user->password)){
             $inputs['role'] = $user->role;
-            $this->userRepository->updateUserInfos($user->id, $inputs);
+            $user = $this->userRepository->updateUserInfos($user->id, $inputs);
             return view('dv/edit-profil')->with('user', $user)->with("success", "Profil mis à jour!");
         }else {
             return view('dv/edit-profil')->with('user', $user)->with("error", "Mot de passe invalide!");
