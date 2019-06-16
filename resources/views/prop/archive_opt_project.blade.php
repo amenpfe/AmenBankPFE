@@ -14,8 +14,8 @@
 {{route('edit_prop')}}
 @endsection
 
-@section('new-notification-route')new-request-details-cdd @endsection
-@section('opt-notification-route')opt-request-details-cdd @endsection
+@section('new-notification-route')new-request-details-prop @endsection
+@section('opt-notification-route')opt-request-details-prop @endsection
 
 
 @section('navigation')

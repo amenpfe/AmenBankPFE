@@ -93,7 +93,8 @@
             <li class="">
             <a href="{{route('get_dv_opt_archive')}}">
                     <i class="fa  fa-wrench" aria-hidden="true"></i>
-                    D'améliorations
+                    Des projets améliorés
+
                 </a>
             </li>
 

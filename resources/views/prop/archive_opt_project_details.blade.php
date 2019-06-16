@@ -90,8 +90,8 @@ Détails de demande
         <span>D'améliorations</span>
     </li>
 @endsection
-@section('new-notification-route')new-request-details-cdd @endsection
-@section('opt-notification-route')opt-request-details-cdd @endsection
+@section('new-notification-route')new-request-details-prop @endsection
+@section('opt-notification-route')opt-request-details-prop @endsection
 
 @section('content')
     @php 

@@ -14,8 +14,8 @@
 {{route('edit_ds')}}
 @endsection
 
-@section('new-notification-route')new-request-details-ced @endsection
-@section('opt-notification-route')opt-request-details-ced @endsection
+@section('new-notification-route')new-request-details-ds @endsection
+@section('opt-notification-route')opt-request-details-ds @endsection
 
 @section('navigation')
 <li class="nav-parent">

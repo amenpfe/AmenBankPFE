@@ -14,8 +14,8 @@
 {{route('edit_prop')}}
 @endsection
 
-@section('new-notification-route')new-request-details-ced @endsection
-@section('opt-notification-route')opt-request-details-ced @endsection
+@section('new-notification-route')new-request-details-prop @endsection
+@section('opt-notification-route')opt-request-details-prop @endsection
 
 @section('navigation')
 <li class="nav-parent">

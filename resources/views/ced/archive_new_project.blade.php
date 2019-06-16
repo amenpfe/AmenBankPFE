@@ -14,8 +14,8 @@
 {{route('edit_ced')}}
 @endsection
 
-@section('new-notification-route')new-request-details-cdd @endsection
-@section('opt-notification-route')opt-request-details-cdd @endsection
+@section('new-notification-route')new-request-details-ced @endsection
+@section('opt-notification-route')opt-request-details-ced @endsection
 
 
 @section('navigation')

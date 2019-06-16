@@ -14,8 +14,8 @@
 {{route('edit_cdq')}}
 @endsection
 
-@section('new-notification-route')new-request-details-cdd @endsection
-@section('opt-notification-route')opt-request-details-cdd @endsection
+@section('new-notification-route')new-request-details-cdq @endsection
+@section('opt-notification-route')opt-request-details-cdq @endsection
 
 
 @section('navigation')

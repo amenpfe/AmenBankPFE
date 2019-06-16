@@ -85,7 +85,7 @@
     <li class="nav-parent">
         <a>
             <i class="fa fa-archive" aria-hidden="true"></i>
-            <span>Archive des projets</span>
+            <span>Archive </span>
         </a>
         <ul class="nav nav-children">
             <li class="">
@@ -97,7 +97,8 @@
             <li class="">
             <a href="{{route('get_dv_opt_archive')}}">
                     <i class="fa  fa-wrench" aria-hidden="true"></i>
-                    D'améliorations
+                    Des projets améliorés
+
                 </a>
             </li>
             
@@ -125,23 +126,34 @@ Les statistiques
 @section('content')
 
 <section class="panel">
-        <div class="panel-body">
-            <div class="col-sm-12" style="margin-bottom: 20px; margin-top: 20px; font-size: 7em; text-align: center; height: 100%; ">
-                <div class="col-sm-4 col-sm-offset-2" style="padding-top: 30px; padding-bottom: 30px;"><strong><span class='numscroller' data-min='1' data-max='{{$untreatedCount}}' data-delay='5' data-increment='10'>{{$untreatedCount}}</span></strong></div>
-                <div class="col-sm-4 " style="padding-top: 30px; padding-bottom: 30px; border-left: solid black 3px;"><strong><span class='numscroller' data-min='1' data-max='{{$avgHours}}' data-delay='5' data-increment='10'>{{$avgHours}}</span></strong></div>
+    <div class="panel-body">
+        <div class="col-sm-12" style="margin-bottom: 20px; margin-top: 40px; text-align: center; height: 100%; ">
+            <div class="col-sm-4 col-sm-offset-2" style="padding-bottom: 30px;">
+                <strong>
+                    <span style="font-size: 1.5em;">Le nombre des projets affectés</span><br/><br/><br/></br>
+                    <span style="font-size: 7em;" class='numscroller' data-min='1' data-max='{{$untreatedCount}}' data-delay='5' data-increment='10'>{{$untreatedCount}}</span>
+                </strong>
             </div>
-            <div  style="margin-top: 25%; margin-bottom: 25%">
-                <div class="col-sm-6">
-                    <canvas id="dvProjCanvas"></canvas>
-                </div>
-                <div class="col-sm-6">
-                    <canvas id="newProjCanvas"></canvas>
-                </div>
+            <div class="col-sm-4 " style="padding-bottom: 30px; border-left: solid black 3px;">
+                <strong>
+                        <span style="font-size: 1.5em;">la durée moyenne de traitement d'une demande en heures</span><br/><br/><br/>
+                    <span style="font-size: 7em;" class='numscroller' data-min='1' data-max='{{$avgHours}}' data-delay='5' data-increment='10'>{{$avgHours}}</span>
+                </strong>
             </div>
-            
-
         </div>
-    </section>
+        <div>
+            <div class="col-sm-6" style="margin-top: 60px; margin-bottom: 20px;">
+                <canvas id="dvProjCanvas"></canvas>
+            </div>
+            <div class="col-sm-6" style="margin-top: 60px; margin-bottom: 20px;">
+                <canvas id="newProjCanvas"></canvas>
+            </div>
+        </div>
+        
+
+    </div>
+</section>
+@endsection
 @endsection
 
 
@@ -191,7 +203,7 @@ Les statistiques
                 title: {
                     display: true,
                     position: "top",
-                    text: "Les projets affectés",
+                    text: "Le taux des projets affectés",
                     fontSize: 18,
                     fontColor: "#111"
                 },

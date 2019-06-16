@@ -14,8 +14,8 @@
 {{route('edit_chd')}}
 @endsection
 
-@section('new-notification-route')new-request-details-cdd @endsection
-@section('opt-notification-route')opt-request-details-cdd @endsection
+@section('new-notification-route')new-request-details-chd @endsection
+@section('opt-notification-route')opt-request-details-chd @endsection
 
 
 @section('navigation')

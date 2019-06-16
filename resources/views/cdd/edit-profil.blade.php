@@ -77,12 +77,6 @@
 
     </ul>
 </li>
-<li class="">
-    <a href="{{route('get_cdd_stat')}}">
-        <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
-        <span>Les Statistiques</span>
-    </a>
-</li>
 <li class="nav-parent">
     <a>
         <i class="fa fa-archive" aria-hidden="true"></i>
@@ -103,6 +97,12 @@
         </li>
 
     </ul>
+</li>
+<li class="">
+    <a href="{{route('get_cdd_stat')}}">
+        <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
+        <span>Les Statistiques</span>
+    </a>
 </li>
 @endsection
 
