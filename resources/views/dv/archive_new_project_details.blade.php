@@ -101,7 +101,7 @@
             
         </ul>
     </li>
-    <li class="nav-active">
+    <li class="">
         <a href="{{route('get_dev_stat')}}">
             <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
             <span>Les Statistiques</span>

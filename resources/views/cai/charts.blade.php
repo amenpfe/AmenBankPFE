@@ -25,13 +25,13 @@
     </a>
     <ul class="nav nav-children">
         <li class="">
-        <a href="{{route('get_ds_new')}}">
+        <a href="{{route('get_cai_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
         <li class="">
-        <a href="{{route('get_ds_opt')}}">
+        <a href="{{route('get_cai_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations
             </a>
@@ -45,13 +45,13 @@
         </a>
         <ul class="nav nav-children">
             <li class="">
-                <a href="{{route('all_new_request_ds')}}">
+                <a href="{{route('all_new_request_cai')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
             <li class="">
-            <a href="{{route('all_opt_request_ds')}}">
+            <a href="{{route('all_opt_request_cai')}}">
                     <i class="fa  fa-wrench" aria-hidden="true"></i>
                     D'améliorations
                 </a>
@@ -66,13 +66,13 @@
         </a>
         <ul class="nav nav-children">
             <li class="">
-                <a href="{{route('get_ds_new_archive')}}">
+                <a href="{{route('get_cai_new_archive')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
             <li class="">
-            <a href="{{route('get_ds_opt_archive')}}">
+            <a href="{{route('get_cai_opt_archive')}}">
                     <i class="fa  fa-wrench" aria-hidden="true"></i>
                     Des projets améliorés
                 </a>
@@ -80,7 +80,7 @@
             
         </ul>
     </li>
-<li class="nav-active">
+<li class="nav-active nav-expanded">
     <a href="">
         <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
         <span>Les Statistiques</span>
@@ -106,7 +106,7 @@ Les statistiques
             <div class="col-sm-12" style="margin-bottom: 20px; margin-top: 40px; text-align: center; height: 100%; ">
                 <div class="col-sm-4 col-sm-offset-2" style="padding-bottom: 30px;">
                     <strong>
-                        <span style="font-size: 1.5em;">Le nombre des projets affectés</span><br/><br/><br/></br>
+                        <span style="font-size: 1.5em;">Le nombre des projets affectés</span><br/><br/><br/><br/>
                         <span style="font-size: 7em;" class='numscroller' data-min='1' data-max='{{$untreatedCount}}' data-delay='5' data-increment='10'>{{$untreatedCount}}</span>
                     </strong>
                 </div>
@@ -148,7 +148,7 @@ Les statistiques
 
     <script>
         @php
-            $rest = 100 - $dsProjPercentage;
+            $rest = 100 - $caiProjPercentage;
         @endphp
         //ChdProjChart
         var dsProjCtx = document.getElementById('dsProjCanvas').getContext('2d');
@@ -160,7 +160,7 @@ Les statistiques
                 datasets: [
                 {
                     label: "TeamA Score",
-                    data: [{{$dsProjPercentage}}, {{$rest}}],
+                    data: [{{$caiProjPercentage}}, {{$rest}}],
                     backgroundColor: [
                     "rgba(40,187,105)",
                     "rgba(37,129,188)"

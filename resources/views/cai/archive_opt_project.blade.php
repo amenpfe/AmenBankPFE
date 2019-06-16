@@ -24,7 +24,7 @@
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-        <li class="nav-active">
+        <li class="">
                 <a href="{{route('get_cai_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
@@ -81,7 +81,7 @@
         
     </ul>
 </li>
-<li class="nav-active">
+<li class="">
     <a href="{{route('get_cai_stat')}}">
         <i class="fa fa-bar-chart-o" aria-hidden="true"></i>
         <span>Les Statistiques</span>

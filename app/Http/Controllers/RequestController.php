@@ -11,7 +11,6 @@ use App\Project;
 use App\Http\Requests\NewProjectRequestRequest;
 use App\Http\Requests\OptimizationRequestRequest;
 use App\Http\Requests\NewRequestDetailsRequest;
-use Illuminate\Support\Facades\Redirect;
 use App\Http\Requests\OptRequestDetailsRequest;
 use App\OptimizationRequest;
 use App\Enums\UserRole;
@@ -1352,7 +1351,7 @@ class RequestController extends Controller
 
       //cai
 
-      public function getcaiNewProjectRequest(){
+    public function getcaiNewProjectRequest(){
         return view('cai/new-request-table')->with('newprojectrequests',
             ProjectRequest::where(['requestable_type' => 'App\NewProjectRequest', 'status' => StatusRequest::byKey('progressing_archi')->getValue()])->get());
     }
@@ -1426,8 +1425,6 @@ class RequestController extends Controller
         return view('cai/opt-request-details')->with('request', $request);
     }
 
-
-
     public function getcaiAllNewProjectRequests() {
         return view('cai/all-new-requests')->with('newprojectrequests', NewProjectRequest::all());
     }
@@ -1456,9 +1453,10 @@ class RequestController extends Controller
     public function getStatcai(){
         $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('progressing_archi')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        if($avgHours == null) $avgHours = 0;
         $notcaiProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $caiProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_archi')->getValue()])->count();
-        $caiProjPercentage = ($caiProjCount / $notcaiProjCount) * 100;
+        $caiProjPercentage = $notcaiProjCount == 0 ? 0 : ($caiProjCount / $notcaiProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
 
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
