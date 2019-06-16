@@ -41,7 +41,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-parent nav-expanded">
+                    <li class="nav-parent nav-active nav-expanded">
                         <a>Codage</a>
                         <ul class="nav nav-children">
                             <li>

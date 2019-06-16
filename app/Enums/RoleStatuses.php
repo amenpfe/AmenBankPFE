@@ -36,7 +36,7 @@ class RoleStatuses extends Enum
     /**
      * @description('le chef de division développement')
      */
-    const dev_chef = [7];
+    const dev_chef = [7, 13];
     
     /**
     * @description('le développeur')

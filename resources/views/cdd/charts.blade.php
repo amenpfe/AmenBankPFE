@@ -150,13 +150,13 @@ Les statistiques
         @php
             $rest = 100 - $cddProjPercentage;
         @endphp
-        //CedProjChart
-        var cedProjCtx = document.getElementById('cddProjCanvas').getContext('2d');
+        //cddProjCtx
+        var cddProjCtx = document.getElementById('cddProjCanvas').getContext('2d');
 
         new Chart(cddProjCtx, {
             type: 'doughnut',
             data: {
-                labels: ["Autres", "Projets affectés"],
+                labels: ["Projets affectés", "Autres"],
                 datasets: [
                 {
                     label: "TeamA Score",
@@ -188,6 +188,15 @@ Les statistiques
                     labels: {
                     fontColor: "#333",
                     fontSize: 16
+                    }
+                },
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var currentValue = dataset.data[tooltipItem.index];  
+                            return currentValue + "%";
+                        }
                     }
                 }
             }

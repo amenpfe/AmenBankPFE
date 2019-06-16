@@ -72,7 +72,7 @@ class LoginController extends Controller
                 return redirect()->route('get_cai_new');
                 break;
             case UserRole::byKey('Developpeur')->getValue():
-            return redirect()->route('get_dv_new');
+                return redirect()->route('get_dv_new');
                 break;    
             default:
                 # code...

@@ -244,9 +244,10 @@ class RequestController extends Controller
     public function getStatChd(){
         $untreatedCount = ProjectRequest::where('status', '=', StatusRequest::byKey('progressing_chd')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        if($avgHours == null) $avgHours = 0;
         $notChdProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $chdProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_chd')->getValue()])->count();
-        $chdProjPercentage = ($chdProjCount / $notChdProjCount) * 100;
+        $chdProjPercentage = $notChdProjCount == 0 ? 0 : ($chdProjCount / $notChdProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
 
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
@@ -378,9 +379,10 @@ class RequestController extends Controller
     public function getStatCed(){
         $untreatedCount = ProjectRequest::where('status', '=', StatusRequest::byKey('progressing_CED')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        if($avgHours == null) $avgHours = 0;
         $notCedProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $cedProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_CED')->getValue()])->count();
-        $cedProjPercentage = ($cedProjCount / $notCedProjCount) * 100;
+        $cedProjPercentage = $notCedProjCount == 0 ? 0 : ($cedProjCount / $notCedProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
 
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
@@ -490,9 +492,10 @@ class RequestController extends Controller
     public function getStatProp(){
         $untreatedCount = ProjectRequest::where('status', '=', StatusRequest::byKey('waiting')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        if($avgHours == null) $avgHours = 0;
         $notPropProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $propProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('waiting')->getValue()])->count();
-        $propProjPercentage = ($propProjCount / $notPropProjCount) * 100;
+        $propProjPercentage = $notPropProjCount == 0 ? 0 : ($propProjCount / $notPropProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
 
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
@@ -691,11 +694,12 @@ class RequestController extends Controller
       //stat
 
       public function getStatcdd(){
-        $untreatedCount = ProjectRequest::where('status', '=', StatusRequest::byKey('progressing_p')->getValue())->count();
+        $untreatedCount = ProjectRequest::where('status', '=', StatusRequest::byKey('progressing_p')->getValue())->where('status', '=', StatusRequest::byKey('progressing_div')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        if($avgHours == null) $avgHours = 0;
         $notcddProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
-        $cddProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_div','progressing_p')->getValue()])->count();
-        $cddProjPercentage = ($cddProjCount / $notcddProjCount) * 100;
+        $cddProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_p')->getValue(), 'status' => StatusRequest::byKey('progressing_div')->getValue()])->count();
+        $cddProjPercentage = $notcddProjCount == 0 ? 0 : ($cddProjCount / $notcddProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
 
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
@@ -843,9 +847,10 @@ class RequestController extends Controller
     public function getStatCdq(){
         $untreatedCount = ProjectRequest::where('status', '=', StatusRequest::byKey('progressing_recette')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        if($avgHours == null) $avgHours = 0;
         $notCdqProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $cdqProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_recette')->getValue()])->count();
-        $cdqProjPercentage = ($cdqProjCount / $notCdqProjCount) * 100;
+        $cdqProjPercentage = $cdqProjCount == 0 ? 0 : ($cdqProjCount / $notCdqProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
 
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
@@ -973,9 +978,10 @@ class RequestController extends Controller
     public function getStatOrg(){
         $untreatedCount = ProjectRequest::where('status', '=', StatusRequest::byKey('progressing_circulaire')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        if($avgHours == null) $avgHours = 0;
         $notOrgProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $orgProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_circulaire')->getValue()])->count();
-        $orgProjPercentage = ($orgProjCount / $notOrgProjCount) * 100;
+        $orgProjPercentage = $notOrgProjCount == 0 ? 0 : ($orgProjCount / $notOrgProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
 
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
@@ -1105,9 +1111,10 @@ class RequestController extends Controller
     public function getStatDs(){
         $untreatedCount = ProjectRequest::where('status', '=', StatusRequest::byKey('progressing_systeme')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        if($avgHours == null) $avgHours = 0;
         $notDsProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
         $dsProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_systeme')->getValue()])->count();
-        $dsProjPercentage = ($dsProjCount / $notDsProjCount) * 100;
+        $dsProjPercentage = $notDsProjCount == 0 ? 0 : ($dsProjCount / $notDsProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
 
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
@@ -1324,11 +1331,12 @@ class RequestController extends Controller
     }
     //stat
     public function getStat(){
-        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('progressing_devlop')->getValue())->count();
+        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('progressing_devlop')->getValue())->where('status', '!=', StatusRequest::byKey('progressing_devp')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
+        if($avgHours == null) $avgHours = 0;
         $notdvProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
-        $dvProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_devlop','progressing_devp')->getValue()])->count();
-        $dvProjPercentage = ($dvProjCount / $notdvProjCount) * 100;
+        $dvProjCount = ProjectRequest::where(['status' => StatusRequest::byKey('progressing_devlop')->getValue(), 'status' => StatusRequest::byKey('progressing_devp')->getValue()])->count();
+        $dvProjPercentage = $notdvProjCount == 0 ? 0 : ($dvProjCount / $notdvProjCount) * 100;
         $newProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%NewProjectRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
 
         $optProjectRequestData = collect(DB::select(DB::raw('select count(r.id) as count FROM (SELECT * FROM requests WHERE YEAR(created_at) = YEAR(NOW()) AND requestable_type LIKE "%OptimizationRequest") r RIGHT JOIN (SELECT 1 AS month UNION SELECT 1 UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION SELECT 11 UNION SELECT 12) m ON MONTH(r.created_at) = m.month GROUP BY m.month ORDER BY m.month')))->pluck("count");
