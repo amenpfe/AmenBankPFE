@@ -156,8 +156,8 @@ Détails de demande
             <footer>
                 <div class="row ">
                     <div class="col-sm-3 col-sm-offset-9">
-                    <button class="btn btn-success"><a href="{{route('accept_request', $request->id)}}">Valider</a></button>
-                    <button class="btn btn-danger"><a href="{{route('refuse_request', $request->id)}}">Refuser</a></button>
+                        <button type="button" class="btn btn-success col-sm-6"><a href="{{route('accept_request', $request->id)}}" style="text-decoration: none; color: white !important;">Valider</a></button>
+                        <button type="button" class="btn btn-danger col-sm-3 col-sm-offset-1"><a href="{{route('refuse_request', $request->id)}}" style="text-decoration: none; color: white !important;">Refuser</a></button>
                     </div>
                 </div>
             </footer>

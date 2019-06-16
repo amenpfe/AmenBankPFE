@@ -1417,7 +1417,7 @@ class RequestController extends Controller
 
     public function getcaiOptRequest(){
         return view('cai/opt-request-table')->with('optimizationRequests',
-            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_devlop')->getValue()])->get());
+            ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_archi')->getValue()])->get());
     }
 
     public function getcaiOptDetails($id){
