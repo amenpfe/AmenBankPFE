@@ -169,7 +169,7 @@ Détails de demande
                                                 
                                                 <div class="form-group {{ $errors->has('request_id') ? ' has-error' : '' }}">
                                                             <div class="input-group input-group-icon">
-                                                                    <input type="text" value="{{$request->id}}" name="request_id" >
+                                                                    <input type="text" value="{{$request->id}}" name="request_id" hidden>
                                                             </div>
                                                             @if ($errors->has('request_id'))
                                                                 <span class="help-block">
