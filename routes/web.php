@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\RequestController;
+use App\ProjectRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,10 +149,10 @@ Route::group(['prefix' => 'cdd', 'middleware' => 'cdd'], function () {
     Route::get('/shownewp', 'RequestController@getCDDPNewProjectRequest')->name('get_cddp_new');
     Route::get('/showoppt', 'RequestController@getCDDPOptRequest')->name('get_cddp_opt');
 
-    Route::get('/detailp/{id}', 'RequestController@getCDDPNewDetails')->middleware('request_details')->name('new-p-details-cdd');
+    Route::get('/detailp/{id}', 'RequestController@getCDDPNewDetails')->middleware('request_details')->name('new-request-details-cdd-p');
     Route::post('/detailsubmitp', 'RequestController@submitCDDPNewRequestForm')->name('new-p-detail-cdd-submit');
 
-    Route::get('/detailoptp/{id}', 'RequestController@getCDDPOptDetails')->middleware('request_details')->name('opt-p-details-cdd');
+    Route::get('/detailoptp/{id}', 'RequestController@getCDDPOptDetails')->middleware('request_details')->name('opt-request-details-cdd-p');
     Route::post('/detailoptsubmitp', 'RequestController@submitCDDPOptRequestForm')->name('opt-p-detail-cdd-submit');
 
 
@@ -306,6 +307,10 @@ Route::group(['prefix' => 'cai', 'middleware' => 'cai'], function () {
     Route::get('/archiveNewDetails{id}', 'RequestController@getcaiNewArchiveDetails')->name('get_cai_new_archive_details');
     Route::get('/stat', 'RequestController@getStatcai')->name('get_cai_stat');
 
+});
+
+Route::get('getRequest/{id}', function ($id) {
+    return ProjectRequest::find($id);
 });
 
 

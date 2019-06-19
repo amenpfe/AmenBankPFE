@@ -79,11 +79,22 @@
                                     @foreach (Auth::user()->unreadNotifications as $notification)
                                         <li>
                                             @php
-                                                $routeLink;
-                                                if($notification->data['projectRequest']['requestable_type'] == "App\\NewProjectRequest")
-                                                    $routeLink = route($newRequestRouteName, $notification->data['projectRequest']['id']);
-                                                else
-                                                    $routeLink = route($optRequestRouteName, $notification->data['projectRequest']['id']);
+                                                $routeLink = "";
+                                                $request = App\ProjectRequest::find($notification->data['projectRequest']['id']);
+                                                if($notification->data['projectRequest']['requestable_type'] == "App\\NewProjectRequest"){
+                                                    if($request->status == 13) {
+                                                        $routeLink = route($newRequestRouteName."-p", $notification->data['projectRequest']['id']);
+                                                    }else {
+                                                        $routeLink = route($newRequestRouteName, $notification->data['projectRequest']['id']);
+                                                    }
+                                                }
+                                                else {
+                                                    if($request->status == 13) {
+                                                        $routeLink = route($optRequestRouteName."-p", $notification->data['projectRequest']['id']);
+                                                    }else {
+                                                        $routeLink = route($optRequestRouteName, $notification->data['projectRequest']['id']);
+                                                    }   
+                                                }
                                             @endphp
                                             <a href="{{$routeLink}}" class="clearfix">
                                                 @if($notification->data['projectRequest']['requestable_type'] == "App\\NewProjectRequest")

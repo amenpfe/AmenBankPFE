@@ -150,7 +150,7 @@ Demandes d'améliorations
                             <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($projectRequest->status)}}</td>
                             <td class="input email email">{{$projectRequest->requestable->created_at}}</td>
                             <td class="actions">
-                                <a href="{{route('opt-p-details-cdd', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
+                                <a href="{{route('opt-request-details-cdd-p', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach
