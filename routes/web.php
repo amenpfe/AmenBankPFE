@@ -262,10 +262,10 @@ Route::group(['prefix' => 'dv', 'middleware' => 'dv'], function () {
 Route::get('/shownewd', 'RequestController@getdvsecNewProjectRequest')->name('get_sec_new');
     Route::get('/showoptd', 'RequestController@getdvsecOptRequest')->name('get_sec_opt');
 
-    Route::get('/detaild/{id}', 'RequestController@getdvsecNewDetails')->middleware('request_details')->name('new-sec-details-dv');
+    Route::get('/detaild/{id}', 'RequestController@getdvsecNewDetails')->middleware('request_details')->name('new-request-details-dv-d');
     Route::post('/detailsubmitd', 'RequestController@submitdvsecNewRequestForm')->name('new-sec-detail-dv-submit');
 
-    Route::get('/detailoptd/{id}', 'RequestController@getdvsecOptDetails')->middleware('request_details')->name('opt-sec-details-dv');
+    Route::get('/detailoptd/{id}', 'RequestController@getdvsecOptDetails')->middleware('request_details')->name('opt-request-details-dv-d');
     Route::post('/detailoptsubmitd', 'RequestController@submitdvsecOptRequestForm')->name('opt-sec-detail-dv-submit');
 
 

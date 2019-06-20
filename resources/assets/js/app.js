@@ -39,11 +39,13 @@ $(document).ready(function() {
                         success: function (request, status, xhr) {// success callback function
                             var notificationContainer = $('#notifications-container');
                             var notificationHTML = '<li><a href="';
-                            console.log(request.status);
                             if(notification.projectRequest.requestable_type == "App\\NewProjectRequest") {
                                 if(request.status == 13) {
-                                    console.log(request.status + "new");
                                     var link = newRouteLink.slice(0, newRouteLink.length-1) + "p" + newRouteLink.slice(newRouteLink.length-1, newRouteLink.length) + notification.projectRequest.id;
+                                    notificationHTML += link;
+                                } else if(request.status == 14) {
+                                    console.log(request.status + "new");
+                                    var link = newRouteLink.slice(0, newRouteLink.length-1) + "d" + newRouteLink.slice(newRouteLink.length-1, newRouteLink.length) + notification.projectRequest.id;
                                     console.log(link);
                                     notificationHTML += link;
                                 }else {
@@ -52,8 +54,11 @@ $(document).ready(function() {
                                 notificationHTML += '">Demande de nouveau projet';
                             }else {
                                 if(request.status == 13) {
-                                    console.log(request.status + "opt");
                                     var link = optRouteLink.slice(0, optRouteLink.length-1) + "p" + optRouteLink.slice(optRouteLink.length-1, optRouteLink.length) + notification.projectRequest.id;
+                                    notificationHTML += link;
+                                } else if(request.status == 14) {
+                                    console.log(request.status + "opt");
+                                    var link = optRouteLink.slice(0, optRouteLink.length-1) + "d" + optRouteLink.slice(optRouteLink.length-1, optRouteLink.length) + notification.projectRequest.id;
                                     console.log(link);
                                     notificationHTML += link;
                                 }else {

@@ -152,7 +152,7 @@ Demandes des nouveaux projets
                             <td class="input email email">{{App\Enums\StatusRequest::getEnumDescriptionByValue($projectRequest->status)}}</td>
                             <td class="input email email">{{$projectRequest->requestable->created_at}}</td>
                             <td class="actions">
-                                <a href="{{route('new-sec-details-dv', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
+                                <a href="{{route('new-request-details-dv-d', $projectRequest->id)}}"><i class="fa fa-eye"></i></a>
                             </td>
                         </tr>
                         @endforeach
