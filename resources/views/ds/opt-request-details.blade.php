@@ -162,7 +162,7 @@ Détails de demande
             <footer>
                 <div class="row ">
                     <div class="col-sm-3 col-sm-offset-9">
-                    <button class="btn btn-success"><a href="{{route('mail_opt_request', $request->id)}}">Valider</a></button>
+                    <button class="btn btn-success"><a style="text-decoration: none; color: white;" href="{{route('mail_opt_request', $request->id)}}">Valider</a></button>
                     </div>
                 </div>
             </footer>
