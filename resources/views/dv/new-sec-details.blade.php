@@ -16,7 +16,7 @@
 @section('opt-notification-route')opt-request-details-dv @endsection
 
 @section('navigation')
-<li class="nav-parent">
+<li class="nav-parent nav-active nav-expanded">
 <a>
     <i class="fa fa-table" aria-hidden="true"></i>
     <span>Consulter les demandes</span>

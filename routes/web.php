@@ -289,12 +289,12 @@ Route::group(['prefix' => 'cai', 'middleware' => 'cai'], function () {
     Route::get('/showopt', 'RequestController@getcaiOptRequest')->name('get_cai_opt');
 
     Route::get('/detail/{id}', 'RequestController@getcaiNewDetails')->middleware('request_details')->name('new-request-details-cai');
-    Route::any('/detailaccept/{id}', 'RequestController@caiAcceptOptRequest')->name('caiaccept_request');
-    Route::any('/detailrefu/{id}', 'RequestController@caiRefuseOptRequest')->name('cairefuse_request');
-
-    Route::get('/detailopt/{id}', 'RequestController@getcaiOptDetails')->middleware('request_details')->name('opt-request-details-cai');
     Route::any('/detailacceptnew/{id}', 'RequestController@caiAcceptNewRequest')->name('caiaccept_new_request');
     Route::any('/detailrefunew/{id}', 'RequestController@caiRefuseNewRequest')->name('cairefuse_new_request');
+
+    Route::get('/detailopt/{id}', 'RequestController@getcaiOptDetails')->middleware('request_details')->name('opt-request-details-cai');
+    Route::any('/detailaccept/{id}', 'RequestController@caiAcceptOptRequest')->name('caiaccept_request');
+    Route::any('/detailrefu/{id}', 'RequestController@caiRefuseOptRequest')->name('cairefuse_request');
 
     Route::get('/allnew', 'RequestController@getcaiAllNewProjectRequests')->name('all_new_request_cai');
     Route::get('/allopt', 'RequestController@getcaiAllOptRequests')->name('all_opt_request_cai');

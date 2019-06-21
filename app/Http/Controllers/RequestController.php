@@ -1332,7 +1332,7 @@ class RequestController extends Controller
     }
     //stat
     public function getStat(){
-        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('progressing_devlop')->getValue())->where('status', '!=', StatusRequest::byKey('progressing_devp')->getValue())->count();
+        $untreatedCount = ProjectRequest::where('status', '=', StatusRequest::byKey('progressing_devlop')->getValue())->where('status', '=', StatusRequest::byKey('progressing_devp')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
         if($avgHours == null) $avgHours = 0;
         $notdvProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();
@@ -1419,22 +1419,21 @@ class RequestController extends Controller
         $request = ProjectRequest::find($id);
 
         $inputs['status'] = StatusRequest::byKey("progressing_devp")->getValue();
-        $inputs['chd_doc'] = $request->chd_doc;
-        $inputs['type'] = $request->requestable->type;
-        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['title'] = $request->requestable->title;
         $inputs['remarques'] = $request->remarques;
         $inputs['user_doc'] = $request->user_doc;
-        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['chd_doc'] = $request->chd_doc;
         $inputs['organisation_doc'] = $request->organisation_doc;
-        $inputs['analyse_doc'] = $request->analyse_doc;
-        $inputs['conception_doc'] = $request->conception_doc;
-        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['analyse_doc'] =$request->analyse_doc ;
+        $inputs['conception_doc'] =$request->conception_doc ;
+        $inputs['logiciel_doc'] = $request->logiciel_doc ;
         $inputs['test_doc'] = $request->test_doc;
         $inputs['recette_doc'] = $request->recette_doc;
         $inputs['circulaire_doc'] = $request->circulaire_doc;
         $inputs['user_id'] = $request->user_id;
 
-        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
         $this->markNotificationAsReaded($request);
         $user = User::where(['role' => UserRole::byKey('Developpeur')])->first();
         $user->notify(new WorkAdded($request));
@@ -1445,22 +1444,21 @@ class RequestController extends Controller
         $request = ProjectRequest::find($id);
 
         $inputs['status'] = StatusRequest::byKey("progressing_devlop")->getValue();
-        $inputs['chd_doc'] = $request->chd_doc;
-        $inputs['type'] = $request->requestable->type;
-        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['title'] = $request->requestable->title;
         $inputs['remarques'] = $request->remarques;
         $inputs['user_doc'] = $request->user_doc;
-        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['chd_doc'] = $request->chd_doc;
         $inputs['organisation_doc'] = $request->organisation_doc;
-        $inputs['analyse_doc'] = $request->analyse_doc;
-        $inputs['conception_doc'] = $request->conception_doc;
-        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['analyse_doc'] =$request->analyse_doc ;
+        $inputs['conception_doc'] =$request->conception_doc ;
+        $inputs['logiciel_doc'] = $request->logiciel_doc ;
         $inputs['test_doc'] = $request->test_doc;
         $inputs['recette_doc'] = $request->recette_doc;
         $inputs['circulaire_doc'] = $request->circulaire_doc;
         $inputs['user_id'] = $request->user_id;
 
-        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
         $this->markNotificationAsReaded($request);
         $user = User::where(['role' => UserRole::byKey('Developpeur')])->first();
         $user->notify(new WorkAdded($request));
@@ -1505,7 +1503,7 @@ class RequestController extends Controller
         return view('cai/archive_new_project_details')->with('newprojectrequest', $newprojectrequest);
     }
     public function getStatcai(){
-        $untreatedCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('progressing_archi')->getValue())->count();
+        $untreatedCount = ProjectRequest::where('status', '=', StatusRequest::byKey('progressing_archi')->getValue())->count();
         $avgHours = DB::select(DB::raw('select round(avg(hours)) as avgHours from (select time_to_sec(timediff(updated_at, created_at)) / 3600 as hours from requests where requests.status = 6) as hoursTable'))[0]->avgHours;
         if($avgHours == null) $avgHours = 0;
         $notcaiProjCount = ProjectRequest::where('status', '!=', StatusRequest::byKey('done')->getValue())->count();

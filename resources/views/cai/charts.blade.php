@@ -238,6 +238,8 @@ Les statistiques
             pointStyle: 'rectRounded'
         };
 
+        console.log(dataFirst);
+
         var lineChart = new Chart(newProjCtx, {
             type: 'line',
             data: {
