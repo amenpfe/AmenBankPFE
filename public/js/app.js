@@ -821,9 +821,16 @@ $(document).ready(function () {
                         }
                         notificationHTML += '">Demande d\'amélioration';
                     }
-                    notificationHTML += '<span class="message">' + notification.projectRequest.created_at + '</span></a></li>';
+                    notificationHTML += '<span class="message">' + notification.projectRequest.updated_at + '</span></a></li>';
                     console.log("Notification HTML: " + notificationHTML);
                     notificationContainer.prepend(notificationHTML);
+
+                    outerBadge = $('#notifications-outer-badge');
+                    outerBadge.html(+outerBadge.html() + 1);
+                    outerBadge.show();
+
+                    innerBadge = $('#notifications-inner-badge');
+                    innerBadge.html(+innerBadge.html() + 1);
                 }
             });
 
@@ -835,13 +842,6 @@ $(document).ready(function () {
                 '</a>' +
             '</li>' + 
             '');*/
-
-            outerBadge = $('#notifications-outer-badge');
-            outerBadge.html(+outerBadge.html() + 1);
-            outerBadge.show();
-
-            innerBadge = $('#notifications-inner-badge');
-            innerBadge.html(+innerBadge.html() + 1);
         });
     }
 });
