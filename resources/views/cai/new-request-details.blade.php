@@ -161,8 +161,8 @@ Détails de demande
             <footer>
                 <div class="row ">
                     <div class="col-sm-3 col-sm-offset-9">
-                    <button type="button" class="btn btn-success col-sm-6"><a href="{{route('caiaccept_request', $request->id)}}" style="text-decoration: none; color: white !important;">Valider</a></button>
-                    <button type="button" class="btn btn-danger col-sm-3 col-sm-offset-1"><a href="{{route('cairefuse_request', $request->id)}}" style="text-decoration: none; color: white !important;">Refuser</a></button>
+                    <button type="button" class="btn btn-success col-sm-6"><a href="{{route('caiaccept_new_request', $request->id)}}" style="text-decoration: none; color: white !important;">Valider</a></button>
+                    <button type="button" class="btn btn-danger col-sm-3 col-sm-offset-1"><a href="{{route('cairefuse_new_request', $request->id)}}" style="text-decoration: none; color: white !important;">Refuser</a></button>
                     </div>
                 </div>
             </footer>

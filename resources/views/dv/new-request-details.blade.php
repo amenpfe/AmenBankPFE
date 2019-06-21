@@ -13,20 +13,20 @@
 @endsection
 
 @section('navigation')
-<li class="nav-parent">
+<li class="nav-parent nav-expanded">
         <a>
             <i class="fa fa-table" aria-hidden="true"></i>
             <span>Consulter les demandes</span>
         </a>
         <ul class="nav nav-children">
 
-            <li class="nav-parent">
+            <li class="nav-parent nav-active nav-expanded">
                 <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
                 <ul class="nav nav-children">
-                    <li class="nav-parent">
+                    <li class="nav-parent nav-active nav-expanded">
                         <a>Conception globale</a>
                         <ul class="nav nav-children">
-                            <li>
+                            <li class = "nav-active">
                                 <a href="{{route('get_dv_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
                                     Des nouveaux projets</a>
                             </li>

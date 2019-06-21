@@ -19,13 +19,13 @@
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-        <li class="nav-active">
-                <a href="">
+        <li class="">
+                <a href="{{route('get_ds_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
-        <li class="">
+        <li class="nav-active">
         <a href="{{route('get_ds_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations

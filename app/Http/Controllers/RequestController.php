@@ -1025,12 +1025,12 @@ class RequestController extends Controller
         $inputs['circulaire_doc'] = $request->circulaire_doc;
         $inputs['user_id'] = $request->user_id;
 
-        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs);
+        $this->requestRepository->saveNewProjectRequest($request->requestable, $inputs); 
+        $user = User::where(['role' => UserRole::byKey('info')])->first();
+        $user->notify(new WorkAdded($request));
         $this->markNotificationAsReaded($request);
-        return redirect()->route('get_ds_new');
-
         $user->notify(new DeploymentNotification($name, $creation, $title));
-        return redirect()->back();
+        return redirect()->route('get_ds_new');
     
     }
 
@@ -1072,6 +1072,8 @@ class RequestController extends Controller
         $user->notify(new MiseEnPlaceNotification($name, $creation, $project));
 
         $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $user = User::where(['role' => UserRole::byKey('info')])->first();
+        $user->notify(new WorkAdded($request));        
         $this->markNotificationAsReaded($request);
         return redirect()->route('get_ds_opt');
     }
@@ -1263,7 +1265,7 @@ class RequestController extends Controller
             ProjectRequest::where(['requestable_type' => 'App\OptimizationRequest', 'status' => StatusRequest::byKey('progressing_devp')->getValue()])->get());
     }
 
-    public function getdvsecPOptDetails($id){
+    public function getdvsecOptDetails($id){
         $request = ProjectRequest::find($id);
         return view('dv/opt-sec-details')->with('request', $request);
     }
@@ -1364,7 +1366,7 @@ class RequestController extends Controller
     public function caiAcceptOptRequest($id){
         $request = ProjectRequest::find($id);
 
-        $inputs['status'] = StatusRequest::byKey("progressing_devlop")->getValue();
+        $inputs['status'] = StatusRequest::byKey("progressing_devp")->getValue();
         $inputs['chd_doc'] = $request->chd_doc;
         $inputs['type'] = $request->requestable->type;
         $inputs['project_id'] = $request->requestable->project_id;
@@ -1384,7 +1386,7 @@ class RequestController extends Controller
         $this->markNotificationAsReaded($request);
         $user = User::where(['role' => UserRole::byKey('Developpeur')])->first();
         $user->notify(new WorkAdded($request));
-        return redirect()->route('get_cai_new');
+        return redirect()->route('get_cai_opt');
     }
 
     public function caiRefuseOptRequest($id){
@@ -1411,6 +1413,58 @@ class RequestController extends Controller
         $user = User::where(['role' => UserRole::byKey('Developpeur')])->first();
         $user->notify(new WorkAdded($request));
         return redirect()->route('get_cai_opt');
+    }
+    
+    public function caiAcceptNewRequest($id){
+        $request = ProjectRequest::find($id);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_devp")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('Developpeur')])->first();
+        $user->notify(new WorkAdded($request));
+        return redirect()->route('get_cai_new');
+    }
+
+    public function caiRefuseNewRequest($id){
+        $request = ProjectRequest::find($id);
+
+        $inputs['status'] = StatusRequest::byKey("progressing_devlop")->getValue();
+        $inputs['chd_doc'] = $request->chd_doc;
+        $inputs['type'] = $request->requestable->type;
+        $inputs['project_id'] = $request->requestable->project_id;
+        $inputs['remarques'] = $request->remarques;
+        $inputs['user_doc'] = $request->user_doc;
+        $inputs['ced_doc'] = $request->ced_doc;
+        $inputs['organisation_doc'] = $request->organisation_doc;
+        $inputs['analyse_doc'] = $request->analyse_doc;
+        $inputs['conception_doc'] = $request->conception_doc;
+        $inputs['logiciel_doc'] = $request->logiciel_doc;
+        $inputs['test_doc'] = $request->test_doc;
+        $inputs['recette_doc'] = $request->recette_doc;
+        $inputs['circulaire_doc'] = $request->circulaire_doc;
+        $inputs['user_id'] = $request->user_id;
+
+        $this->requestRepository->saveOptimizationRequest($request->requestable, $inputs);
+        $this->markNotificationAsReaded($request);
+        $user = User::where(['role' => UserRole::byKey('Developpeur')])->first();
+        $user->notify(new WorkAdded($request));
+        return redirect()->route('get_cai_new');
     }
 
     //opt request

@@ -19,13 +19,13 @@
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-        <li class="nav-active">
-                <a href="">
+        <li class="">
+                <a href="{{route('get_cdq_new')}}">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets
                 </a>
             </li>
-        <li class="">
+        <li class="nav-active">
         <a href="{{route('get_cdq_opt')}}">
                 <i class="fa fa-wrench" aria-hidden="true"></i>
                     D'améliorations
@@ -160,7 +160,7 @@ Détails de demande
                 </div>
             </div>
             <div class="table-responsive col-sm-10 col-sm-offset-1"><br>
-                                <form class="form-horizontal form-bordered" method="POST" action="{{route('opt-request-detail-cdd-submit')}}" enctype="multipart/form-data">
+                                <form class="form-horizontal form-bordered" method="POST" action="{{route('opt-request-detail-cdq-submit')}}" enctype="multipart/form-data">
                                     {{ csrf_field() }}
                                     <table class="table invoice-items" border="0">
                                         <tbody>

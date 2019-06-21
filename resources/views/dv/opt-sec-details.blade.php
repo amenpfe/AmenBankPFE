@@ -16,14 +16,14 @@
 @section('opt-notification-route')opt-request-details-dv @endsection
 
 @section('navigation')
-<li class="nav-parent">
+<li class="nav-parent nav-expanded">
 <a>
     <i class="fa fa-table" aria-hidden="true"></i>
     <span>Consulter les demandes</span>
 </a>
 <ul class="nav nav-children">
 
-    <li class="nav-parent">
+    <li class="nav-parent nav-active nav-expanded">
         <a><i class="fa fa-tasks" aria-hidden="true"></i> Activité</a>
         <ul class="nav nav-children">
             <li class="nav-parent">
@@ -39,14 +39,14 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-parent">
+            <li class="nav-parent nav-active nav-expanded">
                 <a>Codage</a>
                 <ul class="nav nav-children">
                     <li>
                         <a href="{{route('get_sec_new')}}"><i class="fa fa-plus" aria-hidden="true"></i>
                             Des nouveaux projets</a>
                     </li>
-                    <li>
+                    <li class="nav-active">
                         <a href="{{route('get_sec_opt')}}"><i class="fa fa-wrench" aria-hidden="true"></i>
                             D'améliorations</a>
                     </li>

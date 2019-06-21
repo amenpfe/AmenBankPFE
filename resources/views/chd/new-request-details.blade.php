@@ -13,13 +13,13 @@
 @endsection
 
 @section('navigation')
-<li class="nav-parent">
+<li class="nav-parent nav-active nav-expanded">
     <a>
         <i class="fa fa-table" aria-hidden="true"></i>
         <span>Consulter les demandes</span>
     </a>
     <ul class="nav nav-children">
-        <li class="">
+        <li class="nav-active">
                 <a href="">
                     <i class="fa fa-plus" aria-hidden="true"></i>
                     Des nouveaux projets

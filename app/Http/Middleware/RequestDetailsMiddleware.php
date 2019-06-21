@@ -54,6 +54,9 @@ class RequestDetailsMiddleware
         }else if ($user->role == UserRole::byKey('ChefArchitectureIntegration')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_archi')->getValue()) {
             return $next($request);
 
+        }else if ($user->role == UserRole::byKey('info')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_circulaire')->getValue()) {
+            return $next($request);
+
         } else if ($user->role == UserRole::byKey('Developpeur')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_devlop')->getValue()) {
             return $next($request);
         } else if ($user->role == UserRole::byKey('Developpeur')->getValue() && $projectRequest->status == StatusRequest::byKey('progressing_devp')->getValue()) {

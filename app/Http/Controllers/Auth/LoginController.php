@@ -73,7 +73,10 @@ class LoginController extends Controller
                 break;
             case UserRole::byKey('Developpeur')->getValue():
                 return redirect()->route('get_dv_new');
-                break;    
+                break;
+            case UserRole::byKey('comite')->getValue():
+                return redirect()->route('get_org_new');
+                break;      
             default:
                 # code...
                 break;
